@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_depot')->unique();
             $table->decimal('montant', 15, 2); 
-            $table->string('statut');
+            $table->string('statut')->default('non_valider');
             $table->string('devise', 3); 
             $table->date('date_depot')->default(DB::raw('CURRENT_DATE'));
             $table->string('email');
