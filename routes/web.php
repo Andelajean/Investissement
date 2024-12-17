@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DepotController;
+//use App\Http\Controllers\DepotController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use Illuminate\Support\Facades\Route;
@@ -58,6 +59,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/depots/{id}/edit', [DepotController::class, 'edit'])->name('admin.edit_depot');
     Route::put('/depots/{id}', [DepotController::class, 'update'])->name('admin.update_depot');
     Route::delete('/depots/{id}', [DepotController::class, 'destroy'])->name('admin.destroy_depot');
+});
+
+Route::middleware(['auth'])->group(function () {
+    // Dashboard par défaut 
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('role:0');
+
+    // Dashboard administrateur
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard')
+        ->middleware('role:1');
 });
 Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
 

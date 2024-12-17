@@ -17,6 +17,15 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->role_id === 1; // Rôle admin
+    }
     protected $fillable = [
         'name',
         'telephone',
