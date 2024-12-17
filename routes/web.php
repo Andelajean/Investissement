@@ -23,8 +23,19 @@ use App\Models\Investissement;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
+});
+
+Route::get('/help', function () {
+    return view('site.help'); // Affiche la page about.blade.php
+});
+
+Route::get('/contact', function () {
+    return view('site.contact'); // Affiche la page about.blade.php
 });
 
 Route::get('/dashboard', function () {
@@ -82,4 +93,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/depots/{id}', [DepotController::class, 'destroy'])->name('admin.destroy_depot');
 });
 Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
+
 
