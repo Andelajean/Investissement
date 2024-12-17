@@ -12,6 +12,8 @@
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>EMAIL INVESTISSEUR</th>
+                        <th>NOM INVESTISSEMENT</th>
                         <th>Montant</th>
                         <th>Statut</th>
                         <th>Date</th>
@@ -22,6 +24,8 @@
                     @foreach($retraits as $transaction)
                     <tr>
                         <td class="txt-oflo">{{ $transaction->id }}</td>
+                        <td class="txt-oflo">{{ $transaction->email }}</td>
+                        <td class="txt-oflo">{{ $transaction->nom_investissement }}</td>
                         <td class="txt-oflo">{{ $transaction->montant }}</td>
                         <td>
                             <span class="label label-{{ $transaction->statut == 'succès' ? 'success' : ($transaction->statut == 'échec' ? 'danger' : 'warning') }} label-rounded">

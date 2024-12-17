@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('duree');
             $table->string('statut')->default('non');
             $table->decimal('gain', 15, 2);  
-            $table->date('date_investissement')->default(DB::raw('CURRENT_DATE'));
+            $table->date('date_investissement')->now();
             $table->string('email');
             $table->unsignedBigInteger('id_user'); 
             $table->timestamps();

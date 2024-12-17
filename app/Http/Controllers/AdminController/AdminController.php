@@ -78,4 +78,6 @@ class AdminController extends Controller
         return view('admin.depot_retrait',compact('transactions'));
              
     }
+
+   
 }
