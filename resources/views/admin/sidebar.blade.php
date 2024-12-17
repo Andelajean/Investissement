@@ -20,9 +20,9 @@
                     <li><a href="javascript:void(0)"><i class="fa fa-power-off"></i> Logout</a></li>
                 </ul>
             </li>
-            <li><a href="{{ route('admin.dashboard') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Dashboard</span></a></li>
-            <li><a href="{{ route('admin.changerStatutTransaction') }}" class="waves-effect"><i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Clients</span></a></li>
-            <li><a href="{{ route('admin.etatTransaction') }}" class="waves-effect"><i class="mdi mdi-table fa-fw"></i> <span class="hide-menu">Transactions</span></a></li>
+            <li><a href="{{ route('admin.transaction_retrait') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Demande de retrait</span></a></li>
+            <li><a href="{{ route('admin.transaction_retrait') }}" class="waves-effect"><i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Clients</span></a></li>
+            <li><a href="{{ route('admin.transaction_all') }}" class="waves-effect"><i class="mdi mdi-table fa-fw"></i> <span class="hide-menu">Transactions</span></a></li>
         </ul>
     </div>
 </div>

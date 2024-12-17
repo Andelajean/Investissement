@@ -3,27 +3,41 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <h1 class="page-header">État de la Transaction</h1>
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">Détails de la Transaction</h3>
-            </div>
-            <div class="panel-body">
-                <p><strong>Statut actuel :</strong> <span class="label label-{{ $statut == 'succès' ? 'success' : ($statut == 'échec' ? 'danger' : 'warning') }}">{{ $statut }}</span></p>
-
-                <form action="{{ route('admin.changerStatutTransaction', $retrait->id) }}" method="POST" class="form-inline">
-                    @csrf
-                    <div class="form-group">
-                        <label for="statut">Changer le statut :</label>
-                        <select name="statut" id="statut" class="form-control">
-                            <option value="traitement_en_cours" {{ $statut == 'traitement_en_cours' ? 'selected' : '' }}>Traitement en cours</option>
-                            <option value="succès" {{ $statut == 'succès' ? 'selected' : '' }}>Succès</option>
-                            <option value="échec" {{ $statut == 'échec' ? 'selected' : '' }}>Échec</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                </form>
-            </div>
+        <h1 class="page-header">État des Transactions</h1>
+        <div id="notification" class="alert alert-success" style="display: none;">
+            Statut de la transaction mis à jour avec succès.
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($retraits as $transaction)
+                    <tr>
+                        <td class="txt-oflo">{{ $transaction->id }}</td>
+                        <td class="txt-oflo">{{ $transaction->montant }}</td>
+                        <td>
+                            <span class="label label-{{ $transaction->statut == 'succès' ? 'success' : ($transaction->statut == 'échec' ? 'danger' : 'warning') }} label-rounded">
+                                {{ $transaction->statut }}
+                            </span>
+                        </td>
+                        <td class="txt-oflo">{{ $transaction->date_retrait }}</td>
+                        <td>
+                            <a href="{{ route('admin.etatTransaction', $transaction->id) }}" class="btn btn-info btn-sm">Voir</a>
+                            <button class="btn btn-warning btn-sm" onclick="showChangeStatusModal({{ $transaction->id }}, '{{ $transaction->statut }}')">Changer</button>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <a href="#" class="btn btn-primary">Voir toutes les transactions</a>
         </div>
     </div>
 </div>
@@ -32,7 +46,7 @@
 <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $retrait->id) }}">
+            <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $transaction->id) }}">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="changeStatusModalLabel">Changer le statut de la transaction</h5>
@@ -85,7 +99,7 @@
                 $('#changeStatusModal').modal('hide');
                 $('#notification').fadeIn().delay(3000).fadeOut();
                 setTimeout(function() {
-                    window.location.href = "{{ route('admin.transaction_retrait') }}";
+                    location.reload();
                 }, 3000);
             },
             error: function(response) {
