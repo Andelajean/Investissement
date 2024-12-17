@@ -13,98 +13,77 @@
         <h3 class="text-xl font-bold mb-6 text-yellow-600">Liste des Investissements Disponibles</h3>
         <div class="grid grid-cols-1 gap-6">
             <!-- Product Items -->
-            <!-- Repeat for 15 products -->
-            <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
-                <img src="{{asset('image/1.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
-                <div class="flex-1 ml-6">
-        <p class="text-xl font-semibold text-gray-800">Standard <span class='text-2xl text-blue-500'> </span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>30 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>340 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>2H</span></p>
-    </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ', '30 000',' 340 000', '2h')">Investir</button>
-    
-            </div>
+            
             <div class="bg-blue-500 to-red-600 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/2.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">Standard <span class='text-2xl text-blue-500'> ⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>40 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>440 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H50 minutes</span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>1.000 000 FG </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>5 100 000FG </span></p>
+        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>2H</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐', '40 000',' 440 000', '1H50 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('Standard ⭐ ', '1 000 000','5 100 000', '2H')">Investir</button>
 </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/3.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">Standard <span class='text-2xl text-blue-500'> ⭐⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>50 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>550 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H45 minutes</span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>2 000 000 FG </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>9 300 000 FG</span></p>
+        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H45 minute</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐ ⭐', '50 000',' 540 000', '1H45 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('Standard ⭐ ⭐ ', '2 000 000','9 300 000', '1h45 minute')">Investir</button>
 </div>
-<div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
-    <img src="{{asset('image/4.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
-    <div class="flex-1 ml-6">
-        <p class="text-xl font-semibold text-gray-800">Premium <span class='text-2xl text-blue-500'></span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>60 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>650 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H30 minutes</span></p>
-    </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ', '60 000',' 650 000', '1H30 minutes')">Investir</button>
-    </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/5.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">Premium <span class='text-2xl text-blue-500'> ⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>70 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>780 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H 15 minutes</span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>3 000 000 FG </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>13 500 000 FG </span></p>
+        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H30 minuteS</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ⭐', '70 000',' 780 000', '1H15 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('Premium ⭐', '3 000 000','13 500 000', '1H30 minute')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/6.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">Premium <span class='text-2xl text-blue-500'> ⭐ ⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>80 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>880 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H</span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>4 000 000 </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>17 300 000 </span></p>
+        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H15 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium  ⭐ ⭐', '80 000',' 880 000', '1H')">Investir</button>
-    </div>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('Premium  ⭐ ⭐', '4 000 000','17 300 000', '1H15 minutes')">Investir</button>
+</div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/7.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
-        <p class="text-xl font-semibold text-gray-800">V.I.P ⭐ <span class='text-2xl text-blue-500'></span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>90 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>890 000 CFA </span></p>
-        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>45 minutes</span></p>
+        <p class="text-xl font-semibold text-gray-800">V.I.P  ⭐ <span class='text-2xl text-blue-500'></span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>5 000 000 FG </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>22 300 000 FG </span></p>
+        <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.I.P ⭐', '90 000',' 890 000', '45 minutes')">Investir</button>
-    </div>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('V.I.P ⭐', '5 000 000','22 300 000', '1H')">Investir</button>
+</div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/8.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">V.V.I.P <span class='text-2xl text-blue-500'>⭐ ⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>100 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>1 300 000 CFA </span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>10 000 000 FG </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>44 600 000 FG </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>30 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐', '100 000',' 1 300 000', '30 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('V.V.I.P ⭐ ⭐', '10 000 000','44 600 000', '30 minutes')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/9.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
     <div class="flex-1 ml-6">
         <p class="text-xl font-semibold text-gray-800">V.V.I.P <span class='text-2xl text-blue-500'>⭐ ⭐ ⭐</span></p>
-        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>200 000 FCFA </span></p>
-        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>2 400 000 CFA </span></p>
+        <p class="text-lg text-white">Montant: <span class='text-xl text-yellow-400'>20 000 000 Fg </span></p>
+        <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>85 200 000 FG </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>15 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐⭐', '200 000',' 2 400 000', '15 minutes')">Investir</button>
-    </div>       
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600"  onclick="openModal('V.V.I.P ⭐ ⭐ ⭐', '20 000 000','85 200 000', '15 minutes')">Investir</button>
+    </div>        
     </div>
 <!-- Fenêtre contextuelle -->
 <div id="investModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
