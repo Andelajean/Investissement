@@ -80,10 +80,7 @@
 @endif
 
     <div class="flex justify-between items-center">
-        <!-- Bouton Partager le lien -->
-        <button class="bg-purple-700 text-white py-3 px-6 rounded-lg hover:bg-purple-800 transition">
-            Partager le lien
-        </button>
+       
         @php
     $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())
         ->where('statut', 'non')
@@ -121,7 +118,7 @@
                 <p><strong>Email :</strong>  {{ Auth::user()->email }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
-                    href="https://wa.me/{{ config('app.admin_whatsapp') }}?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
+                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
                     target="_blank"
                     class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
                 >
@@ -225,16 +222,85 @@
         </div>
     </div>
 
+<!-- Message d'erreur -->
+<div id="error-message" class="hidden text-center text-red-500 font-bold mt-4">
+    Vous n'avez aucun investissement actif.
+</div>
 
 
-            <div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2" onclick="openModal(100000,1300000)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
-                    </svg>
-                    Retrait
-                </button>
+
+<div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white" id="openModalButton">
+    <button class="flex flex-col items-center gap-2" onclick="document.getElementById('actif').classList.remove('hidden')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
+            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
+        </svg>
+        Retrait
+    </button>
+</div>
+
+
+
+<!-- Fenêtre contextuelle (Modal) -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-md shadow-lg max-w-lg w-full">
+        <h3 class="text-gray-700 font-semibold mb-2">Demande de Retrait :</h3>
+        
+        @if($investissementsActifs instanceof \Illuminate\Support\Collection && $investissementsActifs->count() > 0)
+            <ul class="list-disc ml-5">
+                @foreach($investissementsActifs as $investissement)
+                    <li>
+                        <button 
+                            class="text-blue-500 underline hover:text-blue-700" 
+                            onclick="remplirFormulaireRetrait('{{ $investissement->montant }}', '{{ $investissement->nom_investissement }}')">
+                            {{ $investissement->nom_investissement }} - 
+                            {{ number_format($investissement->montant, 2) }} XAF
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <!-- Message si aucun investissement actif -->
+            <div class="text-red-500 text-center">
+                Vous n'avez aucun investissement actif.
             </div>
+        @endif
+
+        <!-- Bouton pour fermer la fenêtre contextuelle -->
+        <button id="closeModalButton" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+            Fermer
+        </button>
+    </div>
+</div>
+
+<!-- JavaScript pour contrôler l'affichage de la fenêtre contextuelle -->
+<script>
+    // Cacher la fenêtre contextuelle par défaut
+    const modal = document.getElementById('modal');
+    const openModalButton = document.getElementById('openModalButton');
+    const closeModalButton = document.getElementById('closeModalButton');
+
+    // Ouvrir la fenêtre contextuelle
+    openModalButton.addEventListener('click', function() {
+        modal.classList.remove('hidden');
+    });
+
+    // Fermer la fenêtre contextuelle
+    closeModalButton.addEventListener('click', function() {
+        modal.classList.add('hidden');
+    });
+
+    // Optionnel: fermer la fenêtre si l'utilisateur clique en dehors de celle-ci
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>
+
+
+
+
+
             <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-8 rounded-lg text-center text-white">
     <a href="/profile" class="flex flex-col items-center gap-2"> <!-- Lien vers la page du profil -->
         <button>
@@ -283,20 +349,24 @@
 </div>
 
             <div class="bg-gradient-to-r from-purple-400 to-purple-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2">
+                <a href="/contact">
+            <button class="flex flex-col items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
                         <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-2 8h4a1 1 0 0 1 0 2h-4a1 1 0 0 1 0-2Z"/>
                     </svg>
                     Contact
                 </button>
+                </a>
             </div>
             <div class="bg-gradient-to-r from-gray-400 to-gray-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2">
+            <a href="/help">  
+            <button class="flex flex-col items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
                         <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-3 9h6a1 1 0 0 1 0 2H9a1 1 0 0 1 0-2Z"/>
                     </svg>
                     Aide
                 </button>
+                </a> 
             </div>
         </div>
     </div>
@@ -310,56 +380,91 @@
         <p class="mt-4 text-gray-800">75% de progression</p>
     </div>
 
-    <!-- History Table Section -->
-    <div class="bg-gradient-to-r from-gray-200 to-gray-400 shadow-lg rounded-lg p-8 mx-auto max-w-4xl">
-        <h3 class="text-lg font-bold mb-6 text-white">Historique des transactions</h3>
-        <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
-            <thead>
-                <tr class="bg-gray-300">
-                    <th class="py-3 px-4 border">Date</th>
-                    <th class="py-3 px-4 border">Type</th>
-                    <th class="py-3 px-4 border">Montant</th>
-                    <th class="py-3 px-4 border">Statut</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="py-3 px-4 border">2024-12-01</td>
-                    <td class="py-3 px-4 border">Recharge</td>
-                    <td class="py-3 px-4 border">$500</td>
-                    <td class="py-3 px-4 border text-green-500">Réussi</td>
-                </tr>
-                <tr>
-                    <td class="py-3 px-4 border">2024-11-25</td>
-                    <td class="py-3 px-4 border">Retrait</td>
-                    <td class="py-3 px-4 border">$200</td>
-                    <td class="py-3 px-4 border text-red-500">Échoué</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    <div id="currency-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg w-96">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Demande De retrait</h2>
-        <label for="currency" class="block text-gray-700 mb-2">Devise</label>
-        <form action="/payement/investissement" method="POST">
-            @csrf
-        <select id="currency" class="w-full p-2 border rounded-lg mb-4" name="currency" onchange="updateAmount()">
-            <option value="XAF">XAF</option>
-            <option value="XOF">XOF</option>
-            <option value="CDF">CDF</option>
-            <option value="GNF">GNF</option>
-            <option value="USD">USD</option>
-        </select>
-        <label for="currency" class="block text-gray-700 mb-2">Montant du Retrait</label>
-        <input type="text" name="montant" id="amunt" class="w-full p-2 border rounded-lg mb-4">
-        <label for="currency" class="block text-gray-700 mb-2">Telephone du beneficiaire</label>
-        <input type="text" name="benefice" id="gan"  class="w-full p-2 border rounded-lg mb-4">
-        <button class="bg-green-500 text-white py-2 px-4 rounded-lg w-full hover:bg-green-600"  onclick="confirmInvestment()" type="submit">Confirmer</button>
-        <button class="mt-2 w-full bg-red-400 text-white py-2 px-4 rounded-lg hover:bg-red-500" onclick="closModal()" type="reset">Annuler</button>
+    
 
-       </form>
-    </div>
+    <!-- Historique des Dépôts -->
+<div class="bg-gradient-to-r from-red-400 to-red-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Dépôts</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Devise</th>
+                <th class="py-3 px-4 border">Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($depots as $depot)
+                <tr>
+                    <td class="py-3 px-4 border">{{ $depot->date_depot }}</td>
+                    <td class="py-3 px-4 border">{{ $depot->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $depot->devise }}</td>
+                    <td class="py-3 px-4 border text-green-500">{{ $depot->statut }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Historique des Retraits -->
+<div class="bg-gradient-to-r from-green-400 to-green-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Retraits</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Devise</th>
+                <th class="py-3 px-4 border">Statut</th>
+                <th class="py-3 px-4 border">Nom Investissement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($retraits as $retrait)
+                <tr>
+                    <td class="py-3 px-4 border">{{ $retrait->date_retrait }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->devise }}</td>
+                    <td class="py-3 px-4 border text-yellow-500">{{ $retrait->statut }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->nom_investissement }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Historique des Investissements -->
+<div class="bg-gradient-to-r from-yellow-200 to-green-400 shadow-lg rounded-lg p-8 mx-auto max-w-4xl">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Investissements</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Nom de l'investissement</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Durée</th>
+                <th class="py-3 px-4 border">Gain</th>
+                <th class="py-3 px-4 border">Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($investissements as $investissement)
+                <tr>
+                    <td class="py-3 px-4 border">{{ $investissement->date_investissement }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->nom_investissement }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->duree }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->gain }}</td>
+                    <td class="py-3 px-4 border text-green-500">{{ $investissement->statut }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+  
+
 
     <div id="currency-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg w-96">
@@ -381,6 +486,8 @@
     </div>
     </div>
 
+
+    
 
    
 <script>
@@ -443,28 +550,7 @@ function closModal() {
     function closePaymentModal() {
         document.getElementById('paymentModal').classList.add('hidden');
     }
-    function validateDepot() {
-        const code = document.getElementById('depotCode').value;
-
-        fetch('/validate-depot', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ code: code })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload();
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => console.error('Erreur :', error));
-    }
+    
     function openActivationModal() {
         document.getElementById('activationModal').classList.remove('hidden');
     }
@@ -472,6 +558,8 @@ function closModal() {
     function closeActivationModal() {
         document.getElementById('activationModal').classList.add('hidden');
     }
+
+
 </script>
 </body>
 </html>

@@ -50,7 +50,7 @@
 <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="changeStatusForm" method="POST" action="">
+            <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $transaction->id) }}">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="changeStatusModalLabel">Changer le statut de la transaction</h5>
