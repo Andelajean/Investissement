@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
            
             $table->decimal('montant', 15, 2);  
-            $table->date('mise_jour')->default(DB::raw('CURRENT_DATE'));
+            $table->date('mise_jour')->now();
             $table->string('email');
             $table->unsignedBigInteger('id_user'); 
             $table->timestamps();

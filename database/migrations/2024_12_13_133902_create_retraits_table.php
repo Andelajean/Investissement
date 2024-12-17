@@ -17,7 +17,7 @@ return new class extends Migration
         $table->decimal('montant', 15, 2); 
         $table->string('statut')->default('traitement_en_cours'); 
         $table->string('devise', 3); 
-        $table->date('date_retrait')->default(DB::raw('CURRENT_DATE'));
+        $table->date('date_retrait')->now();
         $table->string('nom_investissement'); 
         $table->unsignedBigInteger('id_user'); 
         $table->timestamps();
