@@ -80,10 +80,7 @@
 @endif
 
     <div class="flex justify-between items-center">
-        <!-- Bouton Partager le lien -->
-        <button class="bg-purple-700 text-white py-3 px-6 rounded-lg hover:bg-purple-800 transition">
-            Partager le lien
-        </button>
+       
         @php
     $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())
         ->where('statut', 'non')
@@ -352,20 +349,24 @@
 </div>
 
             <div class="bg-gradient-to-r from-purple-400 to-purple-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2">
+                <a href="/contact">
+            <button class="flex flex-col items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
                         <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-2 8h4a1 1 0 0 1 0 2h-4a1 1 0 0 1 0-2Z"/>
                     </svg>
                     Contact
                 </button>
+                </a>
             </div>
             <div class="bg-gradient-to-r from-gray-400 to-gray-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2">
+            <a href="/help">  
+            <button class="flex flex-col items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
                         <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-3 9h6a1 1 0 0 1 0 2H9a1 1 0 0 1 0-2Z"/>
                     </svg>
                     Aide
                 </button>
+                </a> 
             </div>
         </div>
     </div>
@@ -379,34 +380,89 @@
         <p class="mt-4 text-gray-800">75% de progression</p>
     </div>
 
-    <!-- History Table Section -->
-    <div class="bg-gradient-to-r from-gray-200 to-gray-400 shadow-lg rounded-lg p-8 mx-auto max-w-4xl">
-        <h3 class="text-lg font-bold mb-6 text-white">Historique des transactions</h3>
-        <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
-            <thead>
-                <tr class="bg-gray-300">
-                    <th class="py-3 px-4 border">Date</th>
-                    <th class="py-3 px-4 border">Type</th>
-                    <th class="py-3 px-4 border">Montant</th>
-                    <th class="py-3 px-4 border">Statut</th>
-                </tr>
-            </thead>
-            <tbody>
+    
+
+    <!-- Historique des Dépôts -->
+<div class="bg-gradient-to-r from-red-400 to-red-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Dépôts</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Devise</th>
+                <th class="py-3 px-4 border">Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($depots as $depot)
                 <tr>
-                    <td class="py-3 px-4 border">2024-12-01</td>
-                    <td class="py-3 px-4 border">Recharge</td>
-                    <td class="py-3 px-4 border">$500</td>
-                    <td class="py-3 px-4 border text-green-500">Réussi</td>
+                    <td class="py-3 px-4 border">{{ $depot->date_depot }}</td>
+                    <td class="py-3 px-4 border">{{ $depot->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $depot->devise }}</td>
+                    <td class="py-3 px-4 border text-green-500">{{ $depot->statut }}</td>
                 </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Historique des Retraits -->
+<div class="bg-gradient-to-r from-green-400 to-green-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Retraits</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Devise</th>
+                <th class="py-3 px-4 border">Statut</th>
+                <th class="py-3 px-4 border">Nom Investissement</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($retraits as $retrait)
                 <tr>
-                    <td class="py-3 px-4 border">2024-11-25</td>
-                    <td class="py-3 px-4 border">Retrait</td>
-                    <td class="py-3 px-4 border">$200</td>
-                    <td class="py-3 px-4 border text-red-500">Échoué</td>
+                    <td class="py-3 px-4 border">{{ $retrait->date_retrait }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->devise }}</td>
+                    <td class="py-3 px-4 border text-yellow-500">{{ $retrait->statut }}</td>
+                    <td class="py-3 px-4 border">{{ $retrait->nom_investissement }}</td>
                 </tr>
-            </tbody>
-        </table>
-    </div>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
+<!-- Historique des Investissements -->
+<div class="bg-gradient-to-r from-yellow-200 to-green-400 shadow-lg rounded-lg p-8 mx-auto max-w-4xl">
+    <h3 class="text-lg font-bold mb-6 text-white">Historique des Investissements</h3>
+    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+        <thead>
+            <tr class="bg-gray-300">
+                <th class="py-3 px-4 border">Date</th>
+                <th class="py-3 px-4 border">Nom de l'investissement</th>
+                <th class="py-3 px-4 border">Montant</th>
+                <th class="py-3 px-4 border">Durée</th>
+                <th class="py-3 px-4 border">Gain</th>
+                <th class="py-3 px-4 border">Statut</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($investissements as $investissement)
+                <tr>
+                    <td class="py-3 px-4 border">{{ $investissement->date_investissement }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->nom_investissement }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->montant }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->duree }}</td>
+                    <td class="py-3 px-4 border">{{ $investissement->gain }}</td>
+                    <td class="py-3 px-4 border text-green-500">{{ $investissement->statut }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+</div>
+
   
 
 

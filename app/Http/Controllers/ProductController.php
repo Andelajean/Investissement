@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Contact;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -69,5 +70,26 @@ class ProductController extends Controller
             ]);
 
         return back()->with('success', 'Votre investissement a été enregistré avec succès.');
+    }
+    public function contact(Request $request)
+    {
+        // Validation des données
+        $request->validate([
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'objet' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        // Enregistrement dans la base de données
+        Contact::create([
+            'nom' => $request->nom,
+            'email' => $request->email,
+            'objet' => $request->objet,
+            'message' => $request->message,
+        ]);
+
+        // Rediriger ou afficher un message de succès
+        return redirect()->back()->with('success', 'Votre message a été envoyé avec succès!');
     }
 }
