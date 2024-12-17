@@ -15,8 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
+    return view('site.index');
+});
+
+Route::get('/help', function () {
+    return view('site.help'); // Affiche la page about.blade.php
+});
+
+Route::get('/contact', function () {
+    return view('site.contact'); // Affiche la page about.blade.php
 });
 
 Route::get('/dashboard', function () {
@@ -30,4 +41,5 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
 Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
