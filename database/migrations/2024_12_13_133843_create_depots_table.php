@@ -17,7 +17,7 @@ return new class extends Migration
             $table->decimal('montant', 15, 2); 
             $table->string('statut')->default('non_valider');
             $table->string('devise', 3); 
-            $table->date('date_depot')->default(DB::raw('CURRENT_DATE'));
+            $table->date('date_depot')->now();
             $table->string('email');
             $table->unsignedBigInteger('id_user'); 
             $table->timestamps();
