@@ -31,3 +31,28 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/////***** ADMIN ROUTE******/////
+use App\Http\Controllers\AdminController\AdminController;
+
+Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+Route::get('/admin/recherche', [AdminController::class, 'rechercherClient'])->name('admin.recherche');
+Route::get('/admin/etat-transaction/{id}', [AdminController::class, 'etatTransaction'])->name('admin.etatTransaction');
+Route::post('/admin/changer-statut-transaction/{id}', [AdminController::class, 'changerStatutTransaction'])->name('admin.changerStatutTransaction');
