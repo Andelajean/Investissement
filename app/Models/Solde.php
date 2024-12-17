@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Solde extends Model
 {
     use HasFactory;
+    protected $fillable = [
+        'montant', 'mise_jour', 'email', 'id_user',
+    ];
 }

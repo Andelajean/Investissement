@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Depot extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'montant', 'devise', 'email', 'id_user', 'date_depot', ];
+
+    protected $fillable = [
+        'id_depot', 'montant', 'statut', 'devise', 'date_depot', 'email', 'id_user',
+    ];
+
 }

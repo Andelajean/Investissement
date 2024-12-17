@@ -13,6 +13,18 @@
         <h3 class="text-xl font-bold mb-6 text-yellow-600">Liste des Investissements Disponibles</h3>
         <div class="grid grid-cols-1 gap-6">
             <!-- Product Items -->
+            @if(session('success'))
+    <div class="bg-green-500 text-white p-4 rounded-lg mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="bg-red-500 text-white p-4 rounded-lg mb-4">
+        {{ session('error') }}
+    </div>
+@endif
+
             <!-- Repeat for 15 products -->
             <div class="bg-blue-500 to-red-600 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/2.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -95,7 +107,7 @@
 <div id="investModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
     <div class="bg-white p-6 rounded-lg shadow-lg w-96">
         <h2 class="text-lg font-semibold mb-4">Détails de l'investissement</h2>
-        <form id="investForm" method="POST" action="">
+        <form id="investForm" method="POST" action="{{ route('confirmerInvestissement') }}">
             @csrf
             <div class="mb-4">
                 <label for="productName" class="block text-sm font-medium text-gray-700">Nom du produit</label>

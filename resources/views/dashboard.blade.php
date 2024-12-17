@@ -23,24 +23,40 @@
                         <img src="/image/2.jpg" alt="Crypto" class="h-20 w-20 rounded-full shadow-lg">
                     </div>
                 </div>
-                <div class="mt-6 grid grid-cols-2 gap-6">
-                    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Solde</h3>
-                        <p class="text-2xl font-bold">0</p>
-                    </div>
-                    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Nombre D'investissement</h3>
-                        <p class="text-2xl font-bold">0</p>
-                    </div>
-                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Investissement Actif</h3>
-                        <p class="text-2xl font-bold">0</p>
-                    </div>
-                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
-                        <p class="text-2xl font-bold">0</p>
-                    </div>
-                </div>
+                @php
+    // Récupérer les données nécessaires
+    $solde = \App\Models\Solde::where('id_user', Auth::id())->first();
+    $nombreInvestissements = \App\Models\Investissement::where('id_user', Auth::id())->count();
+    $investissementsActifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'actif')->count();
+    $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'non')->count();
+@endphp
+
+<div class="mt-6 grid grid-cols-2 gap-6">
+    <!-- Solde -->
+    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Solde</h3>
+        <p class="text-2xl font-bold">{{ number_format($solde ? $solde->montant : 0, 2) }} FCFA</p>
+    </div>
+    
+    <!-- Nombre D'investissement -->
+    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Nombre D'investissement</h3>
+        <p class="text-2xl font-bold">{{ $nombreInvestissements }}</p>
+    </div>
+
+    <!-- Investissement Actif -->
+    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Investissement Actif</h3>
+        <p class="text-2xl font-bold">{{ $investissementsActifs }}</p>
+    </div>
+
+    <!-- Investissement Inactif -->
+    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
+        <p class="text-2xl font-bold">{{ $investissementsInactifs }}</p>
+    </div>
+</div>
+
             </div>
         </div>
     </div>
@@ -51,11 +67,78 @@
     <p class="text-center mb-6 font-medium text-white">
         Plus vous invitez les personnes à investir, plus vous aurez des récompenses.
     </p>
+    @if (session('success'))
+    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+        {{ session('error') }}
+    </div>
+@endif
+
     <div class="flex justify-between items-center">
         <!-- Bouton Partager le lien -->
         <button class="bg-purple-700 text-white py-3 px-6 rounded-lg hover:bg-purple-800 transition">
             Partager le lien
         </button>
+        @php
+    $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())
+        ->where('statut', 'non')
+        ->get();
+
+    $nombreInactifs = $investissementsInactifs->count();
+@endphp
+
+              <!-- Section des investissements inactifs -->
+@if ($nombreInactifs > 0)
+    <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
+        <p>
+            Vous avez <strong>{{ $nombreInactifs }}</strong> investissement(s) inactif(s). 
+            <button 
+                class="text-blue-600 underline"
+                onclick="openActivationModal()">
+                Cliquez ici pour activer
+            </button>
+        </p>
+    </div>
+@endif
+         
+
+<!-- Fenêtre contextuelle d'activation -->
+<div id="activationModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50 hidden">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+        <h2 class="text-lg font-bold text-gray-700 mb-4">Activation d'investissement</h2>
+        <p class="text-sm text-gray-500 mb-4">
+            Pour activer votre investissement, contactez l'administrateur via WhatsApp en cliquant sur le bouton ci-dessous.
+        </p>
+        
+        @foreach ($investissementsInactifs as $investissement)
+            <div class="mb-4 p-3 border border-gray-300 rounded-lg">
+                <p><strong>Montant :</strong> {{ $investissement->montant }} </p>
+                <p><strong>Email :</strong>  {{ Auth::user()->email }}</p>
+                <p><strong>ID :</strong> {{ $investissement->id }}</p>
+                <a 
+                    href="https://wa.me/{{ config('app.admin_whatsapp') }}?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
+                    target="_blank"
+                    class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
+                >
+                    Contacter l'Admin sur WhatsApp
+                </a>
+            </div>
+        @endforeach
+
+        <button 
+            onclick="closeActivationModal()" 
+            class="mt-4 w-full bg-gray-400 text-white py-2 px-4 rounded-lg hover:bg-gray-500 transition"
+        >
+            Fermer
+        </button>
+    </div>
+</div>
+
 
         <!-- Bouton Valider un paiement -->
         <button 
@@ -77,20 +160,30 @@
             &times;
         </button>
         
-        <!-- Contenu de la fenêtre -->
-        <h2 class="text-lg font-bold text-gray-700 mb-4">Validation de paiement</h2>
+         <h2 class="text-lg font-bold text-gray-700 mb-4">Validation de paiement</h2>
         <p class="text-sm text-gray-500 mb-6">
             Entrez le code envoyé par l'administrateur sur WhatsApp pour valider votre paiement.
         </p>
-        <input 
-            type="text" 
-            class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-purple-500"
-            placeholder="Entrez le code ici" />
+        <form method="POST" action="{{ route('valider.depot') }}">
+            @csrf
+        <label for="code" class="block text-sm font-medium text-gray-700">Code de validation</label>
+                <input 
+                    type="text" 
+                    id="code" 
+                    name="code" 
+                    class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring focus:ring-purple-500" 
+                    placeholder="Entrez le code ici" 
+                    required 
+                >
         <button 
-            class="mt-4 w-full bg-purple-700 text-white py-3 px-6 rounded-lg hover:bg-purple-800 transition">
+            class="mt-4 w-full bg-green-700 text-white py-3 px-6 rounded-lg hover:bg-purple-800 transition" type="submit">
             Confirmer
         </button>
+        
+        </form>
     </div>
+    </div>
+</div>
 </div>
     <!-- Action Buttons Section -->
     <div class="bg-white shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
@@ -349,6 +442,35 @@ function closModal() {
     // Fonction pour fermer la fenêtre contextuelle
     function closePaymentModal() {
         document.getElementById('paymentModal').classList.add('hidden');
+    }
+    function validateDepot() {
+        const code = document.getElementById('depotCode').value;
+
+        fetch('/validate-depot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            },
+            body: JSON.stringify({ code: code })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(data.message);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Erreur :', error));
+    }
+    function openActivationModal() {
+        document.getElementById('activationModal').classList.remove('hidden');
+    }
+
+    function closeActivationModal() {
+        document.getElementById('activationModal').classList.add('hidden');
     }
 </script>
 </body>
