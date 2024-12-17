@@ -51,7 +51,7 @@
 <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-        <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $retrait->id ?? '') }}">
+        <form id="changeStatusForm" method="POST" action="">
 
                 @csrf
                 <div class="modal-header">
