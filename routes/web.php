@@ -3,12 +3,8 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DepotController;
-
 use App\Http\Controllers\RetraiController;
-
 use App\Http\Controllers\AdminController\AdminController;
-use App\Http\Controllers\AdminController\DepotController;
-
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Investissement;

@@ -2,7 +2,7 @@
     <div class="navbar-header">
         <a class="navbar-toggle hidden-sm hidden-md hidden-lg" href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="ti-menu"></i></a>
         <div class="top-left-part">
-            <a class="logo" href="index.html">
+            <a class="logo" href="{{route('admin.dashboard')}}">
                 <b>
                     <img src="../plugins/images/eliteadmin-logo.png" alt="home" class="dark-logo" />
                     <img src="../plugins/images/eliteadmin-logo-dark.png" alt="home" class="light-logo" />

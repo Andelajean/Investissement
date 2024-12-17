@@ -21,25 +21,26 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($retraits as $transaction)
-                    <tr>
-                        <td class="txt-oflo">{{ $transaction->id }}</td>
-                        <td class="txt-oflo">{{ $transaction->email }}</td>
-                        <td class="txt-oflo">{{ $transaction->nom_investissement }}</td>
-                        <td class="txt-oflo">{{ $transaction->montant }}</td>
-                        <td>
-                            <span class="label label-{{ $transaction->statut == 'succès' ? 'success' : ($transaction->statut == 'échec' ? 'danger' : 'warning') }} label-rounded">
-                                {{ $transaction->statut }}
-                            </span>
-                        </td>
-                        <td class="txt-oflo">{{ $transaction->date_retrait }}</td>
-                        <td>
-                            <a href="{{ route('admin.etatTransaction', $transaction->id) }}" class="btn btn-info btn-sm">Voir</a>
-                            <button class="btn btn-warning btn-sm" onclick="showChangeStatusModal({{ $transaction->id }}, '{{ $transaction->statut }}')">Changer</button>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
+    @foreach ($retraits as $retrait)
+    <tr>
+        <td class="txt-oflo">{{ $retrait->id }}</td>
+        <td class="txt-oflo">{{ $retrait->email }}</td>
+        <td class="txt-oflo">{{ $retrait->nom_investissement }}</td>
+        <td class="txt-oflo">{{ $retrait->montant }}</td>
+        <td>
+            <span class="label label-{{ $retrait->statut == 'succès' ? 'success' : ($retrait->statut == 'échec' ? 'danger' : 'warning') }} label-rounded">
+                {{ $retrait->statut }}
+            </span>
+        </td>
+        <td class="txt-oflo">{{ $retrait->date_retrait }}</td>
+        <td>
+            <a href="{{ route('admin.etatTransaction', $retrait->id) }}" class="btn btn-info btn-sm">Voir</a>
+            <button class="btn btn-warning btn-sm" onclick="showChangeStatusModal({{ $retrait->id }}, '{{ $retrait->statut }}')">Changer</button>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
+
             </table>
             <a href="#" class="btn btn-primary">Voir toutes les transactions</a>
         </div>
@@ -50,7 +51,8 @@
 <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $transaction->id) }}">
+        <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $retrait->id ?? '') }}">
+
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="changeStatusModalLabel">Changer le statut de la transaction</h5>
