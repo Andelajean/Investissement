@@ -25,7 +25,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Appelez pour toute question</h5>
-                  <h4 class="text-primary mb-0">+237 699 999 999</h4>
+                  <h4 class="text-primary mb-0">+237 697 091 769</h4>
                 </div>
               </div>
             </div>
@@ -36,7 +36,8 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Envoyez un email pour un devis gratuit</h5>
-                  <h4 class="text-primary mb-0">info@investir-en-ligne.cm</h4>
+                  <h4 class="text-primary mb-0">globalinvestissement
+                    trading27@gmail.com</h4>
                 </div>
               </div>
             </div>
