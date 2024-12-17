@@ -9,20 +9,44 @@
                 <h3 class="panel-title">Détails de la Transaction</h3>
             </div>
             <div class="panel-body">
-                <p><strong>Statut actuel :</strong> <span class="label label-{{ $statut == 'succès' ? 'success' : ($statut == 'échec' ? 'danger' : 'warning') }}">{{ $statut }}</span></p>
+                {{-- Affichage du statut actuel --}}
+                <p>
+                    <strong>Statut actuel :</strong> 
+                    <span class="label label-{{ $statut == 'succès' ? 'success' : ($statut == 'échec' ? 'danger' : 'warning') }}">
+                        {{ $statut }}
+                    </span>
+                </p>
 
-                <form action="{{ route('admin.changerStatutTransaction', $retrait->id) }}" method="POST" class="form-inline">
-                    @csrf
-                    <div class="form-group">
-                        <label for="statut">Changer le statut :</label>
-                        <select name="statut" id="statut" class="form-control">
-                            <option value="traitement_en_cours" {{ $statut == 'traitement_en_cours' ? 'selected' : '' }}>Traitement en cours</option>
-                            <option value="succès" {{ $statut == 'succès' ? 'selected' : '' }}>Succès</option>
-                            <option value="échec" {{ $statut == 'échec' ? 'selected' : '' }}>Échec</option>
-                        </select>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
-                </form>
+                {{-- Vérification si $retrait ou $depot est disponible --}}
+                @if(isset($retrait) && $retrait)
+                    <form action="{{ route('admin.changerStatutTransaction', $retrait->id) }}" method="POST" class="form-inline">
+                        @csrf
+                        <div class="form-group">
+                            <label for="statut">Changer le statut :</label>
+                            <select name="statut" id="statut" class="form-control">
+                                <option value="traitement_en_cours" {{ $statut == 'traitement_en_cours' ? 'selected' : '' }}>Traitement en cours</option>
+                                <option value="succès" {{ $statut == 'succès' ? 'selected' : '' }}>Succès</option>
+                                <option value="échec" {{ $statut == 'échec' ? 'selected' : '' }}>Échec</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </form>
+                @elseif(isset($depot) && $depot)
+                    <form action="{{ route('admin.changerStatutTransaction', $depot->id) }}" method="POST" class="form-inline">
+                        @csrf
+                        <div class="form-group">
+                            <label for="statut">Changer le statut :</label>
+                            <select name="statut" id="statut" class="form-control">
+                                <option value="traitement_en_cours" {{ $statut == 'traitement_en_cours' ? 'selected' : '' }}>Traitement en cours</option>
+                                <option value="succès" {{ $statut == 'succès' ? 'selected' : '' }}>Succès</option>
+                                <option value="échec" {{ $statut == 'échec' ? 'selected' : '' }}>Échec</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </form>
+                @else
+                    <p>Aucune transaction trouvée.</p>
+                @endif
             </div>
         </div>
     </div>
@@ -32,7 +56,8 @@
 <div class="modal fade" id="changeStatusModal" tabindex="-1" role="dialog" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form id="changeStatusForm" method="POST" action="{{ route('admin.changerStatutTransaction', $retrait->id) }}">
+            <form id="changeStatusForm" method="POST" 
+                action="{{ isset($retrait) && $retrait ? route('admin.changerStatutTransaction', $retrait->id) : (isset($depot) && $depot ? route('admin.changerStatutTransaction', $depot->id) : '#') }}">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="changeStatusModalLabel">Changer le statut de la transaction</h5>
@@ -59,6 +84,7 @@
         </div>
     </div>
 </div>
+
 
 <script>
     function showChangeStatusModal(transactionId, currentStatus) {

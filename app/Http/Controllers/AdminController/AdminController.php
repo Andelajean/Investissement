@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Depot;
 use App\Models\Retrait;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -33,20 +34,31 @@ class AdminController extends Controller
     }
 
     public function etatTransaction($id)
-    {
-        $retrait = Retrait::find($id);
-        $depot = Depot::find($id);
+{
+    $retrait = Retrait::find($id);
+    $depot = Depot::find($id);
 
-        if ($retrait) {
-            $statut = $retrait->statut;
-        } elseif ($depot) {
-            $statut = 'succès'; // ou autre statut pertinent pour les dépôts
-        } else {
-            $statut = 'échec';
-        }
+    // Logs pour le débogage
+    Log::info('Valeur de $retrait:', ['retrait' => $retrait]);
+    Log::info('Valeur de $depot:', ['depot' => $depot]);
+    Log::info('ID reçu:', ['id' => $id]);
 
-        return view('admin.etat', compact('statut','retrait'));
+    if ($retrait) {
+        $statut = $retrait->statut;
+    } elseif ($depot) {
+        $statut = 'succès';
+        $retrait = null;
+    } else {
+        $statut = 'échec';
+        $retrait = null;
     }
+
+    return view('admin.etat', compact('statut', 'retrait'));
+}
+
+
+    
+
 
     public function changerStatutTransaction(Request $request, $id) { 
         $retrait = Retrait::find($id); 
