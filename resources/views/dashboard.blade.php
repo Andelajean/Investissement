@@ -121,7 +121,7 @@
                 <p><strong>Email :</strong>  {{ Auth::user()->email }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
-                    href="https://wa.me/{{ config('app.admin_whatsapp') }}?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
+                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
                     target="_blank"
                     class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
                 >
@@ -225,16 +225,85 @@
         </div>
     </div>
 
+<!-- Message d'erreur -->
+<div id="error-message" class="hidden text-center text-red-500 font-bold mt-4">
+    Vous n'avez aucun investissement actif.
+</div>
 
 
-            <div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white">
-                <button class="flex flex-col items-center gap-2" onclick="openModal(100000,1300000)">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
-                    </svg>
-                    Retrait
-                </button>
+
+<div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white" id="openModalButton">
+    <button class="flex flex-col items-center gap-2" onclick="document.getElementById('actif').classList.remove('hidden')">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
+            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
+        </svg>
+        Retrait
+    </button>
+</div>
+
+
+
+<!-- Fenêtre contextuelle (Modal) -->
+<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
+    <div class="bg-white p-6 rounded-md shadow-lg max-w-lg w-full">
+        <h3 class="text-gray-700 font-semibold mb-2">Demande de Retrait :</h3>
+        
+        @if($investissementsActifs instanceof \Illuminate\Support\Collection && $investissementsActifs->count() > 0)
+            <ul class="list-disc ml-5">
+                @foreach($investissementsActifs as $investissement)
+                    <li>
+                        <button 
+                            class="text-blue-500 underline hover:text-blue-700" 
+                            onclick="remplirFormulaireRetrait('{{ $investissement->montant }}', '{{ $investissement->nom_investissement }}')">
+                            {{ $investissement->nom_investissement }} - 
+                            {{ number_format($investissement->montant, 2) }} XAF
+                        </button>
+                    </li>
+                @endforeach
+            </ul>
+        @else
+            <!-- Message si aucun investissement actif -->
+            <div class="text-red-500 text-center">
+                Vous n'avez aucun investissement actif.
             </div>
+        @endif
+
+        <!-- Bouton pour fermer la fenêtre contextuelle -->
+        <button id="closeModalButton" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
+            Fermer
+        </button>
+    </div>
+</div>
+
+<!-- JavaScript pour contrôler l'affichage de la fenêtre contextuelle -->
+<script>
+    // Cacher la fenêtre contextuelle par défaut
+    const modal = document.getElementById('modal');
+    const openModalButton = document.getElementById('openModalButton');
+    const closeModalButton = document.getElementById('closeModalButton');
+
+    // Ouvrir la fenêtre contextuelle
+    openModalButton.addEventListener('click', function() {
+        modal.classList.remove('hidden');
+    });
+
+    // Fermer la fenêtre contextuelle
+    closeModalButton.addEventListener('click', function() {
+        modal.classList.add('hidden');
+    });
+
+    // Optionnel: fermer la fenêtre si l'utilisateur clique en dehors de celle-ci
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>
+
+
+
+
+
             <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-8 rounded-lg text-center text-white">
     <a href="/profile" class="flex flex-col items-center gap-2"> <!-- Lien vers la page du profil -->
         <button>
@@ -338,28 +407,8 @@
             </tbody>
         </table>
     </div>
-    <div id="currency-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
-    <div class="bg-white p-6 rounded-lg w-96">
-        <h2 class="text-xl font-semibold text-gray-800 mb-4">Demande De retrait</h2>
-        <label for="currency" class="block text-gray-700 mb-2">Devise</label>
-        <form action="/payement/investissement" method="POST">
-            @csrf
-        <select id="currency" class="w-full p-2 border rounded-lg mb-4" name="currency" onchange="updateAmount()">
-            <option value="XAF">XAF</option>
-            <option value="XOF">XOF</option>
-            <option value="CDF">CDF</option>
-            <option value="GNF">GNF</option>
-            <option value="USD">USD</option>
-        </select>
-        <label for="currency" class="block text-gray-700 mb-2">Montant du Retrait</label>
-        <input type="text" name="montant" id="amunt" class="w-full p-2 border rounded-lg mb-4">
-        <label for="currency" class="block text-gray-700 mb-2">Telephone du beneficiaire</label>
-        <input type="text" name="benefice" id="gan"  class="w-full p-2 border rounded-lg mb-4">
-        <button class="bg-green-500 text-white py-2 px-4 rounded-lg w-full hover:bg-green-600"  onclick="confirmInvestment()" type="submit">Confirmer</button>
-        <button class="mt-2 w-full bg-red-400 text-white py-2 px-4 rounded-lg hover:bg-red-500" onclick="closModal()" type="reset">Annuler</button>
+  
 
-       </form>
-    </div>
 
     <div id="currency-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg w-96">
@@ -381,6 +430,8 @@
     </div>
     </div>
 
+
+    
 
    
 <script>
@@ -443,28 +494,7 @@ function closModal() {
     function closePaymentModal() {
         document.getElementById('paymentModal').classList.add('hidden');
     }
-    function validateDepot() {
-        const code = document.getElementById('depotCode').value;
-
-        fetch('/validate-depot', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-            },
-            body: JSON.stringify({ code: code })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert(data.message);
-                location.reload();
-            } else {
-                alert(data.message);
-            }
-        })
-        .catch(error => console.error('Erreur :', error));
-    }
+    
     function openActivationModal() {
         document.getElementById('activationModal').classList.remove('hidden');
     }
@@ -472,6 +502,8 @@ function closModal() {
     function closeActivationModal() {
         document.getElementById('activationModal').classList.add('hidden');
     }
+
+
 </script>
 </body>
 </html>
