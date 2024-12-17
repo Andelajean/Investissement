@@ -63,21 +63,25 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav  ">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="users/produit-list"> Produits</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="help">Aide</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact">Contact</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
-              </li>
+            <li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
+    <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item {{ Request::is('/dashboard') ? 'active' : '' }}">
+    <a class="nav-link" href="{{route('dashboard')}}">Produits</a>
+</li>
+<li class="nav-item {{ Request::is('/help') ? 'active' : '' }}">
+    <a class="nav-link" href="help">Aide</a>
+</li>
+<li class="nav-item {{ Request::is('/contact') ? 'active' : '' }}">
+    <a class="nav-link" href="contact">Contact</a>
+</li>
+<li class="nav-item {{ Request::is('/login') ? 'active' : '' }}">
+    <a class="nav-link" href="login">
+        <i class="fa fa-user" aria-hidden="true"></i> Login
+    </a>
+</li>
+
+
               <form class="form-inline">
                 <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
                   <i class="fa fa-search" aria-hidden="true"></i>
