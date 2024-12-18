@@ -4,6 +4,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 //use App\Http\Controllers\DepotController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
@@ -53,7 +54,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/etat_transaction/all/retrait', [AdminController::class, 'ShowAllRetrait'])->name('admin.transaction_retrait');
     Route::get('/admin/etat_transaction/all', [AdminController::class, 'ShowAllTransaction'])->name('admin.transaction_all');
     Route::get('/contacts', [ContactController::class,'index'])->name('admin.contacts');
-
+    Route::get('/profile', [UserController::class, 'profile'])->name('admin.profile'); 
+    Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
+    Route::get('/settings', [UserController::class, 'settings'])->name('admin.settings'); 
+    Route::post('/logout', [UserController::class, 'logout'])->name('admin.logout');
 
     Route::get('/depots', [DepotController::class, 'index'])->name('admin.depots');
     Route::post('/depots', [DepotController::class, 'store'])->name('admin.store_depot');
