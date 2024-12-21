@@ -73,6 +73,9 @@
                 <a class="nav-link" href="help">Aide</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="team"> Equipe</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="contact">Contact</a>
               </li>
               <li class="nav-item">

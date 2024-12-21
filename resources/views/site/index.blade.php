@@ -36,6 +36,9 @@
             <a class="nav-link" href="help">Aide</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="team"> equipe</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="contact">Contact</a>
           </li>
           <li class="nav-item">

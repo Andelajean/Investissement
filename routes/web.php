@@ -30,6 +30,10 @@ Route::get('/contact', function () {
     return view('site.contact'); // Affiche la page about.blade.php
 });
 
+Route::get('/team', function () {
+    return view('site.team'); // Affiche la page about.blade.php
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
