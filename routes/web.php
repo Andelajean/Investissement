@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
+use App\Http\Controllers\AdminController\InvestissementController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,6 +54,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/changer-statut-transaction/{id}', [AdminController::class, 'changerStatutTransaction'])->name('admin.changerStatutTransaction');
     Route::get('/admin/etat_transaction/all/retrait', [AdminController::class, 'ShowAllRetrait'])->name('admin.transaction_retrait');
     Route::get('/admin/etat_transaction/all', [AdminController::class, 'ShowAllTransaction'])->name('admin.transaction_all');
+    Route::get('/admin/investissement/all', [InvestissementController::class, 'ShowAllInvestissement'])->name('admin.investissement_all');
+    Route::get('/admin/investissement/update/activate/{id}', [InvestissementController::class, 'activer'])->name('admin.activer.investissement');
+    Route::get('/admin/investissement/update/deactivate/{id}', [InvestissementController::class, 'desactiver'])->name('admin.desactiver.investissement');
+    Route::delete('/admin/investissement/delete/{id}', [InvestissementController::class, 'supprimer'])->name('admin.supprimer.investissement');
+
     Route::get('/contacts', [ContactController::class,'index'])->name('admin.contacts');
     Route::get('/profile', [UserController::class, 'profile'])->name('admin.profile'); 
     Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
