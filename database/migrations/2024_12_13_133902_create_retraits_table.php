@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\DB;
 return new class extends Migration
 {
     /**
@@ -17,7 +17,8 @@ return new class extends Migration
         $table->decimal('montant', 15, 2); 
         $table->string('statut')->default('traitement_en_cours'); 
         $table->string('devise', 3); 
-        $table->date('date_retrait');
+        $table->date('date_retrait')->now();
+        $table->string('nom_investissement'); 
         $table->unsignedBigInteger('id_user'); 
         $table->timestamps();
         $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
