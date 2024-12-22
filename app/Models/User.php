@@ -24,12 +24,13 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return $this->role_id === 1; // Rôle admin
+        return $this->role === 1; // Rôle admin
     }
     protected $fillable = [
         'name',
         'telephone',
         'email',
+        'role',
         'password',
     ];
     /**
