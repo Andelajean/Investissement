@@ -30,19 +30,21 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="users/produit-list"> Produits</a>
+            <a class="nav-link" href="{{route('dashboard')}}"> Produits</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="help">Aide</a>
+            <a class="nav-link" href="/help">Aide</a>
           </li>
           <li class="nav-item">
+
             <a class="nav-link" href="team"> equipe</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contact">Contact</a>
+
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+            <a class="nav-link" href="{{route('login')}}"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
           </li>
           <form class="form-inline">
             <button class="btn  my-2 my-sm-0 nav_search-btn" type="submit">
@@ -74,12 +76,12 @@
                 </p>
                 <div class="row">
                   <div class="col btn-box">
-                    <a href="" class="btn1">
-                      Investir
+                    <a href="{{route('register')}}" class="btn1">
+                      Investir Maintenant
                     </a>
                   </div>
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="{{route('login')}}" class="btn1">
                       Se connecter
                     </a>
                   </div>
@@ -108,12 +110,12 @@
                 </p>
                 <div class="row">
                   <div class="col btn-box">
-                    <a href="" class="btn1">
-                      Investir
+                    <a href="/register" class="btn1">
+                      Investir Maintenant
                     </a>
                   </div>
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="/login" class="btn1">
                       Se connecter
                     </a>
                   </div>
@@ -188,9 +190,9 @@
       <div class="container ">
         <div class="heading_container heading_center">
           <h2>
-        Trouver de <span>l'Aide</span>
+          <span> Trouver de l'Aide</span>
           </h2>
-          <p>
+          <p class="mb-5 text-white">
             Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
           </p>
         </div>
@@ -200,7 +202,7 @@
             <div class="box">
               <p><strong>Présentation des opportunités d'investissement</strong></p>
               <div class="video-box">
-                <video src="videos/video1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -209,7 +211,7 @@
             <div class="box">
               <p><strong>Témoignage de nos clients satisfaits</strong></p>
               <div class="video-box">
-                <video src="videos/video2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -218,7 +220,7 @@
             <div class="box">
               <p><strong>Stratégies pour maximiser vos profits</strong></p>
               <div class="video-box">
-                <video src="videos/video3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -229,7 +231,7 @@
             <div class="box">
               <p><strong>Exemple d'un projet financé avec succès</strong></p>
               <div class="video-box">
-                <video src="videos/video4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -238,7 +240,7 @@
             <div class="box">
               <p><strong>Interviews avec des experts financiers</strong></p>
               <div class="video-box">
-                <video src="videos/video5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -247,14 +249,14 @@
             <div class="box">
               <p><strong>Explication des concepts clés de la finance</strong></p>
               <div class="video-box">
-                <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
         </div>
 
         <div class="btn-box">
-          <a href="">
+          <a href="/plus">
             Voir tout
           </a>
         </div>
@@ -268,7 +270,7 @@
       <div class="container">
         <div class="heading_container heading_center">
           <h2>
-            Nos <span>Produits</span>
+          <span>  Nos Produits</span>
           </h2>
           <p>
             Découvrez une gamme variée de produits d'investissement, conçus pour vous accompagner dans la croissance de votre capital de manière sécurisée et efficace.
@@ -282,7 +284,7 @@
           </div>
           <div class="col-md-6">
             <div class="detail-box">
-              <h3>
+              <h3 class="mb-5 text-white">
                 Nous sommes Global Investissement Trading
               </h3>
               <p>
@@ -291,7 +293,7 @@
               <p>
                 Nous offrons des produits allant des investissements à faible risque à ceux plus dynamiques, en vous garantissant une transparence totale et un accompagnement personnalisé pour chaque étape de votre parcours d'investisseur.
               </p>
-              <a href="users/produit-list">
+              <a href="{{route('dashboard')}}">
                 En savoir plus
               </a>
             </div>
@@ -307,9 +309,9 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
-                Questions <span>Fréquentes</span>
+                <span> Questions Fréquentes</span>
                 </h2>
-                <h1 class="mb-5">Réponses à vos interrogations sur l'investissement</h1>
+                <h1 class="mb-5 text-white">Réponses à vos interrogations sur l'investissement</h1>
             </div>
         <div class="row g-5">
       <!-- Colonne Gauche -->
@@ -319,16 +321,16 @@
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
-            <h4>Comment investir ?</h4>
-            <p class="mb-0">
+            <h4 > <span>Comment investir ?</span></h4>
+            <p class="mb-0 text-white">
                 Tout d'abord cliquer sur Investir ensuite remplir ses informations dans le formulaire d'enregistrement. Un email vous sera envoye pour valider votre demande. Une fois dans le tableau de bord vous pourrez effectuer votre investissement</p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
-            <h4>comment recharger mon compte ?</h4>
-            <p class="mb-0">
+            <h4> <span>comment recharger mon compte ?</span></h4>
+            <p class="mb-0 text-white">
                 Une fois connecté, cliquer sur recharger mon compte. Vous serez ensuite rediriger vers votre compte WhatSapp avec un message, envoyez ce message sans le modifer. Nous vous enverrons les methodes de payement via WhatSapp. Une fois le payement effectue, envoyez nous la capture d'ecran via WhatApp, nous verifierons et vous envoyerons un code que vous utiliser pour valider votre payement dans la palteforme</p>
           </div>
         </div>
@@ -348,16 +350,16 @@
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
-            <h4>Comment faire un retrait ?</h4>
-            <p class="mb-0">
+            <h4> <span> Comment faire un retrait ?</span> </h4>
+            <p class="mb-0 text-white" >
                 Une fois connecté, cliquer sur Retrait puis choisir l'investissement qu'on souhaite retirer ensuite renseigner les informations enfin soumettez la demande</p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
-            <h4>Comment nous contacter ?</h4>
-            <p class="mb-0"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
+            <h4> <span>Comment nous contacter ?</span> </h4>
+            <p class="mb-0 text-white"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
           </div>
         </div>
       </div>
