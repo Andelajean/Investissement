@@ -25,12 +25,15 @@
                             <i class="fa fa-power-off"></i> Logout
                         </a>
                     </li>
+                    <li><a href="{{ route('admin.depots') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Gestion des dépôts</span></a></li>
+                    <li><a href="{{ route('admin.transaction_retrait') }}" class="waves-effect"><i class="mdi mdi-cash-multiple fa-fw"></i> <span class="hide-menu">Demande de retrait</span></a></li>
+                    <li><a href="{{ route('admin.transaction_all') }}" class="waves-effect"><i class="mdi mdi-swap-horizontal fa-fw"></i> <span class="hide-menu">Gestions Transactions</span></a></li>
+                    <li><a href="{{ route('admin.investissement_all') }}" class="waves-effect"><i class="mdi mdi-chart-line fa-fw"></i> <span class="hide-menu">Investissements</span></a></li>
+
                 </ul>
 
             </li>
-            <li><a href="{{ route('admin.depots') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Gestion des depots</span></a></li>
-            <li><a href="{{ route('admin.transaction_retrait') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw"></i> <span class="hide-menu">Demande de retrait</span></a></li>
-           <li><a href="{{ route('admin.transaction_all') }}" class="waves-effect"><i class="mdi mdi-table fa-fw"></i> <span class="hide-menu">Transactions</span></a></li>
+           
         </ul>
     </div>
 </div>
