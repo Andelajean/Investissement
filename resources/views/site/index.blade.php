@@ -14,7 +14,7 @@
 <header class="header_section">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg custom_nav-container ">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="/">
         <span>
         Global Investissement Trading
         </span>
@@ -183,6 +183,20 @@
     </div>
     <!-- Facts Start -->
 
+   <!-- Bouton Fixe -->
+  <a 
+    href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
+    class="fixed-whatsapp-btn"
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+      alt="WhatsApp Logo" 
+      style="width: 24px; height: 24px;"
+    />
+    Plus D'infos
+  </a>
 
      <!-- help section -->
     <section class="service_section layout_padding">
@@ -202,7 +216,7 @@
             <div class="box">
               <p><strong>Présentation des opportunités d'investissement</strong></p>
               <div class="video-box">
-                <video src="videos/1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -211,7 +225,7 @@
             <div class="box">
               <p><strong>Témoignage de nos clients satisfaits</strong></p>
               <div class="video-box">
-                <video src="videos/2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/7.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -220,7 +234,7 @@
             <div class="box">
               <p><strong>Stratégies pour maximiser vos profits</strong></p>
               <div class="video-box">
-                <video src="videos/3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/8.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -231,7 +245,7 @@
             <div class="box">
               <p><strong>Exemple d'un projet financé avec succès</strong></p>
               <div class="video-box">
-                <video src="videos/4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/9.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -240,7 +254,7 @@
             <div class="box">
               <p><strong>Interviews avec des experts financiers</strong></p>
               <div class="video-box">
-                <video src="videos/5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/10.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -249,7 +263,7 @@
             <div class="box">
               <p><strong>Explication des concepts clés de la finance</strong></p>
               <div class="video-box">
-                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/11.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>

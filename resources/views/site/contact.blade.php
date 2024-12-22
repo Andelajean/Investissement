@@ -4,7 +4,20 @@
 @section('content') 
 
      <!-- contact section -->
-
+ <!-- Bouton Fixe -->
+ <a 
+    href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
+    class="fixed-whatsapp-btn"
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+      alt="WhatsApp Logo" 
+      style="width: 24px; height: 24px;"
+    />
+    Plus D'infos
+  </a>
   <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -24,8 +37,9 @@
                   <i class="fa fa-phone text-white"></i>
                 </div>
                 <div class="ps-4 mx-3">
-                  <h5 class="mb-2">Appelez pour toute question</h5>
+                  <h5 class="mb-2 text-white">Appelez pour toute question</h5>
                   <h4 class="text-primary mb-0">+237 697 091 769</h4>
+                  <h4 class="text-primary mb-0">+237 686 370 673</h4>
                 </div>
               </div>
             </div>
@@ -48,7 +62,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Visitez notre bureau</h5>
-                  <h4 class="text-primary mb-0">Yaoundé, Cameroun</h4>
+                  <h4 class="text-primary mb-0">Mokolo , Beroua, Cameroun</h4>
                 </div>
               </div>
             </div>

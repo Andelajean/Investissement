@@ -40,7 +40,7 @@ Route::get('/contact', function () {
     return view('site.contact');
 });
 Route::get('/teams', function () {
-    return view('site.contact');
+    return view('site.teams');
 });
 
 Route::get('/team', function () {
@@ -74,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
     Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
-    Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
+    
 });
 
 require __DIR__.'/auth.php';
@@ -83,6 +83,7 @@ Route::get('/pay/success', [\App\Http\Controllers\PaiementController::class, 'ca
 Route::post('/pay/notify', [\App\Http\Controllers\PaiementController::class, 'notify'])->name('payment.notify');
 Route::get('/return_url', [\App\Http\Controllers\PaiementController::class, 'return_url'])->name('return_url');
 Route::post('/payement/investissement', [\App\Http\Controllers\PaiementController::class, 'payment'])->name('paiement');
+Route::post('/validate-depot', [\App\Http\Controllers\PaiementController::class, 'validerDepot'])->name('valider.depot');
 
 Route::middleware('auth')->group(function () {
 
@@ -102,6 +103,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
     Route::get('/settings', [UserController::class, 'settings'])->name('admin.settings'); 
     Route::post('/logout/admin', [UserController::class, 'logout'])->name('admin.logout');
+    
 
     Route::get('/depots', [DepotController::class, 'index'])->name('admin.depots');
     Route::post('/depots', [DepotController::class, 'store'])->name('admin.store_depot');
