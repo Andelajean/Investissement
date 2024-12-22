@@ -41,6 +41,10 @@ Route::get('/teams', function () {
     return view('site.contact');
 });
 
+Route::get('/team', function () {
+    return view('site.team'); // Affiche la page about.blade.php
+});
+
 Route::get('/dashboard', function () {
     // Récupérer les investissements actifs de l'utilisateur connecté
     $investissementsActifs = Investissement::where('id_user', auth()->id())
