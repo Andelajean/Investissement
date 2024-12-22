@@ -71,12 +71,12 @@
                 </p>
                 <div class="row">
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="{{route('register')}}" class="btn1">
                       Investir Maintenant
                     </a>
                   </div>
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="{{route('login')}}" class="btn1">
                       Se connecter
                     </a>
                   </div>
@@ -105,12 +105,12 @@
                 </p>
                 <div class="row">
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="/register" class="btn1">
                       Investir Maintenant
                     </a>
                   </div>
                   <div class="col btn-box">
-                    <a href="" class="btn1">
+                    <a href="/login" class="btn1">
                       Se connecter
                     </a>
                   </div>
@@ -197,7 +197,7 @@
             <div class="box">
               <p><strong>Présentation des opportunités d'investissement</strong></p>
               <div class="video-box">
-                <video src="videos/video1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@
             <div class="box">
               <p><strong>Témoignage de nos clients satisfaits</strong></p>
               <div class="video-box">
-                <video src="videos/video2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -215,7 +215,7 @@
             <div class="box">
               <p><strong>Stratégies pour maximiser vos profits</strong></p>
               <div class="video-box">
-                <video src="videos/video3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@
             <div class="box">
               <p><strong>Exemple d'un projet financé avec succès</strong></p>
               <div class="video-box">
-                <video src="videos/video4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -235,7 +235,7 @@
             <div class="box">
               <p><strong>Interviews avec des experts financiers</strong></p>
               <div class="video-box">
-                <video src="videos/video5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -244,14 +244,14 @@
             <div class="box">
               <p><strong>Explication des concepts clés de la finance</strong></p>
               <div class="video-box">
-                <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
         </div>
 
         <div class="btn-box">
-          <a href="">
+          <a href="/plus">
             Voir tout
           </a>
         </div>
