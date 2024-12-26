@@ -5,8 +5,8 @@
 
      <!-- team section -->
 
-     <section class="why_section layout_padding">
-        <div class="container">
+<section class="why_section layout_padding">
+    <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
                 Membres de <span>l'equipe</span>
@@ -63,7 +63,7 @@
             </div>
         </div>
     </div>
-  </section>
+</section>
 
     
   
