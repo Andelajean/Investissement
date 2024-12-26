@@ -34,6 +34,29 @@
   <link href="{{ asset('css/style.css') }} " rel="stylesheet" />
   <!-- responsive style -->
   <link href="{{ asset('css/responsive.css') }} " rel="stylesheet" />
+  <style>
+    /* Bouton centré et au-dessus */
+    .fixed-whatsapp-btn {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1050; /* Au-dessus de tout */
+      border: 2px solid #25D366; /* Couleur verte de WhatsApp */
+      color: #25D366; /* Texte et icône verts */
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent; /* Pas de background */
+    }
+    .fixed-whatsapp-btn:hover {
+      background-color: #25D366; /* Ajout d'un fond au survol */
+      color: #fff; /* Texte et icône en blanc au survol */
+    }
+  </style>
 
 </head>
 
@@ -80,7 +103,7 @@
                 <a class="nav-link" href="contact">Contact</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                <a class="nav-link" href="/login"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
               </li>
 
               <form class="form-inline">
@@ -120,6 +143,7 @@
                   <i class="fa fa-phone" aria-hidden="true"></i>
                   <span>
                     Appel +237 697 091 769
+                    +237 686 370 673
                   </span>
                 </a>
                 <a href="">

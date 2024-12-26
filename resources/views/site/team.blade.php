@@ -4,7 +4,20 @@
 @section('content') 
 
      <!-- team section -->
-
+ <!-- Bouton Fixe -->
+ <a 
+    href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
+    class="fixed-whatsapp-btn"
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+      alt="WhatsApp Logo" 
+      style="width: 24px; height: 24px;"
+    />
+    Plus D'infos
+  </a>
      <section class="why_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
@@ -22,8 +35,8 @@
                             <img class="img-fluid w-100" src="image/team-1.jpg" alt="" style="height: 400px;">
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">President</h4>
-                            <p class="text-uppercase m-0">PDG</p>
+                            <h4 class="text-primary">Emile SIMB</h4>
+                            <p class="text-uppercase m-0">Fondateur</p>
                         </div>
                     </div>
                 </div>

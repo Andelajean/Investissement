@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Retrait extends Model
 {
     use HasFactory; 
-    protected $fillable = ['id_demande', 'montant', 'statut', 'devise', 'date_retrait', 'id_user'];
+    protected $fillable = ['id_demande', 'montant', 'nom_investissement','statut', 'devise', 'date_retrait', 'id_user'];
     
     public function updateStatut($statut) { 
         $this->statut = $statut;
