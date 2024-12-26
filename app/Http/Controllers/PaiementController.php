@@ -123,46 +123,57 @@ class PaiementController extends Controller
     }
 }
 public function validerDepot(Request $request)
-    {
-        // Valider l'entrée
-        $request->validate([
-            'code' => 'required|string',
-        ]);
+{
+    // Validation des données entrantes
+    $request->validate([
+        'code' => 'required|string',
+    ]);
 
-        // Récupérer l'utilisateur connecté
-        $user = Auth::user();
+    // Récupération de l'utilisateur connecté
+    $user = Auth::user();
 
-        // Trouver le dépôt correspondant au code
-        $depot = Depot::where('id_depot', $request->code)
-            ->where('id_user', $user->id)
-            ->first();
+    // Rechercher le dépôt correspondant au code, à l'ID utilisateur et à l'email
+    $depot = Depot::where('id_depot', $request->code)
+        ->where('id_user', $user->id)
+        ->where('email', $user->email)
+        ->first();
 
-        // Vérifier si le dépôt existe
-        if (!$depot) {
-            return back()->with('error', 'Dépôt introuvable ou non autorisé.');
-        }
+    // Vérifier si le dépôt existe
+    if (!$depot) {
+        return back()->with('error', 'Dépôt introuvable ou non autorisé.');
+    }
 
-        // Vérifier si le dépôt est déjà validé
-        if ($depot->statut === 'valider') {
-            return back()->with('error', 'Ce dépôt a déjà été validé.');
-        }
+    // Vérifier si le dépôt est déjà validé
+    if ($depot->statut === 'valider') {
+        return back()->with('error', 'Ce dépôt a déjà été validé.');
+    }
 
-        // Mettre à jour le statut du dépôt
-        $depot->update([
-            'statut' => 'valider',
-        ]);
+    // Mettre à jour le statut du dépôt
+    $depot->update([
+        'statut' => 'valider',
+    ]);
 
-        // Mettre à jour le solde de l'utilisateur
-        $solde = Solde::firstOrCreate(
-            ['id_user' => $user->id],
-            ['montant' => 0, 'email' => $user->email]
-        );
+    // Vérifier l'existence du solde de l'utilisateur
+    $solde = Solde::where('id_user', $user->id)->first();
 
+    if ($solde) {
+        // Si un solde existe, mettre à jour le montant et la date de mise à jour
         $solde->update([
             'montant' => $solde->montant + $depot->montant,
+            'mise_jour' => now(),
         ]);
-
-        return back()->with('success', 'Dépôt validé avec succès et solde mis à jour.');
+    } else {
+        // Si aucun solde n'existe, créer le premier solde pour l'utilisateur
+        Solde::create([
+            'id_user' => $user->id,
+            'email' => $user->email,
+            'montant' => $depot->montant,
+            'mise_jour' => now(),
+        ]);
     }
-    
+
+    // Retourner un message de succès
+    return back()->with('success', 'Dépôt validé avec succès et solde mis à jour.');
+}
+
 }

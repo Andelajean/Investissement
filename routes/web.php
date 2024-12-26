@@ -16,6 +16,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Investissement;
 use App\Models\Depot;
 use App\Models\Retrait;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,10 +49,41 @@ Route::get('/team', function () {
     return view('site.team'); // Affiche la page about.blade.php
 });
 
+
+Route::post('/demander-retrait', function (Illuminate\Http\Request $request) {
+    $request->validate([
+        'id_investissement' => 'required|exists:investissements,id',
+    ]);
+
+    $user = auth()->user();
+    $investissement = Investissement::where('id', $request->id_investissement)
+        ->where('id_user', $user->id)
+        ->where('statut', 'oui')
+        ->first();
+
+    if (!$investissement) {
+        return back()->with('error', "Investissement introuvable ou non autorisé.");
+    }
+
+    \App\Models\Retrait::create([
+        'nom_investissement' => $investissement->nom_investissement,
+        'id_demande' => uniqid(),
+        'montant' => $investissement->montant,
+        'statut' => 'traitement_en_cours',
+        'devise' => 'XAF',
+       'date_retrait' => now(),
+        'id_user' => $user->id,
+    ]);
+
+    return back()->with('success', "Demande de retrait effectuée avec succès.");
+});
+
+Route::get('/email',[ProductController::class,'email'])->name('email');
+
 Route::get('/dashboard', function () {
     // Récupérer les investissements actifs de l'utilisateur connecté
     $investissementsActifs = Investissement::where('id_user', auth()->id())
-    ->where('statut', 'actif')
+    ->where('statut', 'oui')
     ->get();
  
  // Récupérer l'historique des dépôts
