@@ -4,22 +4,14 @@
 @section('content') 
 
      <!-- team section -->
- <!-- Bouton Fixe -->
- <a 
-    href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
-    class="fixed-whatsapp-btn"
-    target="_blank" 
-    rel="noopener noreferrer"
-  >
-    <img 
-      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
-      alt="WhatsApp Logo" 
-      style="width: 24px; height: 24px;"
-    />
-    Plus D'infos
-  </a>
+
+<section class="why_section layout_padding">
+    <div class="container">
+
+    
      <section class="why_section layout_padding">
         <div class="container">
+
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
                 Membres de <span>l'equipe</span>
@@ -76,7 +68,7 @@
             </div>
         </div>
     </div>
-  </section>
+</section>
 
     
   

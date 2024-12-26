@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-//use App\Http\Controllers\DepotController;
+
+// use App\Http\Controllers\DepotController;
+use App\Http\Controllers\RetraiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController\UserController;
+
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
