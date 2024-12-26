@@ -9,7 +9,7 @@
     <div class="container">
       <div class="heading_container heading_center">
         <h2>
-          Contactez <span>Nous</span>
+        <span> Contactez Nous</span>
         </h2>
         <p>
           N'hésitez pas à nous contacter pour toute question ou pour plus d'informations sur nos services d'investissement en ligne. Nous sommes à votre écoute pour vous accompagner.
@@ -53,27 +53,35 @@
               </div>
             </div>
           </div>
+          @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
           <div class="row g-5">
             <div class="col-lg-6 wow slideInUp" data-wow-delay="0.3s">
-              <form>
-                <div class="row g-3">
-                  <div class="col-md-6 mt-3">
-                    <input type="text" class="form-control border-0 bg-light px-4" placeholder="Votre Nom" style="height: 55px;">
-                  </div>
-                  <div class="col-md-6 mt-3">
-                    <input type="email" class="form-control border-0 bg-light px-4" placeholder="Votre Email" style="height: 55px;">
-                  </div>
-                  <div class="col-12 mt-3">
-                    <input type="text" class="form-control border-0 bg-light px-4" placeholder="Objet" style="height: 55px;">
-                  </div>
-                  <div class="col-12 mt-3">
-                    <textarea class="form-control border-0 bg-light px-4 py-3" rows="4" placeholder="Message"></textarea>
-                  </div>
-                  <div class="col-12 mt-5">
-                    <button class="btn btn-primary w-100 py-3" type="submit">Envoyer le message</button>
-                  </div>
-                </div>
-              </form>
+            <form action="{{ route('contact') }}" method="POST">
+    @csrf
+    <div class="row g-3">
+        <div class="col-md-6 mt-3">
+            <input type="text" class="form-control border-0 bg-light px-4" name="nom" placeholder="Votre Nom" style="height: 55px;">
+        </div>
+        <div class="col-md-6 mt-3">
+            <input type="email" class="form-control border-0 bg-light px-4" name="email" placeholder="Votre Email" style="height: 55px;">
+        </div>
+        <div class="col-12 mt-3">
+            <input type="text" class="form-control border-0 bg-light px-4" name="objet" placeholder="Objet" style="height: 55px;">
+        </div>
+        <div class="col-12 mt-3">
+            <textarea class="form-control border-0 bg-light px-4 py-3" name="message" rows="4" placeholder="Message"></textarea>
+        </div>
+        <div class="col-12 mt-5">
+            <button class="btn btn-primary w-100 py-3" type="submit">Envoyer le message</button>
+        </div>
+    </div>
+</form>
+
             </div>
             <div class="col-lg-6 wow slideInUp" data-wow-delay="0.6s">
             <iframe class="position-relative rounded w-100 h-100" 

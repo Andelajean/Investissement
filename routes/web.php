@@ -2,16 +2,21 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-// use App\Http\Controllers\DepotController;
 
+// use App\Http\Controllers\DepotController;
 use App\Http\Controllers\RetraiController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminController\UserController;
 
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
-
+use App\Http\Controllers\AdminController\ContactController;
+use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Investissement;
+use App\Models\Depot;
+use App\Models\Retrait;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,19 +28,20 @@ use App\Models\Investissement;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
 Route::get('/', function () {
     return view('site.index');
 });
-
-Route::get('/help', function () {
-    return view('site.help'); // Affiche la page about.blade.php
+Route::get('/plus', function () {
+    return view('site.plus');
 });
-
+Route::get('/help', function () {
+    return view('site.help');
+});
 Route::get('/contact', function () {
-    return view('site.contact'); // Affiche la page about.blade.php
+    return view('site.contact');
+});
+Route::get('/teams', function () {
+    return view('site.contact');
 });
 
 Route::get('/team', function () {
@@ -43,20 +49,26 @@ Route::get('/team', function () {
 });
 
 Route::get('/dashboard', function () {
+    // Récupérer les investissements actifs de l'utilisateur connecté
     $investissementsActifs = Investissement::where('id_user', auth()->id())
     ->where('statut', 'actif')
-    ->get(); // Renvoie une Collection vide si aucun résultat
-
-// Debug : Assure-toi que c'est une collection
-if (!$investissementsActifs instanceof \Illuminate\Support\Collection) {
-    dd('Erreur : $investissementsActifs doit être une collection', $investissementsActifs);
-}
-
-return view('dashboard', [
-    'investissementsActifs' => $investissementsActifs
-]);
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+    ->get();
+ 
+ // Récupérer l'historique des dépôts
+ $depots = Depot::where('id_user', auth()->id())->get();
+ $investissements = Investissement::where('id_user', auth()->id())->get();
+ // Récupérer l'historique des retraits
+ $retraits = Retrait::where('id_user', auth()->id())->get();
+ 
+ // Retourner la vue avec les données
+ return view('dashboard', [
+    'investissementsActifs' => $investissementsActifs,
+    'depots' => $depots,
+    'retraits' => $retraits,
+    'investissements' => $investissements,
+ ]);
+ })->middleware(['auth', 'verified'])->name('dashboard');
+ 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -64,12 +76,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
     Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
     Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
-   // Route::get('/investissement/actif', [RetraiController::class, 'checkInvestissementActif']);
-    Route::post('/check-investissement-actif', [RetraiController::class, 'checkInvestissementActif']);
-    Route::get('/retrait', [RetraiController::class, 'retraitPage'])->name('retrait');
-
-
-Route::post('/paiement/investissement', [RetraiController::class, 'storeRetrait'])->name('payement.retrait');
 });
 
 require __DIR__.'/auth.php';
@@ -87,7 +93,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/changer-statut-transaction/{id}', [AdminController::class, 'changerStatutTransaction'])->name('admin.changerStatutTransaction');
     Route::get('/admin/etat_transaction/all/retrait', [AdminController::class, 'ShowAllRetrait'])->name('admin.transaction_retrait');
     Route::get('/admin/etat_transaction/all', [AdminController::class, 'ShowAllTransaction'])->name('admin.transaction_all');
-
+    Route::get('/contacts', [ContactController::class,'index'])->name('admin.contacts');
+    Route::get('/profile/admin', [UserController::class, 'profile'])->name('admin.profile'); 
+    Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
+    Route::get('/settings', [UserController::class, 'settings'])->name('admin.settings'); 
+    Route::post('/logout/admin', [UserController::class, 'logout'])->name('admin.logout');
 
     Route::get('/depots', [DepotController::class, 'index'])->name('admin.depots');
     Route::post('/depots', [DepotController::class, 'store'])->name('admin.store_depot');
@@ -96,6 +106,17 @@ Route::middleware('auth')->group(function () {
     Route::put('/depots/{id}', [DepotController::class, 'update'])->name('admin.update_depot');
     Route::delete('/depots/{id}', [DepotController::class, 'destroy'])->name('admin.destroy_depot');
 });
-Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
+Route::post('/contact/traitement',[ProductController::class,'contact'])->name('contact');
+Route::middleware(['auth'])->group(function () {
+    
+    /*Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->name('dashboard')
+        ->middleware('role:0');
+
+    */
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])
+        ->name('admin.dashboard');
+        Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
 
 
+});

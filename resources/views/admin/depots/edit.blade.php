@@ -2,6 +2,11 @@
 
 @section('content')
     <h1 class="my-4">Modifier le Dépôt</h1>
+    @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
     <form action="{{ route('admin.update_depot', $depot->id) }}" method="POST">
         @csrf
@@ -24,4 +29,5 @@
         </div>
         <button type="submit" class="btn btn-primary">Mettre à jour</button>
     </form>
+    <a href="{{ route('admin.depots') }}" class="btn btn-primary">Retour</a>
 @endsection
