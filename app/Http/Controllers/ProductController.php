@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
+    public function email(){
+        return view('Produit.email');
+    }
     public function produit(Request $request){
         $currency = $request->input('currency');
 

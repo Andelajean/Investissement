@@ -3,8 +3,6 @@
 
 @section('content') 
 
-  <!-- contact section -->
-
   <section class="about_section layout_padding">
     <div class="container">
       <div class="heading_container heading_center">
@@ -24,8 +22,9 @@
                   <i class="fa fa-phone text-white"></i>
                 </div>
                 <div class="ps-4 mx-3">
-                  <h5 class="mb-2">Appelez pour toute question</h5>
+                  <h5 class="mb-2 text-white">Appelez pour toute question</h5>
                   <h4 class="text-primary mb-0">+237 697 091 769</h4>
+                  <h4 class="text-primary mb-0">+237 686 370 673</h4>
                 </div>
               </div>
             </div>
@@ -48,7 +47,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Visitez notre bureau</h5>
-                  <h4 class="text-primary mb-0">Yaoundé, Cameroun</h4>
+                  <h4 class="text-primary mb-0">Mokolo , Beroua, Cameroun</h4>
                 </div>
               </div>
             </div>

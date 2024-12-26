@@ -14,7 +14,7 @@
 <header class="header_section">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg custom_nav-container ">
-      <a class="navbar-brand" href="index.html">
+      <a class="navbar-brand" href="/">
         <span>
         Global Investissement Trading
         </span>
@@ -250,6 +250,74 @@
                 <div class="video-box">
                   <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
                 </div>
+
+     <!-- help section -->
+    <section class="service_section layout_padding">
+        <div class="service_container">
+      <div class="container ">
+        <div class="heading_container heading_center">
+          <h2>
+          <span> Trouver de l'Aide</span>
+          </h2>
+          <p class="mb-5 text-white">
+            Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Présentation des opportunités d'investissement</strong></p>
+              <div class="video-box">
+                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Témoignage de nos clients satisfaits</strong></p>
+              <div class="video-box">
+                <video src="videos/7.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Stratégies pour maximiser vos profits</strong></p>
+              <div class="video-box">
+                <video src="videos/8.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <div class="row">
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Exemple d'un projet financé avec succès</strong></p>
+              <div class="video-box">
+                <video src="videos/9.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Interviews avec des experts financiers</strong></p>
+              <div class="video-box">
+                <video src="videos/10.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+              </div>
+            </div>
+          </div>
+  
+          <div class="col-md-4">
+            <div class="box">
+              <p><strong>Explication des concepts clés de la finance</strong></p>
+              <div class="video-box">
+                <video src="videos/11.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+
               </div>
             </div>
           </div>

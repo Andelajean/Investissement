@@ -24,6 +24,8 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ asset('css/colors/default-dark.css') }}" id="theme" rel="stylesheet">
+
+    <link href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

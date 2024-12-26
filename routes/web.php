@@ -11,12 +11,16 @@ use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
+
+use App\Http\Controllers\AdminController\InvestissementController;
 use App\Models\Role;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\DB;
 use App\Models\Investissement;
 use App\Models\Depot;
 use App\Models\Retrait;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -41,17 +45,48 @@ Route::get('/contact', function () {
     return view('site.contact');
 });
 Route::get('/teams', function () {
-    return view('site.contact');
+    return view('site.teams');
 });
 
 Route::get('/team', function () {
     return view('site.team'); // Affiche la page about.blade.php
 });
 
+
+Route::post('/demander-retrait', function (Illuminate\Http\Request $request) {
+    $request->validate([
+        'id_investissement' => 'required|exists:investissements,id',
+    ]);
+
+    $user = auth()->user();
+    $investissement = Investissement::where('id', $request->id_investissement)
+        ->where('id_user', $user->id)
+        ->where('statut', 'oui')
+        ->first();
+
+    if (!$investissement) {
+        return back()->with('error', "Investissement introuvable ou non autorisé.");
+    }
+
+    \App\Models\Retrait::create([
+        'nom_investissement' => $investissement->nom_investissement,
+        'id_demande' => uniqid(),
+        'montant' => $investissement->montant,
+        'statut' => 'traitement_en_cours',
+        'devise' => 'XAF',
+       'date_retrait' => now(),
+        'id_user' => $user->id,
+    ]);
+
+    return back()->with('success', "Demande de retrait effectuée avec succès.");
+});
+
+Route::get('/email',[ProductController::class,'email'])->name('email');
+
 Route::get('/dashboard', function () {
     // Récupérer les investissements actifs de l'utilisateur connecté
     $investissementsActifs = Investissement::where('id_user', auth()->id())
-    ->where('statut', 'actif')
+    ->where('statut', 'oui')
     ->get();
  
  // Récupérer l'historique des dépôts
@@ -75,7 +110,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
     Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
-    Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
+    
 });
 
 require __DIR__.'/auth.php';
@@ -84,6 +119,7 @@ Route::get('/pay/success', [\App\Http\Controllers\PaiementController::class, 'ca
 Route::post('/pay/notify', [\App\Http\Controllers\PaiementController::class, 'notify'])->name('payment.notify');
 Route::get('/return_url', [\App\Http\Controllers\PaiementController::class, 'return_url'])->name('return_url');
 Route::post('/payement/investissement', [\App\Http\Controllers\PaiementController::class, 'payment'])->name('paiement');
+Route::post('/validate-depot', [\App\Http\Controllers\PaiementController::class, 'validerDepot'])->name('valider.depot');
 
 Route::middleware('auth')->group(function () {
 
@@ -93,11 +129,17 @@ Route::middleware('auth')->group(function () {
     Route::post('/admin/changer-statut-transaction/{id}', [AdminController::class, 'changerStatutTransaction'])->name('admin.changerStatutTransaction');
     Route::get('/admin/etat_transaction/all/retrait', [AdminController::class, 'ShowAllRetrait'])->name('admin.transaction_retrait');
     Route::get('/admin/etat_transaction/all', [AdminController::class, 'ShowAllTransaction'])->name('admin.transaction_all');
+    Route::get('/admin/investissement/all', [InvestissementController::class, 'ShowAllInvestissement'])->name('admin.investissement_all');
+    Route::get('/admin/investissement/update/activate/{id}', [InvestissementController::class, 'activer'])->name('admin.activer.investissement');
+    Route::get('/admin/investissement/update/deactivate/{id}', [InvestissementController::class, 'desactiver'])->name('admin.desactiver.investissement');
+    Route::delete('/admin/investissement/delete/{id}', [InvestissementController::class, 'supprimer'])->name('admin.supprimer.investissement');
+
     Route::get('/contacts', [ContactController::class,'index'])->name('admin.contacts');
     Route::get('/profile/admin', [UserController::class, 'profile'])->name('admin.profile'); 
     Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
     Route::get('/settings', [UserController::class, 'settings'])->name('admin.settings'); 
     Route::post('/logout/admin', [UserController::class, 'logout'])->name('admin.logout');
+    
 
     Route::get('/depots', [DepotController::class, 'index'])->name('admin.depots');
     Route::post('/depots', [DepotController::class, 'store'])->name('admin.store_depot');

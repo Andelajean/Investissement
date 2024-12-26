@@ -67,7 +67,20 @@
 </section>
     <!-- end questions section -->
     
-
+ <!-- Bouton Fixe -->
+ <a 
+    href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
+    class="fixed-whatsapp-btn"
+    target="_blank" 
+    rel="noopener noreferrer"
+  >
+    <img 
+      src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" 
+      alt="WhatsApp Logo" 
+      style="width: 24px; height: 24px;"
+    />
+    Plus D'infos
+  </a>
     <!-- seconde contain -->
     <section class="service_section layout_padding">
       <div class="service_container">
