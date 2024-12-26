@@ -184,113 +184,78 @@
     <!-- Facts Start -->
 
      <!-- help section -->
-    <section class="service_section layout_padding">
-        <div class="service_container">
-      <div class="container ">
-        <div class="heading_container heading_center">
-          <h2>
-          <span> Trouver de l'Aide</span>
-          </h2>
-          <p class="mb-5 text-white">
-            Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
-          </p>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Présentation des opportunités d'investissement</strong></p>
-<<<<<<< HEAD
-              <div class="video-box" >
-                <video src="videos/video1.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
+     <section class="service_section layout_padding">
+      <div class="service_container">
+        <div class="container">
+          <div class="heading_container heading_center">
+            <h2 class="pb-5 mb-3">
+              Trouver de <span>l'aide</span>
+              </h2>
+            <p class="mb-0 text-white">
+              Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
+            </p>
+          </div>
+    
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Présentation des opportunités d'investissement</strong></p>
+                <div class="video-box">
+                  <video src="videos/video1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Témoignage de nos clients satisfaits</strong></p>
+                <div class="video-box">
+                  <video src="videos/video2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Stratégies pour maximiser vos profits</strong></p>
+                <div class="video-box">
+                  <video src="videos/video3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
               </div>
             </div>
           </div>
-          
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Témoignage de nos clients satisfaits</strong></p>
-<<<<<<< HEAD
-              <div class="video-box" >
-                <video src="videos/video2.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
+    
+          <div class="row">
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Exemple d'un projet financé avec succès</strong></p>
+                <div class="video-box">
+                  <video src="videos/video4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Interviews avec des experts financiers</strong></p>
+                <div class="video-box">
+                  <video src="videos/video5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
+              </div>
+            </div>
+    
+            <div class="col-md-4">
+              <div class="box">
+                <p><strong>Explication des concepts clés de la finance</strong></p>
+                <div class="video-box">
+                  <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                </div>
               </div>
             </div>
           </div>
-  
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Stratégies pour maximiser vos profits</strong></p>
-<<<<<<< HEAD
-              <div class="video-box"  style="height: 250px;">
-                <video src="videos/video3.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/3.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Exemple d'un projet financé avec succès</strong></p>
-<<<<<<< HEAD
-              <div class="video-box" >
-                <video src="videos/video4.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/4.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Interviews avec des experts financiers</strong></p>
-<<<<<<< HEAD
-              <div class="video-box" >
-                <video src="videos/video5.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/5.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-md-4">
-            <div class="box" style="height: 300px">
-              <p><strong>Explication des concepts clés de la finance</strong></p>
-<<<<<<< HEAD
-              <div class="video-box" >
-                <video src="videos/video6.mp4" controls width="100%" style="height: 200px; min-width: 200px;"></video>
-=======
-              <div class="video-box">
-                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
->>>>>>> d58ab95faa6c895ca3abeaf09744c6b6b9a9d128
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="btn-box">
-          <a href="/plus">
-            Voir tout
-          </a>
+    
         </div>
       </div>
-        </div>
     </section>
     <!-- end help section -->
 
@@ -431,16 +396,18 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4 > <span>Comment investir ?</span></h4>
-            <p class="mb-0 text-white">
-                Tout d'abord cliquer sur Investir ensuite remplir ses informations dans le formulaire d'enregistrement. Un email vous sera envoye pour valider votre demande. Une fois dans le tableau de bord vous pourrez effectuer votre investissement</p>
+            <p class="mb-0">
+                Tout d'abord cliquer sur Investir ensuite remplir ses informations dans le formulaire d'enregistrement. Un email vous sera envoye pour valider votre demande. Une fois dans le tableau de bord vous pourrez effectuer votre investissement
+            </p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
             <h4> <span>comment recharger mon compte ?</span></h4>
-            <p class="mb-0 text-white">
-                Une fois connecté, cliquer sur recharger mon compte. Vous serez ensuite rediriger vers votre compte WhatSapp avec un message, envoyez ce message sans le modifer. Nous vous enverrons les methodes de payement via WhatSapp. Une fois le payement effectue, envoyez nous la capture d'ecran via WhatApp, nous verifierons et vous envoyerons un code que vous utiliser pour valider votre payement dans la palteforme</p>
+            <p class="mb-0">
+                Une fois connecté, cliquer sur recharger mon compte. Vous serez ensuite rediriger vers votre compte WhatSapp avec un message, envoyez ce message sans le modifer. Nous vous enverrons les methodes de payement via WhatSapp. Une fois le payement effectue, envoyez nous la capture d'ecran via WhatApp, nous verifierons et vous envoyerons un code que vous utiliser pour valider votre payement dans la palteforme
+            </p>
           </div>
           </div>
         </div>
@@ -460,15 +427,17 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4> <span> Comment faire un retrait ?</span> </h4>
-            <p class="mb-0 text-white" >
-                Une fois connecté, cliquer sur Retrait puis choisir l'investissement qu'on souhaite retirer ensuite renseigner les informations enfin soumettez la demande</p>
+            <p class="mb-0">
+                Une fois connecté, cliquer sur Retrait puis choisir l'investissement qu'on souhaite retirer ensuite renseigner les informations enfin soumettez la demande
+            </p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
             <div class="bg-primary rounded d-flex align-items-center justify-content-center mb-3" style="width: 60px; height: 60px;">
               <i class="fa fa-question text-white"></i>
             </div>
             <h4> <span>Comment nous contacter ?</span> </h4>
-            <p class="mb-0 text-white"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
+            <p class="mb-0"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com
+            </p>
           </div>
         </div>
       </div>

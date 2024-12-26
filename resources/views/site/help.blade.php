@@ -21,7 +21,7 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4>Comment investir ?</h4>
-            <p class="mb-0 text-white">
+            <p class="mb-0">
                 Tout d'abord cliquer sur Investir ensuite remplir ses informations dans le formulaire d'enregistrement. Un email vous sera envoye pour valider votre demande. Une fois dans le tableau de bord vous pourrez effectuer votre investissement</p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.6s">
@@ -29,7 +29,7 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4>comment recharger mon compte ?</h4>
-            <p class="mb-0 text-white">
+            <p class="mb-0">
                 Une fois connecté, cliquer sur recharger mon compte. Vous serez ensuite rediriger vers votre compte WhatSapp avec un message, envoyez ce message sans le modifer. Nous vous enverrons les methodes de payement via WhatSapp. Une fois le payement effectue, envoyez nous la capture d'ecran via WhatApp, nous verifierons et vous envoyerons un code que vous utiliser pour valider votre payement dans la palteforme</p>
           </div>
         </div>
@@ -50,7 +50,7 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4>Comment faire un retrait ?</h4>
-            <p class="mb-0 text-white">
+            <p class="mb-0">
                 Une fois connecté, cliquer sur Retrait puis choisir l'investissement qu'on souhaite retirer ensuite renseigner les informations enfin soumettez la demande</p>
           </div>
           <div class="col-12 wow zoomIn" data-wow-delay="0.8s">
@@ -58,7 +58,7 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4>Comment nous contacter ?</h4>
-            <p class="mb-0 text-white"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
+            <p class="mb-0"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
           </div>
         </div>
       </div>
