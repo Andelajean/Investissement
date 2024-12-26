@@ -140,7 +140,8 @@
 <!-- end slider section -->
 
 </div>
-
+<section class="about_section layout_padding">
+<div class="container">
     <!-- Facts Start -->
     <div class="container-fluid facts py-5 pt-lg-0">
     <div class="container py-5 pt-lg-0">
@@ -181,6 +182,8 @@
     </div>
     </div>
     </div>
+    </div>
+</section>
     <!-- Facts Start -->
 
      <!-- help section -->
@@ -189,7 +192,7 @@
         <div class="container">
           <div class="heading_container heading_center">
             <h2 class="pb-5 mb-3">
-              Trouver de <span>l'aide</span>
+              Des Clients <span>Satisfait</span>
               </h2>
             <p class="mb-0 text-white">
               Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
@@ -201,7 +204,7 @@
               <div class="box">
                 <p><strong>Présentation des opportunités d'investissement</strong></p>
                 <div class="video-box">
-                  <video src="videos/video1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                  <video src="videos/2.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
                 </div>
               </div>
             </div>
@@ -250,14 +253,17 @@
                 <div class="video-box">
                   <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
                 </div>
+                </div>
+                </div>
+</section>
+                
 
      <!-- help section -->
-    <section class="service_section layout_padding">
-        <div class="service_container">
-      <div class="container ">
-        <div class="heading_container heading_center">
+     <section class="about_section layout_padding">
+     <div class="container">
+    
           <h2>
-          <span> Trouver de l'Aide</span>
+          <span> Temoignage des clients</span>
           </h2>
           <p class="mb-5 text-white">
             Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
@@ -278,7 +284,7 @@
             <div class="box">
               <p><strong>Témoignage de nos clients satisfaits</strong></p>
               <div class="video-box">
-                <video src="videos/7.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
+                <video src="videos/r1.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
               </div>
             </div>
           </div>
@@ -327,7 +333,7 @@
     </section>
     <!-- end help section -->
 
-    <section class="why_section layout_padding">
+    <section class="about_section layout_padding">
       <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
@@ -344,8 +350,8 @@
                             <img class="img-fluid w-100" src="image/team-1.jpg" alt="" style="height: 400px;">
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">President</h4>
-                            <p class="text-uppercase m-0">PDG</p>
+                            <h4 class="text-primary">Emile SIMB</h4>
+                            <p class="text-danger">PDG</p>
                         </div>
                     </div>
                 </div>
@@ -356,7 +362,7 @@
                         </div>
                         <div class="text-center py-4">
                             <h4 class="text-primary">Matio Dikando Sywa</h4>
-                            <p class="text-uppercase m-0">Directeur</p>
+                            <p class="text-danger">Directeur</p>
                         </div>
                     </div>
                 </div>
@@ -367,7 +373,7 @@
                         </div>
                         <div class="text-center py-4">
                             <h4 class="text-primary">Eboi Julio Paul</h4>
-                            <p class="text-uppercase m-0">Gestionnaire financier</p>
+                            <p class="text-danger">Gestionnaire financier</p>
                         </div>
                     </div>
                 </div>
@@ -378,7 +384,7 @@
                         </div>
                         <div class="text-center py-4">
                             <h4 class="text-primary">Raphaella Chloé Kira</h4>
-                            <p class="text-uppercase m-0">Sécrétaire générale</p>
+                            <p class="text-danger">Sécrétaire générale</p>
                         </div>
                     </div>
                 </div>
@@ -447,8 +453,8 @@
     <!-- end about section -->
 
     <!-- questions section -->
-    <section class="why_section layout_padding">
-        <div class="container">
+    <section class="about_section layout_padding">
+    <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
                 <span> Questions Fréquentes</span>
@@ -559,7 +565,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Visitez notre bureau</h5>
-                  <h4 class="text-primary mb-0">Yaoundé, Cameroun</h4>
+                  <h4 class="text-primary mb-0">MOKOLO , Bertoua, Cameroun</h4>
                 </div>
               </div>
             </div>
