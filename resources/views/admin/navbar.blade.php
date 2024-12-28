@@ -10,69 +10,119 @@
                 </form>
             </li>
         </ul>
-        <ul class="nav navbar-top-links navbar-right pull-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-envelope"></i>
-                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                </a>
-                <ul class="dropdown-menu mailbox animated bounceInDown">
-                    <li>
-                        <div class="drop-title">You have 4 new messages</div>
-                    </li>
-                    <li>
-                        <div class="message-center">
-                            <a href="#">
-                                <div class="user-img"> <img src="{{ asset('plugins/images/users/pawandeep.jpg') }}" alt="user" class="img-circle"> <span class="profile-status online pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Pavan kumar</h5>
-                                    <span class="mail-desc">Just see the my admin!</span> <span class="time">9:30 AM</span>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="{{ asset('plugins/images/users/sonu.jpg') }}" alt="user" class="img-circle"> <span class="profile-status busy pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Sonu Nigam</h5>
-                                    <span class="mail-desc">I've sung a song! See you at</span> <span class="time">9:10 AM</span>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="{{ asset('plugins/images/users/arijit.jpg') }}" alt="user" class="img-circle"> <span class="profile-status away pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Arijit Sinh</h5>
-                                    <span class="mail-desc">I am a singer!</span> <span class="time">9:08 AM</span>
-                                </div>
-                            </a>
-                            <a href="#">
-                                <div class="user-img"> <img src="{{ asset('plugins/images/users/pawandeep.jpg') }}" alt="user" class="img-circle"> <span class="profile-status offline pull-right"></span> </div>
-                                <div class="mail-contnet">
-                                    <h5>Pavan kumar</h5>
-                                    <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span>
-                                </div>
-                            </a>
-                        </div>
-                    </li>
-                    <li>
-                        <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                    </li>
-                </ul>
+
+   
+<ul class="nav navbar-top-links navbar-right pull-right">
+    <li class="dropdown">
+        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+            <i class="icon-envelope"></i>
+            @if($messages->count() > 0)
+                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+            @endif
+        </a>
+        <ul class="dropdown-menu mailbox animated bounceInDown">
+            <li>
+                <div class="drop-title">Vous avez {{ $messages->count() }} nouveaux messages</div>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#"><i class="icon-note"></i>
-                    <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-                </a>
-                <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                    <li>
-                        <a href="#">
-                            <div>
-                                <p> <strong>Task 1</strong> <span class="pull-right text-muted">40% Complete</span> </p>
-                                <div class="progress progress-striped active">
-                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%"> <span class="sr-only">40% Complete (success)</span> </div>
-                                </div>
+            <li>
+                <div class="message-center">
+                    @foreach($messages as $message)
+                        <a href="#" onclick="showReplyPopup({{ $message->id }}, '{{ $message->nom }}')">
+                            <div class="user-img">
+                                <img src="{{ asset('plugins/images/users/default.jpg') }}" alt="user" class="img-circle">
+                                <span class="profile-status online pull-right"></span>
+                            </div>
+                            <div class="mail-contnet">
+                                <h5>{{ $message->nom }}</h5>
+                                <span class="mail-desc">{{ Str::limit($message->message, 50) }}</span>
+                                <span class="time">{{ $message->created_at->format('H:i A') }}</span>
                             </div>
                         </a>
-                    </li>
-                </ul>
+                    @endforeach
+                </div>
+            </li>
+            <li>
+                <a class="text-center" href="{{ route('admin.messages') }}">
+                    <strong>Voir tous les messages</strong>
+                    <i class="fa fa-angle-right"></i>
+                </a>
             </li>
         </ul>
+    </li>
+</ul>
+
+
+        <!-- Modal de réponse -->
+        <div id="replyModal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeReplyPopup()">&times;</span>
+                <form method="POST" id="replyForm">
+                    @csrf
+                    <input type="hidden" name="id" id="messageId">
+                    <h4>Répondre à <span id="messageSender"></span></h4>
+                    <textarea name="response" required style="width: 100%; height: 150px; padding: 10px; border-radius: 5px; border: 1px solid #ccc;"></textarea>
+                    <button type="submit" style="margin-top: 10px; padding: 10px 20px; background-color: #28a745; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Envoyer</button>
+                </form>
+            </div>
+        </div>
+
+        <style>
+            .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                overflow: auto;
+                background-color: rgb(0,0,0);
+                background-color: rgba(0,0,0,0.4);
+            }
+            .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            }
+            .close {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+            }
+            .close:hover,
+            .close:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+            .mail-contnet h5 {
+                margin: 0;
+                font-weight: 600;
+            }
+            .mail-contnet .mail-desc {
+                color: #777;
+                font-size: 12px;
+            }
+        </style>
+
+        <script>
+            function showReplyPopup(messageId, messageSender) {
+                const form = document.getElementById('replyForm');
+                form.action = `/admin/respond/${messageId}`;
+                document.getElementById('messageId').value = messageId;
+                document.getElementById('messageSender').textContent = messageSender;
+                document.getElementById('replyModal').style.display = 'block';
+            }
+
+            function closeReplyPopup() {
+                document.getElementById('replyModal').style.display = 'none';
+            }
+        </script>
+
     </div>
 </nav>
