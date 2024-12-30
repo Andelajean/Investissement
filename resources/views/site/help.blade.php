@@ -8,7 +8,7 @@
         <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
-                <span>  Questions Fréquentes</span>
+                Questions<span> Fréquentes</span>
                 </h2>
                 <h1 class="mb-5 text-white">Réponses à vos interrogations sur l'investissement</h1>
             </div>

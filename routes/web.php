@@ -52,6 +52,9 @@ Route::get('/team', function () {
     return view('site.team'); // Affiche la page about.blade.php
 });
 
+Route::get('/partenaire', function () {
+    return view('site.partenaire'); // Affiche la page about.blade.php
+});
 
 Route::post('/demander-retrait', function (Illuminate\Http\Request $request) {
     $request->validate([

@@ -14,7 +14,7 @@
 <header class="header_section">
   <div class="container-fluid">
     <nav class="navbar navbar-expand-lg custom_nav-container ">
-      <a class="navbar-brand" href="/">
+      <a class="navbar-brand" href="index.html">
         <span>
         Global Investissement Trading
         </span>
@@ -36,12 +36,13 @@
             <a class="nav-link" href="/help">Aide</a>
           </li>
           <li class="nav-item">
-
             <a class="nav-link" href="team"> equipe</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="partenaire"> partenaire</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="contact">Contact</a>
-
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{{route('login')}}"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
@@ -250,74 +251,6 @@
                 <div class="video-box">
                   <video src="videos/video6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
                 </div>
-
-     <!-- help section -->
-    <section class="service_section layout_padding">
-        <div class="service_container">
-      <div class="container ">
-        <div class="heading_container heading_center">
-          <h2>
-          <span> Trouver de l'Aide</span>
-          </h2>
-          <p class="mb-5 text-white">
-            Découvrez nos vidéos qui illustrent nos activités d'investissement, recueillent des témoignages inspirants et présentent des interviews exclusives.
-          </p>
-        </div>
-
-        <div class="row">
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Présentation des opportunités d'investissement</strong></p>
-              <div class="video-box">
-                <video src="videos/6.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-              </div>
-            </div>
-          </div>
-          
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Témoignage de nos clients satisfaits</strong></p>
-              <div class="video-box">
-                <video src="videos/7.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Stratégies pour maximiser vos profits</strong></p>
-              <div class="video-box">
-                <video src="videos/8.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-              </div>
-            </div>
-          </div>
-        </div>
-  
-        <div class="row">
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Exemple d'un projet financé avec succès</strong></p>
-              <div class="video-box">
-                <video src="videos/9.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Interviews avec des experts financiers</strong></p>
-              <div class="video-box">
-                <video src="videos/10.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-              </div>
-            </div>
-          </div>
-  
-          <div class="col-md-4">
-            <div class="box">
-              <p><strong>Explication des concepts clés de la finance</strong></p>
-              <div class="video-box">
-                <video src="videos/11.mp4" controls width="100%" style="max-height: 200px; min-width: 200px;"></video>
-
               </div>
             </div>
           </div>
@@ -600,5 +533,83 @@
     </section>
   <!-- end contact section -->
 
+  <!--start partenaire-->
+<section class="why_section layout_padding">
+    <div class="container">
+        <div class="heading_container heading_center">
+            <h2 class="pb-5 mb-3">
+                Nos<span> Partenaires</span>
+            </h2>
+            <h5 class="mb-5">Chez <b> Global Investissement Trading </b>, nous croyons que la collaboration est la clé pour offrir des solutions d'investissement performantes et durables. C'est pourquoi nous avons établi des partenariats stratégiques avec des institutions financières renommées, des entreprises technologiques innovantes et des experts en finance.</h5>
+        </div>
+
+        <div class="row">
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/afbank.jpeg" alt="afriklanf first bank" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/bicec.png" alt="bicec bank" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/cca.jpeg" alt="cca bank" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/uba.jpeg" alt="uba bank" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/scb.png" alt="scb" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/cbc.jpeg" alt="cbc" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/ecobank.jpeg" alt="ecobank" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/sgc.png" alt="sgc" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/bgc.png" alt="bgc" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/sc.jpg" alt="Standard Chartered" class="img-fluid" style="width: 100px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/momo.png" alt="mobile money" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="img-box">
+                    <img src="image/om.jpeg" alt="orange money" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+</section>
+<!--end partenaire-->
 
     @endsection
