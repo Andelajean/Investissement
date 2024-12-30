@@ -13,10 +13,11 @@
                 <a href="#" class="waves-effect"><img src="{{ asset('image/profil.jpg') }}" alt="user-img" class="img-circle"> <span class="hide-menu">ADMIN<span class="fa arrow"></span></span>
                 </a>
                 <ul class="nav nav-second-level">
-                    <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> My Profile</a></li>
-                    <li><a href="{{ route('admin.balance') }}"><i class="ti-wallet"></i> My Balance</a></li>
-                    <li><a href="{{ route('admin.contacts') }}"><i class="ti-email"></i> Inbox</a></li>
-                    <li><a href="{{ route('admin.settings') }}"><i class="ti-settings"></i> Account Setting</a></li>
+                    <li><a href="{{ route('admin.dashboard') }}"><i class="ti-dashboard"></i>Dashboard</a></li>
+                    <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> Mon Profil</a></li>
+                    <li><a href="{{ route('admin.balance') }}"><i class="ti-wallet"></i>Mon Compte</a></li>
+                    <li><a href="{{ route('admin.messages') }}"><i class="ti-email"></i> Mes Messages</a></li>
+                    <li><a href="{{ route('admin.settings') }}"><i class="ti-settings"></i> Paramètres</a></li>
                     <li>
                         <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                             @csrf
