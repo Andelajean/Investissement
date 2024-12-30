@@ -355,17 +355,17 @@
         <div class="row">
           <div class="col-md-4">
             <div class="img-box">
-              <img src="image/prod1.jpg" alt="produit" srcset="" style="height: 500px;">
+              <img src="image/prod1.jpg" alt="produit" srcset="" style="height: 500px; width: 500px;">
             </div>
           </div>
           <div class="col-md-4">
             <div class="img-box">
-              <img src="image/prod2.jpg" alt="produit" srcset="" style="height: 500px;">
+              <img src="image/prod2.jpg" alt="produit" srcset="" style="height: 500px; width: 500px;">
             </div>
           </div>
           <div class="col-md-4">
             <div class="img-box">
-              <img src="image/prod3.jpg" alt="produit" srcset="" style="height: 500px;">
+              <img src="image/prod3.jpg" alt="produit" srcset="" style="height: 500px; width: 500px;">
             </div>
           </div>
           <div class="detail-box mx-3">
