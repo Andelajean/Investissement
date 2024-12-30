@@ -100,6 +100,9 @@
                 <a class="nav-link" href="team"> Equipe</a>
               </li>
               <li class="nav-item">
+                <a class="nav-link" href="partenaire"> partenaire</a>
+              </li>
+              <li class="nav-item">
                 <a class="nav-link" href="contact">Contact</a>
               </li>
               <li class="nav-item">
