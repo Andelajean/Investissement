@@ -3,27 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tableau Utilisateur</title>
     <script src="https://cdn.tailwindcss.com"></script>
+   <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+    
+    <style>  
+    .chat-popup { 
+        display: none; 
+        position: fixed; 
+        bottom: 0; 
+        right: 15px; 
+        border: 1px solid #ccc; 
+        background-color: white; 
+        width: 300px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        } 
+        
+    .chat-header { 
+        background-color: #007bff; 
+        color: white; 
+        padding: 10px; 
+        text-align: center; 
+        } 
+    .chat-body { 
+        padding: 10px; 
+        } 
+    #chatMessages { 
+        height: 200px; 
+        overflow-y: auto; 
+        border-bottom: 1px solid #ccc; 
+        margin-bottom: 10px; 
+        } 
+    .chat-message { 
+        padding: 5px; 
+        margin: 5px 0;
+         } 
+    .chat-message.user { 
+        text-align: right; 
+        background-color: #f1f1f1; 
+        } 
+    .chat-message.admin { 
+        text-align: left; 
+        background-color: #e2e2e2; 
+        } 
+    #chatInput { 
+        width: 100%; 
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border: 1px solid #ccc;
+         } 
+         .navbar-nav .nav-link {
+                color: black; /* Assurez-vous que le texte est noir */
+            }
+            .custom-navbar {
+            @apply bg-light; /* Utilisation des classes Tailwind avec la syntaxe @apply */
+        }
+
+        .custom-nav-link {
+            @apply text-black; /* Assurer la visibilité du texte */
+        }
+
+         
+    </style>
 </head>
 <body class="bg-blue-50 text-gray-800">
+
     <!-- User Info Section -->
     <div class="bg-gradient-to-r from-blue-200 to-blue-400 shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
+    <nav class="bg-white shadow-md">
+    <div class="container mx-auto px-4">
+        <div class="flex justify-between items-center py-2">
+        <a class="text-xl font-bold" href="{{ url('/') }}">Accueil</a>
+        <ul class="flex space-x-4 ml-auto">
+            <!-- Lien de déconnexion -->
+            <li>
+            <a class="text-gray-600 hover:text-gray-900" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            </li>
+            <!-- Lien pour discuter avec l'administrateur -->
+            <li>
+            <a class="text-gray-600 hover:text-gray-900" href="#" onclick="openChatPopup()">Discussion</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+    </nav>
+
+
+        <script>
+        function toggleNavbar() {
+            var navbar = document.getElementById("navbarSupportedContent");
+            navbar.classList.toggle("hidden");
+        }
+        </script>
+
+
+
+
         <div class="grid grid-cols-1 gap-6">
             <div class="bg-white p-8 rounded-lg">
                 <div class="flex items-center justify-between">
-                <div>
-    <h2 class="text-3xl font-bold text-gray-800">
-        {{ Auth::user()->name }}
-    </h2>
-    <p><span class='text-2xl text-blue-500'> {{ Auth::user()->telephone }}</span></p>
-</div>
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800">
+                            {{ Auth::user()->name }}
+                        </h2>
+                        <p><span class='text-2xl text-blue-500'> {{ Auth::user()->telephone }}</span></p>
+                    </div>
 
                     <div>
                         <img src="/image/2.jpg" alt="Crypto" class="h-20 w-20 rounded-full shadow-lg">
                     </div>
                 </div>
                 @php
+
     // Récupérer les données nécessaires
     $solde = \App\Models\Solde::where('id_user', Auth::id())->first();
     $nombreInvestissements = \App\Models\Investissement::where('id_user', Auth::id())->count();
@@ -44,18 +142,19 @@
         <p class="text-2xl font-bold">{{ $nombreInvestissements }}</p>
     </div>
 
-    <!-- Investissement Actif -->
-    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-        <h3 class="text-lg font-semibold">Investissement Actif</h3>
-        <p class="text-2xl font-bold">{{ $investissementsActifs }}</p>
-    </div>
 
-    <!-- Investissement Inactif -->
-    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
-        <p class="text-2xl font-bold">{{ $investissementsInactifs }}</p>
-    </div>
-</div>
+                    <!-- Investissement Actif -->
+                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+                        <h3 class="text-lg font-semibold">Investissement Actif</h3>
+                        <p class="text-2xl font-bold">{{ $investissementsActifs }}</p>
+                    </div>
+
+                    <!-- Investissement Inactif -->
+                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+                        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
+                        <p class="text-2xl font-bold">{{ $investissementsInactifs }}</p>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -477,11 +576,97 @@
        </form>
     </div>
     </div>
+<!-- Pop-up pour la discussion -->
+<!-- Pop-up pour la discussion -->
+<div id="chatPopup" class="chat-popup hidden">
+    <div class="chat-header">
+        <span class="close" onclick="closeChatPopup()">&times;</span>
+        <h2>Discussion avec l'administrateur</h2>
+    </div>
+    <div class="chat-body">
+        <div id="chatMessages">
+            <!-- Les messages de l'utilisateur et de l'administrateur seront ici -->
+        </div>
+        <textarea id="chatInput" placeholder="Écrire un message..."></textarea>
+        <button onclick="sendMessage(event)">Envoyer</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.querySelector('a[href="#"]').addEventListener('click', openChatPopup);
+    });
+
+    function openChatPopup() {
+        document.getElementById('chatPopup').style.display='block';
+        fetchMessages();
+    }
+
+    function closeChatPopup() {
+        document.getElementById('chatPopup').style.display='none';
+    }
+
+    function fetchMessages() {
+        fetch('/messages')
+            .then(response => response.json())
+            .then(messages => {
+                const messagesDiv = document.getElementById('chatMessages');
+                messagesDiv.innerHTML = '';
+                messages.forEach(message => {
+                    const messageElement = document.createElement('div');
+                    messageElement.classList.add('chat-message', message.sender_id === {{ Auth::id() }} ? 'user' : 'admin');
+                    messageElement.innerHTML = `
+                        <p>${message.message}</p>
+                        <small>${new Date(message.created_at).toLocaleString()}</small>
+                    `;
+                    messagesDiv.appendChild(messageElement);
+                });
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+            });
+    }
+
+    function sendMessage(event) {
+        event.preventDefault();
+        const messageInput = document.getElementById('chatInput');
+        const message = messageInput.value;
+
+        const csrfTokenMetaTag = document.querySelector('meta[name="csrf-token"]');
+        if (!csrfTokenMetaTag) {
+            console.error('CSRF token not found.');
+            return;
+        }
+
+        const csrfToken = csrfTokenMetaTag.getAttribute('content');
+
+        if (message.trim() !== '') {
+            fetch('/messages', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({
+                    message: message
+                })
+            })
+            .then(response => response.json())
+            .then(newMessage => {
+                const messagesDiv = document.getElementById('chatMessages');
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('chat-message', 'user');
+                messageElement.innerHTML = `
+                    <p>${newMessage.message}</p>
+                    <small>${new Date(newMessage.created_at).toLocaleString()}</small>
+                `;
+                messagesDiv.appendChild(messageElement);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                messageInput.value = '';
+            });
+        }
+    }
+</script>
 
 
-    
-
-   
 <script>
    let currentAmount = 0;
 
@@ -553,5 +738,14 @@ function closModal() {
 
 
 </script>
+ <!-- JavaScript Libraries -->
+ <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('lib/wow/wow.min.js') }}"></script>
+    <script src="{{ asset('lib/easing/easing.min.js') }}"></script>
+    <script src="{{ asset('lib/waypoints/waypoints.min.js') }}"></script>
+    <script src="{{ asset('lib/counterup/counterup.min.js') }}"></script>
+    <script src="{{ asset('lib/owlcarousel/owl.carousel.min.js') }}"></script>
+
 </body>
 </html>

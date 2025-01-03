@@ -11,19 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->foreignId('role_id')->default(2)->constrained('roles');
+        Schema::create('conversations', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->constrained('users'); // l'utilisateur (client)
+            $table->foreignId('admin_id')->constrained('users'); // l'administrateur
+            $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropForeign(['role_id']);
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('conversations');
     }
 };
