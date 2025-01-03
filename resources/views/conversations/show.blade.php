@@ -5,7 +5,7 @@
         <h1 class="mb-4">Conversation avec {{ $conversation->user->name }} et {{ $conversation->admin->name }}</h1>
         
         <div id="chatMessages" class="card mb-4" style="height: 400px; overflow-y: scroll;">
-            <!-- Les messages seront chargés ici par JavaScript -->
+            
         </div>
 
         <form id="messageForm" action="{{ route('admin.messages.store', $conversation->id) }}" method="post" class="mt-4">
@@ -39,13 +39,13 @@
                 });
         }
 
-        // Appel initial pour charger les messages
+        
         fetchMessages();
 
-        // Recharger les messages toutes les 5 secondes
+        
         setInterval(fetchMessages, 5000);
 
-        // Envoyer le message sans recharger la page
+        
         document.getElementById('messageForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const formData = new FormData(this);
