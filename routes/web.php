@@ -11,6 +11,8 @@ use App\Http\Controllers\AdminController\UserController;
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
+use App\Http\Controllers\AdminController\ProfileController as ProfileControllers; 
+use App\Http\Controllers\AdminController\SettingsController;
 
 use App\Http\Controllers\AdminController\InvestissementController;
 use App\Models\Role;
@@ -136,6 +138,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/investissement/update/activate/{id}', [InvestissementController::class, 'activer'])->name('admin.activer.investissement');
     Route::get('/admin/investissement/update/deactivate/{id}', [InvestissementController::class, 'desactiver'])->name('admin.desactiver.investissement');
     Route::delete('/admin/investissement/delete/{id}', [InvestissementController::class, 'supprimer'])->name('admin.supprimer.investissement');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::post('/admin/respond/{id}', [AdminController::class, 'respond'])->name('admin.respond');
+    Route::get('/admin/messages', [AdminController::class, 'allMessages'])->name('admin.messages');
+
+    Route::get('/admin/profile', [ProfileControllers::class, 'show'])->name('admin.profile'); 
+    Route::post('/admin/profile/update', [ProfileControllers::class, 'update'])->name('admin.profile.update');
+
+    // Routes pour les paramètres 
+    Route::get('/admin/settings', [SettingsController::class, 'show'])->name('admin.settings'); 
+    Route::post('/admin/settings/update', [SettingsController::class, 'update'])->name('admin.settings.update');
 
     Route::get('/contacts', [ContactController::class,'index'])->name('admin.contacts');
     Route::get('/profile/admin', [UserController::class, 'profile'])->name('admin.profile'); 

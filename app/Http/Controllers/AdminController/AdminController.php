@@ -7,17 +7,26 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Depot;
 use App\Models\Retrait;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
+    
+    public function respond(Request $request, $id) { 
+        $contact = Contact::findOrFail($id); 
+        $response = $request->input('response'); 
+        $contact->response = $response; 
+        $contact->is_read = true;
+        $contact->save(); 
+        return redirect()->back()->with('success', 'Réponse envoyée avec succès'); 
+    }
     public function dashboard()
     {
         $nombrePaiements = Depot::count() + Retrait::count();
         $montantPaiements = Depot::sum('montant') + Retrait::sum('montant');
         $nombreClients = User::count();
-        $nombreComptes = User::where('role', 'client')->count();
-        
+        $nombreComptes = User::where('role_id', 'client')->count();
         $listeComptes = User::all();
 
         return view('admin.dashboard', compact('nombrePaiements', 'montantPaiements', 'nombreClients', 'nombreComptes', 'listeComptes'));
@@ -89,6 +98,11 @@ class AdminController extends Controller
              
         return view('admin.depot_retrait',compact('transactions'));
              
+    }
+
+    public function allMessages() { 
+        $messages = Contact::orderBy('created_at', 'desc')->get(); 
+        return view('admin.messages', compact('messages')); 
     }
 
    

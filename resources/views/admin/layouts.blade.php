@@ -41,7 +41,8 @@
     
     <div id="wrapper">
         <!-- Navigation -->
-        @include('admin.navbar')
+        @include('admin.navbar', ['messages' => $messages])
+
         <!-- Sidebar -->
         @include('admin.sidebar')
         <!-- Page Content -->
