@@ -5,6 +5,133 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tableau Utilisateur</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .background-image-container {
+    background-image: url('/image/slider-img.png');
+    background-size: cover; /* Pour que l'image couvre tout l'arrière-plan */
+    background-position: center; /* Centrer l'image */
+    background-repeat: no-repeat; /* Évite la répétition de l'image */
+    border-radius: 12px; /* Coins arrondis */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Ombre */
+    padding: 2rem; /* Espacement interne */
+    margin-bottom: 2rem; /* Espacement en bas */
+    max-width: 900px; /* Largeur maximale */
+    margin: 0 auto; /* Centrage horizontal */
+}
+
+       /* Container principal */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 10px;
+    overflow-y: auto; /* Permet le défilement vertical */
+}
+
+/* Contenu de la popup */
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 90%; /* Ajuste la largeur pour petits écrans */
+    max-width: 600px; /* Limite la largeur maximale */
+    max-height: 80vh; /* Limite la hauteur à 80% de l'écran */
+    overflow-y: auto; /* Permet le défilement à l'intérieur */
+    animation: slideDown 0.5s ease;
+}
+
+/* Bouton "Fermer" */
+.popup-close {
+    background:hsl(358, 83.50%, 50.00%);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background 0.3s ease;
+}
+
+.popup-close:hover {
+    background:rgb(243, 51, 51);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-50px);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+.investment-guide {
+    list-style: none;
+    padding: 0;
+    margin: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.8;
+}
+
+.investment-guide li {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    background: #f9f9f9;
+    border: 2px solid #4CAF50;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.investment-guide li:hover {
+    transform: scale(1.02);
+}
+
+.investment-guide .step-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #4CAF50;
+    margin-right: 10px;
+    flex-shrink: 0;
+}
+
+.investment-guide strong {
+    color: #000;
+}
+/* Responsiveness */
+@media (max-width: 768px) {
+    .popup-content {
+        padding: 15px;
+    }
+
+    .investment-guide li {
+        font-size: 14px;
+    }
+}
+
+    </style>
 </head>
 <body class="bg-blue-50 text-gray-800">
     <!-- User Info Section -->
@@ -63,8 +190,8 @@
 
     <!-- Invitation Section -->
     <!-- Invitation Section -->
-<div class="bg-gradient-to-r from-purple-200 to-purple-400 shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
-    <p class="text-center mb-6 font-medium text-white">
+<div class="background-image-container">
+    <p class="text-center mb-6 font-medium text-yellow-500"style="font-size: 1.5rem; line-height: 1.8;">
         Plus vous invitez les personnes à investir, plus vous aurez des récompenses.
     </p>
     @if (session('success'))
@@ -74,7 +201,7 @@
 @endif
 
 @if (session('error'))
-    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
+    <div class="bg-red-100 border border-red-400 text-green-700 px-4 py-3 rounded relative mb-4">
         {{ session('error') }}
     </div>
 @endif
@@ -91,16 +218,17 @@
 
               <!-- Section des investissements inactifs -->
 @if ($nombreInactifs > 0)
-    <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700">
-        <p>
-            Vous avez <strong>{{ $nombreInactifs }}</strong> investissement(s) inactif(s). 
-            <button 
-                class="text-blue-600 underline"
-                onclick="openActivationModal()">
-                Cliquez ici pour activer
-            </button>
-        </p>
-    </div>
+<div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-red-700" style="font-size: 1.5rem; line-height: 1.8;">
+    <p>
+        Vous avez <strong>{{ $nombreInactifs }}</strong> investissement(s) inactif(s). 
+        <button 
+            class="text-blue-600 underline"
+            onclick="openActivationModal()">
+            Cliquez ici pour activer
+        </button>
+    </p>
+</div>
+
 @endif
          
 
@@ -115,10 +243,10 @@
         @foreach ($investissementsInactifs as $investissement)
             <div class="mb-4 p-3 border border-gray-300 rounded-lg">
                 <p><strong>Montant :</strong> {{ $investissement->montant }} </p>
-                <p><strong>Email :</strong>  {{ Auth::user()->email }}</p>
+                <p><strong>Email :</strong>  {{ $investissement->email }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
-                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant} FCFA\nEmail : { Auth::user()->email }\nID : {$investissement->id}") }}" 
+                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant }\nEmail : {$investissement->email }\nID : {$investissement->id}") }}" 
                     target="_blank"
                     class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
                 >
@@ -187,9 +315,7 @@
         <div class="grid grid-cols-3 gap-6">
         <div class="bg-gradient-to-r from-green-400 to-green-600 p-8 rounded-lg text-center text-white">
         <button class="flex flex-col items-center gap-2" onclick="openRechargeModal()">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm3.707 8.707-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L11 12.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z"/>
-            </svg>
+        <img src="{{asset('image/11.jpg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
             Recharger Mon Compte
         </button>
     </div>
@@ -266,9 +392,7 @@
 <!-- Bouton pour ouvrir la modale -->
 
     <div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white" id="openModalButton">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8 inline">
-            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
-        </svg>
+    <img src="{{asset('image/re.jpeg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
         Retrait
     </div>
 
@@ -296,9 +420,7 @@
             <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-8 rounded-lg text-center text-white">
     <a href="/profile" class="flex flex-col items-center gap-2"> <!-- Lien vers la page du profil -->
         <button>
-            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm4 12H8a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Z"/>
-            </svg>
+        <img src="{{asset('image/profile.png')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
             Compte
         </button>
     </a>
@@ -309,9 +431,7 @@
         class="flex flex-col items-center gap-2" 
         onclick="opeModal()"
     >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 5a1 1 0 0 1 2 0v6a1 1 0 0 1-2 0Zm0 8a1 1 0 1 1 1-1 1 0 0 1-1 1Z"/>
-        </svg>
+    <img src="{{asset('image/pro.jpeg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
         Produit
     </button>
 </div>
@@ -343,19 +463,15 @@
             <div class="bg-gradient-to-r from-purple-400 to-purple-600 p-8 rounded-lg text-center text-white">
                 <a href="/contact">
             <button class="flex flex-col items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-2 8h4a1 1 0 0 1 0 2h-4a1 1 0 0 1 0-2Z"/>
-                    </svg>
+            <img src="{{asset('image/con1.jpeg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
                     Contact
                 </button>
                 </a>
             </div>
-            <div class="bg-gradient-to-r from-gray-400 to-gray-600 p-8 rounded-lg text-center text-white">
+            <div class="bg-gradient-to-r from-green-400 to-green-600 p-8 rounded-lg text-center text-white">
             <a href="/help">  
             <button class="flex flex-col items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-                        <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-3 9h6a1 1 0 0 1 0 2H9a1 1 0 0 1 0-2Z"/>
-                    </svg>
+            <img src="{{asset('image/aide.jpeg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
                     Aide
                 </button>
                 </a> 
@@ -478,8 +594,40 @@
     </div>
     </div>
 
-
-    
+   
+    <div id="popup" class="popup">
+    <div class="popup-content">
+        <h2 id="greeting"></h2>
+        <p>🎉 Bienvenue chez Global Investissement Trading! Voici les étapes à suivre pour investir :</p>
+        <ul class="investment-guide">
+            <li>
+                <span class="step-number">1️⃣</span> Une fois sur la page d’accueil, cliquez sur <strong>Investir maintenant</strong> 📈.
+            </li>
+            <li>
+                <span class="step-number">2️⃣</span> Créez votre compte en renseignant le formulaire qui s’affichera.  
+                <strong>Veuillez renseigner des informations exactes</strong> 💡.
+            </li>
+            <li>
+                <span class="step-number">3️⃣</span> Une fois le compte créé, cliquez sur <strong>Recharger mon compte</strong> pour le recharger ⏳.
+            </li>
+            <li>
+                <span class="step-number">4️⃣</span> Une fois votre compte rechargé, cliquez sur <strong>Produits</strong> pour explorer les différentes offres d’investissement.  
+                Choisissez ensuite votre devise (la monnaie utilisée dans votre pays) 💱.
+            </li>
+            <li>
+                <span class="step-number">5️⃣</span> Sélectionnez l’offre qui vous convient et cliquez sur <strong>Investir</strong> 💡.
+            </li>
+            <li>
+                <span class="step-number">6️⃣</span> Après avoir lancé l’investissement, effectuez le paiement des frais pour que votre investissement devienne actif 💳.
+            </li>
+            <li>
+                <span class="step-number">7️⃣</span> Une fois l’investissement actif, il ne vous reste plus qu’à patienter jusqu’à la fin de la durée de l’offre pour lancer votre retrait 🚀.
+            </li>
+        </ul>
+        <p>Profitez de cette expérience pour atteindre vos objectifs financiers ! 🚀</p>
+        <button id="close-popup" class="popup-close">Fermer</button>
+    </div>
+</div>
 
    
 <script>
@@ -550,6 +698,29 @@ function closModal() {
     function closeActivationModal() {
         document.getElementById('activationModal').classList.add('hidden');
     }
+
+    document.addEventListener("DOMContentLoaded", function () {
+    const popup = document.getElementById("popup");
+    const closeButton = document.getElementById("close-popup");
+    const greeting = document.getElementById("greeting");
+
+    const currentHour = new Date().getHours();
+    if (currentHour < 13) {
+        greeting.innerText = "☀️ Bonjour ! Je suis GIT, votre assistant virtuel. Passez une excellente journée !";
+    } else {
+        greeting.innerText = "🌙 Bonsoir ! Passez une merveilleuse soirée !";
+    }
+
+    // Masquer la popup après 30 secondes
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, 30000);
+
+    // Masquer la popup en cliquant sur le bouton "Fermer"
+    closeButton.addEventListener("click", () => {
+        popup.style.display = "none";
+    });
+});
 
 
 </script>

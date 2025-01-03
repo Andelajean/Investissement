@@ -79,7 +79,7 @@
                                 <i class="fa fa-user fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">{{ $nombreComptes }}</div>
+                                <div class="huge"></div>
                                 <div>Nombre de comptes</div>
                             </div>
                         </div>
