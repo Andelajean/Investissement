@@ -39,7 +39,7 @@ class ConversationController extends Controller
     public function adminMessages()
     {
         $conversations = Conversation::where('admin_id', Auth::id())->with('user')->get();
-        return view('admin.conversations.index', compact('conversations'));
+        return view('conversations.index', compact('conversations'));
     }
 
 }
