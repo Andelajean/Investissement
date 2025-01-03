@@ -11,46 +11,83 @@
             </li>
         </ul>
 
-   
-<ul class="nav navbar-top-links navbar-right pull-right">
-    <li class="dropdown">
-        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
-            <i class="icon-envelope"></i>
-            @if($messages->count() > 0)
-                <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
-            @endif
-        </a>
-        <ul class="dropdown-menu mailbox animated bounceInDown">
-            <li>
-                <div class="drop-title">Vous avez {{ $messages->count() }} nouveaux messages</div>
-            </li>
-            <li>
-                <div class="message-center">
-                    @foreach($messages as $message)
-                        <a href="#" onclick="showReplyPopup({{ $message->id }}, '{{ $message->nom }}')">
-                            <div class="user-img">
-                                <img src="{{ asset('plugins/images/users/default.jpg') }}" alt="user" class="img-circle">
-                                <span class="profile-status online pull-right"></span>
-                            </div>
-                            <div class="mail-contnet">
-                                <h5>{{ $message->nom }}</h5>
-                                <span class="mail-desc">{{ Str::limit($message->message, 50) }}</span>
-                                <span class="time">{{ $message->created_at->format('H:i A') }}</span>
-                            </div>
-                        </a>
-                    @endforeach
-                </div>
-            </li>
-            <li>
-                <a class="text-center" href="{{ route('admin.messages') }}">
-                    <strong>Voir tous les messages</strong>
-                    <i class="fa fa-angle-right"></i>
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <!-- Existing messages section -->
+            <li class="dropdown">
+                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+                    <i class="icon-envelope"></i>
+                    @if($messages->count() > 0)
+                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                    @endif
                 </a>
+                <ul class="dropdown-menu mailbox animated bounceInDown">
+                    <li>
+                        <div class="drop-title">Vous avez {{ $messages->count() }} nouveaux messages</div>
+                    </li>
+                    <li>
+                        <div class="message-center">
+                            @foreach($messages as $message)
+                                <a href="#" onclick="showReplyPopup({{ $message->id }}, '{{ $message->nom }}')">
+                                    <div class="user-img">
+                                        <img src="{{ asset('plugins/images/users/default.jpg') }}" alt="user" class="img-circle">
+                                        <span class="profile-status online pull-right"></span>
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h5>{{ $message->nom }}</h5>
+                                        <span class="mail-desc">{{ Str::limit($message->message, 50) }}</span>
+                                        <span class="time">{{ $message->created_at->format('H:i A') }}</span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li>
+                        <a class="text-center" href="{{ route('admin.messages') }}">
+                            <strong>Voir tous les messages</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- New messaging section for clients -->
+            <li class="dropdown">
+                <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#">
+                    <i class="icon-bubbles"></i>
+                    @if($conversations->count() > 0)
+                        <div class="notify"><span class="heartbit"></span><span class="point"></span></div>
+                    @endif
+                </a>
+                <ul class="dropdown-menu mailbox animated bounceInDown">
+                    <li>
+                        <div class="drop-title">Conversations avec les clients</div>
+                    </li>
+                    <li>
+                        <div class="message-center">
+                            @foreach($conversations as $conversation)
+                                <a href="{{ route('conversations.show', $conversation) }}">
+                                    <div class="user-img">
+                                        <img src="{{ asset('plugins/images/users/default.jpg') }}" alt="user" class="img-circle">
+                                        <span class="profile-status online pull-right"></span>
+                                    </div>
+                                    <div class="mail-contnet">
+                                        <h5>{{ $conversation->user->name }}</h5>
+                                        <span class="mail-desc">{{ Str::limit($conversation->messages->last()->message, 50) }}</span>
+                                        <span class="time">{{ $conversation->messages->last()->created_at->format('H:i A') }}</span>
+                                    </div>
+                                </a>
+                            @endforeach
+                        </div>
+                    </li>
+                    <li>
+                        <a class="text-center" href="{{ route('admin.message') }}">
+                            <strong>Voir toutes les conversations</strong>
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
-    </li>
-</ul>
-
 
         <!-- Modal de réponse -->
         <div id="replyModal" class="modal">
@@ -123,6 +160,5 @@
                 document.getElementById('replyModal').style.display = 'none';
             }
         </script>
-
     </div>
 </nav>

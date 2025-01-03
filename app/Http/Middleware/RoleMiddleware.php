@@ -15,9 +15,9 @@ class RoleMiddleware
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
    
-     public function handle(Request $request, Closure $next, $role)
+     public function handle(Request $request, Closure $next)
      {
-         if ($request->user()->role == 1) {
+         if ($request->user()->role_id == 1) {
              return redirect()->route('admin.dashboard');
          }
      
