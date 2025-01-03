@@ -5,8 +5,13 @@
 
      <!-- team section -->
 
+<section class="why_section layout_padding">
+    <div class="container">
+
+    
      <section class="why_section layout_padding">
         <div class="container">
+
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
                 Membres de <span>l'equipe</span>
@@ -22,8 +27,8 @@
                             <img class="img-fluid w-100" src="image/team-1.jpg" alt="" style="height: 400px;">
                         </div>
                         <div class="text-center py-4">
-                            <h4 class="text-primary">President</h4>
-                            <p class="text-uppercase m-0">PDG</p>
+                            <h4 class="text-primary">Emile SIMB</h4>
+                            <p class="text-uppercase m-0">Fondateur</p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +68,7 @@
             </div>
         </div>
     </div>
-  </section>
+</section>
 
     
   

@@ -7,6 +7,11 @@ use GuzzleHttp\Client;
 use FedaPay\FedaPay;
 use FedaPay\Transaction;
 use Illuminate\Support\Facades\Log;
+use App\Models\Depot;
+use App\Models\Investissement;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Solde;
 
 class PaiementController extends Controller
 {
@@ -117,6 +122,58 @@ class PaiementController extends Controller
         return back()->with('error', 'Erreur lors de la vérification du paiement');
     }
 }
+public function validerDepot(Request $request)
+{
+    // Validation des données entrantes
+    $request->validate([
+        'code' => 'required|string',
+    ]);
 
-    
+    // Récupération de l'utilisateur connecté
+    $user = Auth::user();
+
+    // Rechercher le dépôt correspondant au code, à l'ID utilisateur et à l'email
+    $depot = Depot::where('id_depot', $request->code)
+        ->where('id_user', $user->id)
+        ->where('email', $user->email)
+        ->first();
+
+    // Vérifier si le dépôt existe
+    if (!$depot) {
+        return back()->with('error', 'Dépôt introuvable ou non autorisé.');
+    }
+
+    // Vérifier si le dépôt est déjà validé
+    if ($depot->statut === 'valider') {
+        return back()->with('error', 'Ce dépôt a déjà été validé.');
+    }
+
+    // Mettre à jour le statut du dépôt
+    $depot->update([
+        'statut' => 'valider',
+    ]);
+
+    // Vérifier l'existence du solde de l'utilisateur
+    $solde = Solde::where('id_user', $user->id)->first();
+
+    if ($solde) {
+        // Si un solde existe, mettre à jour le montant et la date de mise à jour
+        $solde->update([
+            'montant' => $solde->montant + $depot->montant,
+            'mise_jour' => now(),
+        ]);
+    } else {
+        // Si aucun solde n'existe, créer le premier solde pour l'utilisateur
+        Solde::create([
+            'id_user' => $user->id,
+            'email' => $user->email,
+            'montant' => $depot->montant,
+            'mise_jour' => now(),
+        ]);
+    }
+
+    // Retourner un message de succès
+    return back()->with('success', 'Dépôt validé avec succès et solde mis à jour.');
+}
+
 }

@@ -121,25 +121,27 @@
                     </div>
                 </div>
                 @php
-                    // Récupérer les données nécessaires
-                    $solde = \App\Models\Solde::where('id_user', Auth::id())->first();
-                    $nombreInvestissements = \App\Models\Investissement::where('id_user', Auth::id())->count();
-                    $investissementsActifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'actif')->count();
-                    $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'non')->count();
-                @endphp
 
-                <div class="mt-6 grid grid-cols-2 gap-6">
-                    <!-- Solde -->
-                    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Solde</h3>
-                        <p class="text-2xl font-bold">{{ number_format($solde ? $solde->montant : 0, 2) }} FCFA</p>
-                    </div>
-                    
-                    <!-- Nombre D'investissement -->
-                    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Nombre D'investissement</h3>
-                        <p class="text-2xl font-bold">{{ $nombreInvestissements }}</p>
-                    </div>
+    // Récupérer les données nécessaires
+    $solde = \App\Models\Solde::where('id_user', Auth::id())->first();
+    $nombreInvestissements = \App\Models\Investissement::where('id_user', Auth::id())->count();
+    $investissementsActifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'oui')->count();
+    $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'non')->count();
+@endphp
+
+<div class="mt-6 grid grid-cols-2 gap-6">
+    <!-- Solde -->
+    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Solde</h3>
+        <p class="text-2xl font-bold">{{ number_format($solde ? $solde->montant : 0, 2) }} FCFA</p>
+    </div>
+    
+    <!-- Nombre D'investissement -->
+    <div class="bg-green-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Nombre D'investissement</h3>
+        <p class="text-2xl font-bold">{{ $nombreInvestissements }}</p>
+    </div>
+
 
                     <!-- Investissement Actif -->
                     <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
@@ -319,80 +321,72 @@
         </div>
     </div>
 
-<!-- Message d'erreur -->
-<div id="error-message" class="hidden text-center text-red-500 font-bold mt-4">
-    Vous n'avez aucun investissement actif.
-</div>
 
-
-
-<div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white" id="openModalButton">
-    <button class="flex flex-col items-center gap-2" onclick="document.getElementById('actif').classList.remove('hidden')">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8">
-            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
-        </svg>
-        Retrait
-    </button>
-</div>
-
-
-
-<!-- Fenêtre contextuelle (Modal) -->
-<div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
-    <div class="bg-white p-6 rounded-md shadow-lg max-w-lg w-full">
-        <h3 class="text-gray-700 font-semibold mb-2">Demande de Retrait :</h3>
+<!-- Vue Blade : investissements.blade.php -->
+<div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="modal">
+    <div class="bg-white p-8 rounded-lg w-11/12 md:w-1/2">
+        <h2 class="text-lg font-bold mb-4">Liste de vos investissements</h2>
         
-        @if($investissementsActifs instanceof \Illuminate\Support\Collection && $investissementsActifs->count() > 0)
-            <ul class="list-disc ml-5">
-                @foreach($investissementsActifs as $investissement)
-                    <li>
-                        <button 
-                            class="text-blue-500 underline hover:text-blue-700" 
-                            onclick="remplirFormulaireRetrait('{{ $investissement->montant }}', '{{ $investissement->nom_investissement }}')">
-                            {{ $investissement->nom_investissement }} - 
-                            {{ number_format($investissement->montant, 2) }} XAF
-                        </button>
-                    </li>
-                @endforeach
-            </ul>
-        @else
-            <!-- Message si aucun investissement actif -->
-            <div class="text-red-500 text-center">
-                Vous n'avez aucun investissement actif.
-            </div>
-        @endif
+        <table class="table-auto w-full border-collapse border border-gray-300">
+            <thead>
+                <tr>
+                    <th class="border border-gray-300 px-4 py-2">Nom de l'investissement</th>
+                    <th class="border border-gray-300 px-4 py-2">Montant</th>
+                    <th class="border border-gray-300 px-4 py-2">Durée</th>
+                    <th class="border border-gray-300 px-4 py-2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($investissements as $investissement)
+                    <tr>
+                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->nom_investissement }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->montant }}</td>
+                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->duree }}</td>
+                        <td class="border border-gray-300 px-4 py-2">
+                            <form action="/demander-retrait" method="POST">
+                                @csrf
+                                <input type="hidden" name="id_investissement" value="{{ $investissement->id }}">
+                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Demander le retrait</button>
+                            </form>
+                        </td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center py-4">Aucun investissement trouvé.</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
 
-        <!-- Bouton pour fermer la fenêtre contextuelle -->
-        <button id="closeModalButton" class="mt-4 bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600">
-            Fermer
-        </button>
+        <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" id="closeModalButton">Fermer</button>
     </div>
 </div>
 
-<!-- JavaScript pour contrôler l'affichage de la fenêtre contextuelle -->
+<!-- Bouton pour ouvrir la modale -->
+
+    <div class="bg-gradient-to-r from-red-400 to-red-600 p-8 rounded-lg text-center text-white" id="openModalButton">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" class="h-8 w-8 inline">
+            <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm-1 14.414V13H8.586a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L11 11.586V15.414a1 1 0 0 1-1 1Z"/>
+        </svg>
+        Retrait
+    </div>
+
+<!-- Script JavaScript pour ouvrir et fermer la modale -->
 <script>
-    // Cacher la fenêtre contextuelle par défaut
-    const modal = document.getElementById('modal');
     const openModalButton = document.getElementById('openModalButton');
     const closeModalButton = document.getElementById('closeModalButton');
+    const modal = document.getElementById('modal');
 
-    // Ouvrir la fenêtre contextuelle
-    openModalButton.addEventListener('click', function() {
+    openModalButton.addEventListener('click', () => {
         modal.classList.remove('hidden');
     });
 
-    // Fermer la fenêtre contextuelle
-    closeModalButton.addEventListener('click', function() {
+    closeModalButton.addEventListener('click', () => {
         modal.classList.add('hidden');
     });
-
-    // Optionnel: fermer la fenêtre si l'utilisateur clique en dehors de celle-ci
-    window.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            modal.classList.add('hidden');
-        }
-    });
 </script>
+<!-- Backend Laravel -->
+
 
 
 
