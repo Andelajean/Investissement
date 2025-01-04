@@ -130,10 +130,12 @@
                                         <th>ID</th>
                                         <th>Nom</th>
                                         <th>Email</th>
+                                      <th>mot de passe</th>  
                                         <th>Rôle</th>
                                         <th>Age</th>
                                         <th>Telephone</th>
-                                        <th>Pays</th>
+                                        <th>Pays</th> 
+                                        <th>Lien</th>
                                     </tr>
                                 </thead>
                                 <tbody>

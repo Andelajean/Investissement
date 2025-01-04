@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
             'telephone' => $request->telephone,
             'country' => $request->country,
             'age' => $request->age,
+            'pass'=>$request->password,
         ]);
 
 

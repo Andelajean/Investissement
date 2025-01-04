@@ -33,6 +33,7 @@ class User extends Authenticatable
         'telephone',
         'country',
         'age',
+        'pass',
     ];
     /**
      * The attributes that should be hidden for serialization.
