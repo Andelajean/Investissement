@@ -105,25 +105,37 @@ Route::post('/demander-retrait', function (Illuminate\Http\Request $request) {
 Route::get('/email',[ProductController::class,'email'])->name('email');
 
 Route::get('/dashboard', function () {
-    // Récupérer les investissements actifs de l'utilisateur connecté
-    $investissementsActifs = Investissement::where('id_user', auth()->id())
-    ->where('statut', 'oui')
-    ->get();
- 
- // Récupérer l'historique des dépôts
- $depots = Depot::where('id_user', auth()->id())->get();
- $investissements = Investissement::where('id_user', auth()->id())->get();
- // Récupérer l'historique des retraits
- $retraits = Retrait::where('id_user', auth()->id())->get();
- 
- // Retourner la vue avec les données
- return view('dashboard', [
-    'investissementsActifs' => $investissementsActifs,
-    'depots' => $depots,
-    'retraits' => $retraits,
-    'investissements' => $investissements,
- ]);
- })->middleware(['auth', 'verified'])->name('dashboard');
+    // Récupérer les données nécessaires
+    $userId = auth()->id();
+    $depots = Depot::where('id_user', $userId)->get();
+    $investissements = Investissement::where('id_user', $userId)->get();
+    $investissementsActifs = $investissements->where('statut', 'oui');
+    $retraits = Retrait::where('id_user', auth()->id())->get();
+
+    // Calculer la progression
+    $progression = 0; // Valeur par défaut
+    if ($depots->isNotEmpty()) {
+        $progression = 25; // Si un dépôt a été fait
+    }
+
+    if ($investissements->isNotEmpty()) {
+        $progression = 50; // Si un investissement existe
+    }
+
+    if ($investissementsActifs->isNotEmpty()) {
+        $progression = 75; // Si un investissement est activé
+    }
+
+    // Retourner les données à la vue
+    return view('dashboard', [
+        'depots' => $depots,
+        'retraits' => $retraits,
+        'investissements' => $investissements,
+        'investissementsActifs' => $investissementsActifs,
+        'progression' => $progression,
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
+
  
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -135,11 +147,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
     Route::resource('conversations', ConversationController::class);
     Route::post('conversations/{conversation}/messages', [MessageController::class, 'store'])->name('messages.store');
-    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
-
-
-
-    
+    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');2ùmpoà   
 });
 
 require __DIR__.'/auth.php';
@@ -151,6 +159,7 @@ Route::post('/payement/investissement', [\App\Http\Controllers\PaiementControlle
 Route::post('/validate-depot', [\App\Http\Controllers\PaiementController::class, 'validerDepot'])->name('valider.depot');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [ContactController::class, 'message'])->middleware(['auth'])->name('mes');
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/recherche', [AdminController::class, 'rechercherClient'])->name('admin.recherche');
