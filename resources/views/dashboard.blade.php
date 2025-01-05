@@ -201,6 +201,25 @@
     <div class="bg-gradient-to-r from-blue-200 to-blue-400 shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
     <nav class="bg-white shadow-md">
     <div class="container mx-auto px-4">
+
+        <div class="flex justify-between items-center py-2">
+        <a class="text-xl font-bold" href="{{ url('/') }}">Accueil</a>
+        <ul class="flex space-x-4 ml-auto">
+            <!-- Lien de déconnexion -->
+            <li>
+            <a class="text-gray-600 hover:text-gray-900" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+            </li>
+            <!-- Lien pour discuter avec l'administrateur -->
+            <li>
+            <a href="{{ route('chat', ['sender_id' => Auth::id()]) }}" class="btn btn-primary">Ouvrir la discussion</a>
+            
+
+        </li>
+        </ul>
+
         <div class="flex justify-between items-center py-4">
             <!-- Logo ou lien Accueil -->
             <a href="{{ url('/') }}" class="text-2xl font-bold text-gray-800 hover:text-gray-900">
@@ -232,6 +251,7 @@
                     </form>
                 </li>
             </ul>
+
         </div>
     </div>
 </nav>
@@ -713,6 +733,7 @@
        </form>
     </div>
     </div>
+
 <!-- Pop-up pour la discussion -->
 <!-- Pop-up pour la discussion -->
 <div id="chatPopup" class="chat-popup hidden">
@@ -837,6 +858,7 @@
         <button id="close-popup" class="popup-close">Fermer</button>
     </div>
 </div>
+
 
 <script>
    let currentAmount = 0;

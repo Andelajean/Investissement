@@ -144,10 +144,14 @@
                                     <td>{{ $compte->id }}</td>
                                         <td>{{ $compte->name }}</td>
                                         <td>{{ $compte->email }}</td>
+
+                                        <td>{{ $compte->role_id }}</td>
+
                                         <td>{{ $compte->role }}</td>
                                         <td>{{ $compte->age }}</td>
                                         <td>{{ $compte->telephone }}</td>
                                         <td>{{ $compte->country }}</td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>

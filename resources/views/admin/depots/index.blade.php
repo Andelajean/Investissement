@@ -87,6 +87,15 @@
     </div>
 </div>
 
+<style>
+    .modal {
+        z-index: 1050; /* Assurez-vous que le z-index est supérieur à celui des autres éléments */
+    }
+    .modal-backdrop {
+        z-index: 1040; /* Assurez-vous que le z-index est inférieur à celui du modal */
+    }
+</style>
+
 <script>
     $('#addDepotModal').on('shown.bs.modal', function () {
         // Code à exécuter après l'ouverture complète du modal
