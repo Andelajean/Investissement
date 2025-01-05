@@ -137,7 +137,7 @@
                                     <tr>
                                         <td>{{ $compte->name }}</td>
                                         <td>{{ $compte->email }}</td>
-                                        <td>{{ $compte->role }}</td>
+                                        <td>{{ $compte->role_id }}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
