@@ -147,7 +147,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
     Route::resource('conversations', ConversationController::class);
     Route::post('conversations/{conversation}/messages', [MessageController::class, 'store'])->name('messages.store');
-    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');2ùmpoà   
+    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');   
 });
 
 require __DIR__.'/auth.php';
@@ -159,7 +159,7 @@ Route::post('/payement/investissement', [\App\Http\Controllers\PaiementControlle
 Route::post('/validate-depot', [\App\Http\Controllers\PaiementController::class, 'validerDepot'])->name('valider.depot');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/dashboard', [ContactController::class, 'message'])->middleware(['auth'])->name('mes');
+    Route::get('/mes', [ContactController::class, 'message'])->middleware(['auth'])->name('mes');
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/recherche', [AdminController::class, 'rechercherClient'])->name('admin.recherche');

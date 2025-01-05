@@ -15,6 +15,8 @@ class Investissement extends Model
         'date_investissement',
         'date_echeance',
         'statut',
+        'devise',
+        'activation',
         'id_user',
     ];
 }

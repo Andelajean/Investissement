@@ -201,27 +201,41 @@
     <div class="bg-gradient-to-r from-blue-200 to-blue-400 shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
     <nav class="bg-white shadow-md">
     <div class="container mx-auto px-4">
-        <div class="flex justify-between items-center py-2">
-        <a class="text-xl font-bold" href="{{ url('/') }}">Accueil</a>
-        <li>
-                <button onclick="ouvrir()">Infos</button>
-            </li>
-        <ul class="flex space-x-4 ml-auto">
-            <!-- Lien de déconnexion -->
-            <li>
-            <a class="text-gray-600 hover:text-gray-900" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            </li>
-           
-            <li>
-            <a class="text-gray-600 hover:text-gray-900" href="#" onclick="openChatPopup()">Discussion</a>
-            </li>
-        </ul>
+        <div class="flex justify-between items-center py-4">
+            <!-- Logo ou lien Accueil -->
+            <a href="{{ url('/') }}" class="text-2xl font-bold text-gray-800 hover:text-gray-900">
+                Accueil
+            </a>
+
+            <!-- Bouton Infos -->
+            <button id="info-button" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                Infos
+            </button>
+
+            <!-- Navigation à droite -->
+            <ul class="flex space-x-6 items-center">
+                <!-- Lien Discussion -->
+                <li>
+                    <a href="#" onclick="openChatPopup()" class="text-white bg-green-500 hover:text-blue-500 transition duration-300 shadow hover:bg-green-600 px-4 py-2 rounded-lg">
+                        Discussion
+                    </a>
+                </li>
+                
+                <!-- Lien Déconnexion -->
+                <li>
+                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                       class="text-white bg-red-500  transition duration-300 shadow hover:bg-red-600 px-4 py-2 rounded-lg">
+                        Déconnexion
+                    </a>
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                        @csrf
+                    </form>
+                </li>
+            </ul>
         </div>
     </div>
-    </nav>
+</nav>
+
 
 
         <script>
@@ -291,7 +305,7 @@
     <!-- Invitation Section -->
     <!-- Invitation Section -->
 <div class="background-image-container">
-    <p class="text-center mb-6 font-medium text-yellow-500"style="font-size: 1.5rem; line-height: 1.8;">
+    <p class="text-center bg-white mb-6 font-medium text-black"style="font-size: 1.5rem; line-height: 1.8;">
         Plus vous invitez les personnes à investir, plus vous aurez des récompenses.
     </p>
     @if (session('success'))
@@ -342,8 +356,9 @@
         
         @foreach ($investissementsInactifs as $investissement)
             <div class="mb-4 p-3 border border-gray-300 rounded-lg">
-                <p><strong>Montant :</strong> {{ $investissement->montant }} </p>
+                <p><strong>Montant :</strong> {{ $investissement->activation }} </p>
                 <p><strong>Email :</strong>  {{ $investissement->email }}</p>
+                <p><strong>Email :</strong>  {{ $investissement->devise }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
                     href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant }\nEmail : {$investissement->email }\nID : {$investissement->id}") }}" 
@@ -689,7 +704,7 @@
         <select id="currency" class="w-full p-2 border rounded-lg mb-4" name="currency" onchange="updateAmount()">
             <option value="XAF">XAF</option>
             <option value="XOF">XOF</option>
-            <option value="GNF">GNF</option>
+           
             <option value="USD">USD</option>
         </select>
         <button class="bg-green-500 text-white py-2 px-4 rounded-lg w-full hover:bg-green-600"   type="submit">Confirmer</button>
@@ -789,7 +804,7 @@
 </script>
 
    
-    <div id="popup" class="popup">
+    <div id="popup" class="popup"style="display: none;">
     <div class="popup-content">
         <h2 id="greeting"></h2>
         <p>🎉 Bienvenue chez Global Investissement Trading! Voici les étapes à suivre pour investir :</p>
@@ -832,10 +847,7 @@ function openModal(amount,gain) {
     document.getElementById('currency-modal').classList.remove('hidden');
     
 }
-function ouvrir() {
-    document.getElementById('popup').classList.remove('hidden');
-    
-}
+
 function closeModal() {
     document.getElementById('currency-modal').classList.add('hidden');
 }
@@ -866,7 +878,7 @@ function closModal() {
 
     function contactAdmin() {
         // Numéro WhatsApp de l'administrateur
-        const adminNumber = "+23797091769";
+        const adminNumber = "+237697091769";
 
         // Message à envoyer
         const message = `Bonjour, je suis l'utilisateur avec l'email : ${userEmail} et l'ID : ${userId}. Je voudrais investir , quels sont les methodes de paiements??.`;
@@ -898,8 +910,10 @@ function closModal() {
     document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("popup");
     const closeButton = document.getElementById("close-popup");
+    const infoButton = document.getElementById("info-button");
     const greeting = document.getElementById("greeting");
 
+    // Déterminer le message de salutation en fonction de l'heure
     const currentHour = new Date().getHours();
     if (currentHour < 13) {
         greeting.innerText = "☀️ Bonjour ! Je suis GIT, votre assistant virtuel. Passez une excellente journée !";
@@ -907,17 +921,25 @@ function closModal() {
         greeting.innerText = "🌙 Bonsoir ! Passez une merveilleuse soirée !";
     }
 
-    // Masquer la popup après 30 secondes
-    setTimeout(() => {
+    // Afficher la popup au chargement de la page
+    popup.style.display = "flex";
+
+    // Masquer automatiquement la popup après 30 secondes
+    const autoCloseTimeout = setTimeout(() => {
         popup.style.display = "none";
     }, 30000);
+
+    // Afficher la popup lorsque le bouton "Infos" est cliqué
+    infoButton.addEventListener("click", () => {
+        popup.style.display = "flex";
+        clearTimeout(autoCloseTimeout); // Annuler le masquage automatique pour cette interaction
+    });
 
     // Masquer la popup en cliquant sur le bouton "Fermer"
     closeButton.addEventListener("click", () => {
         popup.style.display = "none";
     });
 });
-
 
 </script>
  <!-- JavaScript Libraries -->
