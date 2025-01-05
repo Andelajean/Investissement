@@ -88,8 +88,10 @@
             </li>
             <!-- Lien pour discuter avec l'administrateur -->
             <li>
-            <a class="text-gray-600 hover:text-gray-900" href="#" onclick="openChatPopup()">Discussion</a>
-            </li>
+            <a href="{{ route('chat', ['sender_id' => Auth::id()]) }}" class="btn btn-primary">Ouvrir la discussion</a>
+            
+
+        </li>
         </ul>
         </div>
     </div>
@@ -582,96 +584,6 @@
        </form>
     </div>
     </div>
-<!-- Pop-up pour la discussion -->
-<!-- Pop-up pour la discussion -->
-<div id="chatPopup" class="chat-popup hidden">
-    <div class="chat-header">
-        <span class="close" onclick="closeChatPopup()">&times;</span>
-        <h2>Discussion avec l'administrateur</h2>
-    </div>
-    <div class="chat-body">
-        <div id="chatMessages">
-            <!-- Les messages de l'utilisateur et de l'administrateur seront ici -->
-        </div>
-        <textarea id="chatInput" placeholder="Écrire un message..."></textarea>
-        <button onclick="sendMessage(event)">Envoyer</button>
-    </div>
-</div>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.querySelector('a[href="#"]').addEventListener('click', openChatPopup);
-    });
-
-    function openChatPopup() {
-        document.getElementById('chatPopup').style.display='block';
-        fetchMessages();
-    }
-
-    function closeChatPopup() {
-        document.getElementById('chatPopup').style.display='none';
-    }
-
-    function fetchMessages() {
-        fetch('/messages')
-            .then(response => response.json())
-            .then(messages => {
-                const messagesDiv = document.getElementById('chatMessages');
-                messagesDiv.innerHTML = '';
-                messages.forEach(message => {
-                    const messageElement = document.createElement('div');
-                    messageElement.classList.add('chat-message', message.sender_id === {{ Auth::id() }} ? 'user' : 'admin');
-                    messageElement.innerHTML = `
-                        <p>${message.message}</p>
-                        <small>${new Date(message.created_at).toLocaleString()}</small>
-                    `;
-                    messagesDiv.appendChild(messageElement);
-                });
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            });
-    }
-
-    function sendMessage(event) {
-        event.preventDefault();
-        const messageInput = document.getElementById('chatInput');
-        const message = messageInput.value;
-
-        const csrfTokenMetaTag = document.querySelector('meta[name="csrf-token"]');
-        if (!csrfTokenMetaTag) {
-            console.error('CSRF token not found.');
-            return;
-        }
-
-        const csrfToken = csrfTokenMetaTag.getAttribute('content');
-
-        if (message.trim() !== '') {
-            fetch('/messages', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': csrfToken
-                },
-                body: JSON.stringify({
-                    message: message
-                })
-            })
-            .then(response => response.json())
-            .then(newMessage => {
-                const messagesDiv = document.getElementById('chatMessages');
-                const messageElement = document.createElement('div');
-                messageElement.classList.add('chat-message', 'user');
-                messageElement.innerHTML = `
-                    <p>${newMessage.message}</p>
-                    <small>${new Date(newMessage.created_at).toLocaleString()}</small>
-                `;
-                messagesDiv.appendChild(messageElement);
-                messagesDiv.scrollTop = messagesDiv.scrollHeight;
-                messageInput.value = '';
-            });
-        }
-    }
-</script>
-
 
 <script>
    let currentAmount = 0;

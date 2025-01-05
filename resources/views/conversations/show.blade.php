@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container mt-4">
-        <h1 class="mb-4">Conversation avec {{ $conversation->user->name }} et {{ $conversation->admin->name }}</h1>
+        <h1 class="mb-4">Conversation avec {{ $conversation->user->name }} </h1>
         
         <div id="chatMessages" class="card mb-4" style="height: 400px; overflow-y: scroll;">
             

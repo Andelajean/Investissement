@@ -149,3 +149,8 @@ Route::post('/contact/traitement',[ProductController::class,'contact'])->name('c
     ->name('admin.dashboard')
     ->middleware('role');
 */
+
+
+Route::get('/chat/{sender_id}', [ChatController::class, 'chat'])->name('chat');
+Route::get('/messages/{discussion_id}', [ChatController::class, 'fetchMessages']);
+Route::post('/messages', [ChatController::class, 'sendMessage']);
