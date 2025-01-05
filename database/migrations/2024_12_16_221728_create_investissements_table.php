@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nom_investissement');
             $table->decimal('montant', 15, 2); 
             $table->string('duree');
+            $table->string('activation');
+            $table->string('devise');
             $table->string('statut')->default('non');
             $table->decimal('gain', 15, 2);  
             $table->date('date_investissement')->now();

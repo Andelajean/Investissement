@@ -5,8 +5,13 @@
 
      <!-- team section -->
 
+<section class="why_section layout_padding">
+    <div class="container">
+
+    
      <section class="why_section layout_padding">
         <div class="container">
+
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
                 Membres de <span>l'equipe</span>
@@ -16,17 +21,7 @@
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
-                <div class="col-lg-3 wow slideInUp" data-wow-delay="0.3s">
-                    <div class="team-item bg-light rounded overflow-hidden">
-                        <div class="team-img position-relative overflow-hidden">
-                            <img class="img-fluid w-100" src="image/team-1.jpg" alt="" style="height: 400px;">
-                        </div>
-                        <div class="text-center py-4">
-                            <h4 class="text-primary">President</h4>
-                            <p class="text-uppercase m-0">PDG</p>
-                        </div>
-                    </div>
-                </div>
+               
                 <div class="col-lg-3 wow slideInUp" data-wow-delay="0.6s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
@@ -63,7 +58,7 @@
             </div>
         </div>
     </div>
-  </section>
+</section>
 
     
   

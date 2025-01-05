@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
-//use App\Http\Controllers\DepotController;
+
+// use App\Http\Controllers\DepotController;
+use App\Http\Controllers\RetraiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminController\UserController;
+
 use App\Http\Controllers\AdminController\AdminController;
 use App\Http\Controllers\AdminController\DepotController;
 use App\Http\Controllers\AdminController\ContactController;
@@ -21,6 +24,10 @@ use App\Models\Retrait;
 use App\Http\Controllers\ConversationController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\ChatController;
+
+
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,33 +63,79 @@ Route::get('/contact', function () {
     return view('site.contact');
 });
 Route::get('/teams', function () {
-    return view('site.contact');
+    return view('site.teams');
 });
 
 Route::get('/team', function () {
     return view('site.team'); // Affiche la page about.blade.php
 });
 
+Route::get('/partenaire', function () {
+    return view('site.partenaire'); // Affiche la page about.blade.php
+});
+
+Route::post('/demander-retrait', function (Illuminate\Http\Request $request) {
+    $request->validate([
+        'id_investissement' => 'required|exists:investissements,id',
+    ]);
+
+    $user = auth()->user();
+    $investissement = Investissement::where('id', $request->id_investissement)
+        ->where('id_user', $user->id)
+        ->where('statut', 'oui')
+        ->first();
+
+    if (!$investissement) {
+        return back()->with('error', "Investissement introuvable ou non autorisé.");
+    }
+
+    \App\Models\Retrait::create([
+        'nom_investissement' => $investissement->nom_investissement,
+        'id_demande' => uniqid(),
+        'montant' => $investissement->montant,
+        'statut' => 'traitement_en_cours',
+        'devise' => 'XAF',
+       'date_retrait' => now(),
+        'id_user' => $user->id,
+    ]);
+
+    return back()->with('success', "Demande de retrait effectuée avec succès.");
+});
+
+Route::get('/email',[ProductController::class,'email'])->name('email');
+
 Route::get('/dashboard', function () {
-    // Récupérer les investissements actifs de l'utilisateur connecté
-    $investissementsActifs = Investissement::where('id_user', auth()->id())
-    ->where('statut', 'actif')
-    ->get();
- 
- // Récupérer l'historique des dépôts
- $depots = Depot::where('id_user', auth()->id())->get();
- $investissements = Investissement::where('id_user', auth()->id())->get();
- // Récupérer l'historique des retraits
- $retraits = Retrait::where('id_user', auth()->id())->get();
- 
- // Retourner la vue avec les données
- return view('dashboard', [
-    'investissementsActifs' => $investissementsActifs,
-    'depots' => $depots,
-    'retraits' => $retraits,
-    'investissements' => $investissements,
- ]);
- })->middleware(['auth', 'verified'])->name('dashboard');
+    // Récupérer les données nécessaires
+    $userId = auth()->id();
+    $depots = Depot::where('id_user', $userId)->get();
+    $investissements = Investissement::where('id_user', $userId)->get();
+    $investissementsActifs = $investissements->where('statut', 'oui');
+    $retraits = Retrait::where('id_user', auth()->id())->get();
+
+    // Calculer la progression
+    $progression = 0; // Valeur par défaut
+    if ($depots->isNotEmpty()) {
+        $progression = 25; // Si un dépôt a été fait
+    }
+
+    if ($investissements->isNotEmpty()) {
+        $progression = 50; // Si un investissement existe
+    }
+
+    if ($investissementsActifs->isNotEmpty()) {
+        $progression = 75; // Si un investissement est activé
+    }
+
+    // Retourner les données à la vue
+    return view('dashboard', [
+        'depots' => $depots,
+        'retraits' => $retraits,
+        'investissements' => $investissements,
+        'investissementsActifs' => $investissementsActifs,
+        'progression' => $progression,
+    ]);
+})->middleware(['auth', 'verified'])->name('dashboard');
+
  
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -90,13 +143,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/users/produit-list',[ProductController::class,'produit'])->name('produit.list');
     Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
+
     Route::post('/validate-depot', [DepotController::class, 'validerDepot'])->name('valider.depot');
     Route::resource('conversations', ConversationController::class);
     Route::post('conversations/{conversation}/messages', [MessageController::class, 'store'])->name('messages.store');
-    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');
-
-
-    
+    Route::post('/confirmer-investissement', [ProductController::class, 'confirmerInvestissement'])->name('confirmerInvestissement');   
 });
 
 require __DIR__.'/auth.php';
@@ -105,8 +156,10 @@ Route::get('/pay/success', [\App\Http\Controllers\PaiementController::class, 'ca
 Route::post('/pay/notify', [\App\Http\Controllers\PaiementController::class, 'notify'])->name('payment.notify');
 Route::get('/return_url', [\App\Http\Controllers\PaiementController::class, 'return_url'])->name('return_url');
 Route::post('/payement/investissement', [\App\Http\Controllers\PaiementController::class, 'payment'])->name('paiement');
+Route::post('/validate-depot', [\App\Http\Controllers\PaiementController::class, 'validerDepot'])->name('valider.depot');
 
 Route::middleware('auth')->group(function () {
+    Route::get('/mes', [ContactController::class, 'message'])->middleware(['auth'])->name('mes');
 
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/recherche', [AdminController::class, 'rechercherClient'])->name('admin.recherche');
@@ -136,6 +189,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/balance', [UserController::class, 'balance'])->name('admin.balance'); 
     Route::get('/settings', [UserController::class, 'settings'])->name('admin.settings'); 
     Route::post('/logout/admin', [UserController::class, 'logout'])->name('admin.logout');
+    
 
     Route::get('/depots', [DepotController::class, 'index'])->name('admin.depots');
     Route::post('/depots', [DepotController::class, 'store'])->name('admin.store_depot');

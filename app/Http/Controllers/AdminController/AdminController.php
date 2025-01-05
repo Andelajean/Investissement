@@ -26,10 +26,10 @@ class AdminController extends Controller
         $nombrePaiements = Depot::count() + Retrait::count();
         $montantPaiements = Depot::sum('montant') + Retrait::sum('montant');
         $nombreClients = User::count();
-        $nombreComptes = User::where('role_id', 'client')->count();
+       // $nombreComptes = User::where('role_id', 'client')->count();
         $listeComptes = User::all();
 
-        return view('admin.dashboard', compact('nombrePaiements', 'montantPaiements', 'nombreClients', 'nombreComptes', 'listeComptes'));
+        return view('admin.dashboard', compact('nombrePaiements', 'montantPaiements', 'nombreClients', 'listeComptes'));
     }
 
     public function rechercherClient(Request $request)
