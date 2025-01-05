@@ -55,6 +55,8 @@ class ProductController extends Controller
             'montant' => $montant,
             'duree' => $request->input('duration'),
             'gain' => $request->input('gain'),
+            'devise' =>$request->input('devise'),
+            'activation' =>$request->input('activation'),
             'email' => $email,
             'id_user' => $userId,
             'statut' => 'non',

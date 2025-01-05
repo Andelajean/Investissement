@@ -39,7 +39,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>340 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>2H</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ', '30000',' 340000', '2h')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ', '30000',' 340000', '2h','45000')">Investir</button>
     
             </div>
             <div class="bg-blue-500 to-red-600 p-6 rounded-lg flex items-center justify-between">
@@ -50,7 +50,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>440 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H50 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐', '40000',' 440000', '1H50 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐', '40000',' 440000', '1H50 minutes','60000')">Investir</button>
 </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/3.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -60,7 +60,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>550 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H45 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐ ⭐', '50000',' 540000', '1H45 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standard ⭐ ⭐', '50000',' 540000', '1H45 minutes','75000')">Investir</button>
 </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/4.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -70,7 +70,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>650 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H30 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ', '60000',' 650000', '1H30 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ', '60000',' 650000', '1H30 minutes','85000')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/5.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -80,7 +80,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>780 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H 15 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ⭐', '70000',' 780000', '1H15 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium ⭐', '70000',' 780000', '1H15 minutes','95000')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/6.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -90,7 +90,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>880 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>1H</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium  ⭐ ⭐', '80000',' 880000', '1H')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Premium  ⭐ ⭐', '80000',' 880000', '1H','100000')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/7.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -100,7 +100,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>890 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>45 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.I.P ⭐', '90000',' 890000', '45 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.I.P ⭐', '90000',' 890000', '45 minutes','120000')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/8.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -110,7 +110,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>1 300 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>30 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐', '100000',' 1300000', '30 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐', '100000',' 1300000', '30 minutes','130000')">Investir</button>
     </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/9.jpg')}}" alt="Product 1" class="h-20 w-20  rounded-full shadow-lg">
@@ -120,7 +120,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>2 400 000 CFA </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>15 minutes</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐⭐', '200000',' 2400000', '15 minutes')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('V.V.I.P  ⭐⭐⭐', '200000',' 2400000', '15 minutes','195000')">Investir</button>
     </div>       
     </div>
 <!-- Fenêtre contextuelle -->
@@ -160,6 +160,26 @@
                 >
             </div>
             <div class="mb-4">
+                <label for="gain" class="block text-sm font-medium text-gray-700">Devise</label>
+                <input 
+                    type="text" 
+                    id="devise" 
+                    name="devise" 
+                    class="w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    readonly value="CFA"
+                >
+            </div>
+            <div class="mb-4 hidden">
+                <label for="gain" class="block hidden text-sm font-medium text-gray-700">Activation</label>
+                <input 
+                    type="text" 
+                    id="activation" 
+                    name="activation" 
+                    class="w-full p-2 border hidden border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm" 
+                    readonly
+                >
+            </div>
+            <div class="mb-4">
                 <label for="duration" class="block text-sm font-medium text-gray-700">Durée</label>
                 <input 
                     type="text" 
@@ -189,12 +209,13 @@
 </div>
 
 <script>
-  function openModal(productName, amount, gain, duration) {
+  function openModal(productName, amount, gain, duration,activation) {
         // Remplir les champs du formulaire avec les données
         document.getElementById('productName').value = productName;
         document.getElementById('amount').value = amount;
         document.getElementById('gain').value = gain;
         document.getElementById('duration').value = duration;
+        document.getElementById('activation').value = activation;
 
         // Afficher la fenêtre contextuelle
         document.getElementById('investModal').classList.remove('hidden');
