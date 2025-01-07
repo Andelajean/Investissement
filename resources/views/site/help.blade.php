@@ -4,7 +4,7 @@
 @section('content') 
 
    <!-- questions section -->
-<section class="why_section layout_padding">
+<section class="about_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
@@ -70,7 +70,7 @@
  <!-- Bouton Fixe -->
  <a 
     href="https://wa.me/+237697091769?text=Bonjour%20je%20suis%20nouveau%2C%20comment%20faire%20pour%20investir%3F" 
-    class="fixed-whatsapp-btn"
+    class="fixed-whatsapp-btn m-4"
     target="_blank" 
     rel="noopener noreferrer"
   >
@@ -82,7 +82,7 @@
     Plus D'infos
   </a>
     <!-- seconde contain -->
-    <section class="service_section layout_padding">
+    <section class="about_section layout_padding">
       <div class="service_container">
         <div class="container">
           <div class="heading_container heading_center">

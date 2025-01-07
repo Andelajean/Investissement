@@ -59,7 +59,7 @@
   </style>
 </head>
 
-<body>
+<body class="about_section">
 
     <main>
         @yield('content')

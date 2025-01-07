@@ -4,7 +4,7 @@
 @section('content') 
 
 <!--start partenaire-->
-<section class="why_section layout_padding">
+<section class="about_section layout_padding">
     <div class="container">
         <div class="heading_container heading_center">
             <h2 class="pb-5 mb-3">
@@ -50,7 +50,7 @@
             <!-- Partenaire 6 -->
             <div class="col-4 col-sm-3 col-md-2 mb-4">
                 <div class="img-box d-flex justify-content-center">
-                    <img src="image/cbc.jpeg" alt="CBC" class="img-fluid" style="width: 80px; height: 80px;">
+                    <img src="image/cocacola.png" alt="cocacola" class="img-fluid" style="width: 80px; height: 80px;">
                 </div>
             </div>
             <!-- Partenaire 7 -->
@@ -87,6 +87,24 @@
             <div class="col-4 col-sm-3 col-md-2 mb-4">
                 <div class="img-box d-flex justify-content-center">
                     <img src="image/om.jpeg" alt="Orange Money" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <!-- Partenaire 13 -->
+            <div class="col-4 col-sm-3 col-md-2 mb-4">
+                <div class="img-box d-flex justify-content-center">
+                    <img src="image/1xbet.jpeg" alt="1xbet" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <!-- Partenaire 14 -->
+            <div class="col-4 col-sm-3 col-md-2 mb-4">
+                <div class="img-box d-flex justify-content-center">
+                    <img src="image/airtel.png" alt="airtel" class="img-fluid" style="width: 80px; height: 80px;">
+                </div>
+            </div>
+            <!-- Partenaire 15 -->
+            <div class="col-4 col-sm-3 col-md-2 mb-4">
+                <div class="img-box d-flex justify-content-center">
+                    <img src="image/moov.jpg" alt="moov" class="img-fluid" style="width: 80px; height: 80px;">
                 </div>
             </div>
         </div>
