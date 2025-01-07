@@ -201,49 +201,38 @@
     <div class="bg-gradient-to-r from-blue-200 to-blue-400 shadow-lg rounded-lg p-8 mb-8 mx-auto max-w-4xl">
     <nav class="bg-white shadow-md">
     <div class="container mx-auto px-4">
-
         <div class="flex justify-between items-center py-2">
-        <a class="text-xl font-bold" href="{{ url('/') }}">Accueil</a>
-        <ul class="flex space-x-4 ml-auto">
-            <!-- Lien de déconnexion -->
-            <li>
-            <a class="text-gray-600 hover:text-gray-900" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
-            </li>
-            <!-- Lien pour discuter avec l'administrateur -->
-            <li>
-            <a href="{{ route('chat', ['sender_id' => Auth::id()]) }}" class="btn btn-primary">Ouvrir la discussion</a>
-            
+            <!-- Logo -->
+            <a class="text-xl font-bold" href="{{ url('/') }}">Accueil</a>
 
-        </li>
-        </ul>
-
-        <div class="flex justify-between items-center py-4">
-            <!-- Logo ou lien Accueil -->
-            <a href="{{ url('/') }}" class="text-2xl font-bold text-gray-800 hover:text-gray-900">
-                Accueil
-            </a>
-
-            <!-- Bouton Infos -->
-            <button id="info-button" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
-                Infos
+            <!-- Bouton mobile -->
+            <button id="menu-toggle" 
+                    class="block lg:hidden text-gray-700 focus:outline-none">
+                <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
             </button>
 
-            <!-- Navigation à droite -->
-            <ul class="flex space-x-6 items-center">
-                <!-- Lien Discussion -->
+            <!-- Menu principal -->
+            <ul id="menu" class="hidden lg:flex space-x-4 ml-auto items-center">
+                <!-- Lien pour discuter avec l'administrateur -->
                 <li>
-                    <a href="#" onclick="openChatPopup()" class="text-white bg-green-500 hover:text-blue-500 transition duration-300 shadow hover:bg-green-600 px-4 py-2 rounded-lg">
-                        Discussion
+                    <a href="{{ route('chat', ['sender_id' => Auth::id()]) }}" 
+                       class="btn btn-success bg-green-500 text-white px-4 py-2 rounded-lg shadow hover:bg-green-600">
+                        Ouvrir la discussion
                     </a>
                 </li>
-                
+                <!-- Bouton Infos -->
+                <li>
+                    <button id="info-button" class="bg-blue-500 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-600">
+                        Infos
+                    </button>
+                </li>
                 <!-- Lien Déconnexion -->
                 <li>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
-                       class="text-white bg-red-500  transition duration-300 shadow hover:bg-red-600 px-4 py-2 rounded-lg">
+                    <a href="{{ route('logout') }}" 
+                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
+                       class="text-white bg-red-500 transition duration-300 shadow hover:bg-red-600 px-4 py-2 rounded-lg">
                         Déconnexion
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
@@ -251,10 +240,18 @@
                     </form>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>
+
+<script>
+    // Script pour le menu mobile
+    document.getElementById('menu-toggle').addEventListener('click', function () {
+        const menu = document.getElementById('menu');
+        menu.classList.toggle('hidden');
+    });
+</script>
+
 
 
 
@@ -291,36 +288,33 @@
     $investissementsInactifs = \App\Models\Investissement::where('id_user', Auth::id())->where('statut', 'non')->count();
 @endphp
 
-<div class="mt-6 grid grid-cols-2 gap-6">
+<div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
     <!-- Solde -->
     <div class="bg-green-500 p-6 rounded-lg text-center text-white">
         <h3 class="text-lg font-semibold">Solde</h3>
         <p class="text-2xl font-bold">{{ number_format($solde ? $solde->montant : 0, 2) }} FCFA</p>
     </div>
-    
+
     <!-- Nombre D'investissement -->
     <div class="bg-green-500 p-6 rounded-lg text-center text-white">
         <h3 class="text-lg font-semibold">Nombre D'investissement</h3>
         <p class="text-2xl font-bold">{{ $nombreInvestissements }}</p>
     </div>
 
-
-                    <!-- Investissement Actif -->
-                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Investissement Actif</h3>
-                        <p class="text-2xl font-bold">{{ $investissementsActifs }}</p>
-                    </div>
-
-                    <!-- Investissement Inactif -->
-                    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
-                        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
-                        <p class="text-2xl font-bold">{{ $investissementsInactifs }}</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    <!-- Investissement Actif -->
+    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Investissement Actif</h3>
+        <p class="text-2xl font-bold">{{ $investissementsActifs }}</p>
     </div>
+
+    <!-- Investissement Inactif -->
+    <div class="bg-blue-500 p-6 rounded-lg text-center text-white">
+        <h3 class="text-lg font-semibold">Investissement Inactif</h3>
+        <p class="text-2xl font-bold">{{ $investissementsInactifs }}</p>
+    </div>
+</div>
+
+
 
     <!-- Invitation Section -->
     <!-- Invitation Section -->
@@ -378,10 +372,10 @@
             <div class="mb-4 p-3 border border-gray-300 rounded-lg">
                 <p><strong>Montant :</strong> {{ $investissement->activation }} </p>
                 <p><strong>Email :</strong>  {{ $investissement->email }}</p>
-                <p><strong>Email :</strong>  {{ $investissement->devise }}</p>
+                <p><strong>Devise :</strong>  {{ $investissement->devise }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
-                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->montant }\nEmail : {$investissement->email }\nID : {$investissement->id}") }}" 
+                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->activation }\nEmail : {$investissement->email }\nDevise : {$investissement->devise }\nID : {$investissement->id}") }}" 
                     target="_blank"
                     class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
                 >
@@ -488,41 +482,51 @@
 <div class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden" id="modal">
     <div class="bg-white p-8 rounded-lg w-11/12 md:w-1/2">
         <h2 class="text-lg font-bold mb-4">Liste de vos investissements</h2>
-        
-        <table class="table-auto w-full border-collapse border border-gray-300">
-            <thead>
-                <tr>
-                    <th class="border border-gray-300 px-4 py-2">Nom de l'investissement</th>
-                    <th class="border border-gray-300 px-4 py-2">Montant</th>
-                    <th class="border border-gray-300 px-4 py-2">Durée</th>
-                    <th class="border border-gray-300 px-4 py-2">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($investissements as $investissement)
+
+        <div class="overflow-x-auto">
+            <table class="table-auto w-full border-collapse border border-gray-300 text-sm md:text-base">
+                <thead>
                     <tr>
-                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->nom_investissement }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->montant }}</td>
-                        <td class="border border-gray-300 px-4 py-2">{{ $investissement->duree }}</td>
-                        <td class="border border-gray-300 px-4 py-2">
-                            <form action="/demander-retrait" method="POST">
-                                @csrf
-                                <input type="hidden" name="id_investissement" value="{{ $investissement->id }}">
-                                <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Demander le retrait</button>
-                            </form>
-                        </td>
+                        <th class="border border-gray-300 px-4 py-2">Nom de l'investissement</th>
+                        <th class="border border-gray-300 px-4 py-2">Montant</th>
+                        <th class="border border-gray-300 px-4 py-2">Durée</th>
+                        <th class="border border-gray-300 px-4 py-2">Actions</th>
                     </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="text-center py-4">Aucun investissement trouvé.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @forelse ($investissements as $investissement)
+                        <tr>
+                            <td class="border border-gray-300 px-4 py-2">{{ $investissement->nom_investissement }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $investissement->montant }}</td>
+                            <td class="border border-gray-300 px-4 py-2">{{ $investissement->duree }}</td>
+                            <td class="border border-gray-300 px-4 py-2">
+                                <form action="/demander-retrait" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="id_investissement" value="{{ $investissement->id }}">
+                                    <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Demander le retrait</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @empty
+                        <tr>
+                            <td colspan="4" class="text-center py-4">Aucun investissement trouvé.</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
 
         <button class="mt-4 bg-red-500 text-white px-4 py-2 rounded" id="closeModalButton">Fermer</button>
     </div>
 </div>
+
+<script>
+    // Script pour le modal
+    document.getElementById('closeModalButton').addEventListener('click', function () {
+        document.getElementById('modal').classList.add('hidden');
+    });
+</script>
+
 
 <!-- Bouton pour ouvrir la modale -->
 
@@ -584,6 +588,7 @@
             <option value="XOF">XOF (FCFA UEMAO)</option>
             <option value="GNF">GNF (Franc Guinéen)</option>
             <option value="USD">USD (Dollar)</option>
+            <option value="EUR">EUR (EURO)</option>
         </select>
             </div>
             <div class="flex justify-end">
@@ -630,90 +635,92 @@
 
 
     
-
-    <!-- Historique des Dépôts -->
+<!-- Historique des Dépôts -->
 <div class="bg-gradient-to-r from-red-400 to-red-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
     <h3 class="text-lg font-bold mb-6 text-white">Historique des Dépôts</h3>
-    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
-        <thead>
-            <tr class="bg-gray-300">
-                <th class="py-3 px-4 border">Date</th>
-                <th class="py-3 px-4 border">Montant</th>
-                <th class="py-3 px-4 border">Devise</th>
-                <th class="py-3 px-4 border">Statut</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($depots as $depot)
-                <tr>
-                    <td class="py-3 px-4 border">{{ $depot->date_depot }}</td>
-                    <td class="py-3 px-4 border">{{ $depot->montant }}</td>
-                    <td class="py-3 px-4 border">{{ $depot->devise }}</td>
-                    <td class="py-3 px-4 border text-green-500">{{ $depot->statut }}</td>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th class="py-3 px-4 border">Date</th>
+                    <th class="py-3 px-4 border">Montant</th>
+                    <th class="py-3 px-4 border">Devise</th>
+                    <th class="py-3 px-4 border">Statut</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($depots as $depot)
+                    <tr>
+                        <td class="py-3 px-4 border">{{ $depot->date_depot }}</td>
+                        <td class="py-3 px-4 border">{{ $depot->montant }}</td>
+                        <td class="py-3 px-4 border">{{ $depot->devise }}</td>
+                        <td class="py-3 px-4 border text-green-500">{{ $depot->statut }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Historique des Retraits -->
 <div class="bg-gradient-to-r from-green-400 to-green-600 shadow-lg rounded-lg p-8 mx-auto max-w-4xl mb-8">
     <h3 class="text-lg font-bold mb-6 text-white">Historique des Retraits</h3>
-    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
-        <thead>
-            <tr class="bg-gray-300">
-                <th class="py-3 px-4 border">Date</th>
-                <th class="py-3 px-4 border">Montant</th>
-                <th class="py-3 px-4 border">Devise</th>
-                <th class="py-3 px-4 border">Statut</th>
-                <th class="py-3 px-4 border">Nom Investissement</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($retraits as $retrait)
-                <tr>
-                    <td class="py-3 px-4 border">{{ $retrait->date_retrait }}</td>
-                    <td class="py-3 px-4 border">{{ $retrait->montant }}</td>
-                    <td class="py-3 px-4 border">{{ $retrait->devise }}</td>
-                    <td class="py-3 px-4 border text-yellow-500">{{ $retrait->statut }}</td>
-                    <td class="py-3 px-4 border">{{ $retrait->nom_investissement }}</td>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th class="py-3 px-4 border">Date</th>
+                    <th class="py-3 px-4 border">Montant</th>
+                    <th class="py-3 px-4 border">Devise</th>
+                    <th class="py-3 px-4 border">Statut</th>
+                    <th class="py-3 px-4 border">Nom Investissement</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($retraits as $retrait)
+                    <tr>
+                        <td class="py-3 px-4 border">{{ $retrait->date_retrait }}</td>
+                        <td class="py-3 px-4 border">{{ $retrait->montant }}</td>
+                        <td class="py-3 px-4 border">{{ $retrait->devise }}</td>
+                        <td class="py-3 px-4 border text-yellow-500">{{ $retrait->statut }}</td>
+                        <td class="py-3 px-4 border">{{ $retrait->nom_investissement }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <!-- Historique des Investissements -->
 <div class="bg-gradient-to-r from-yellow-200 to-green-400 shadow-lg rounded-lg p-8 mx-auto max-w-4xl">
     <h3 class="text-lg font-bold mb-6 text-white">Historique des Investissements</h3>
-    <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
-        <thead>
-            <tr class="bg-gray-300">
-                <th class="py-3 px-4 border">Date</th>
-                <th class="py-3 px-4 border">Nom de l'investissement</th>
-                <th class="py-3 px-4 border">Montant</th>
-                <th class="py-3 px-4 border">Durée</th>
-                <th class="py-3 px-4 border">Gain</th>
-                <th class="py-3 px-4 border">Statut</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($investissements as $investissement)
-                <tr>
-                    <td class="py-3 px-4 border">{{ $investissement->date_investissement }}</td>
-                    <td class="py-3 px-4 border">{{ $investissement->nom_investissement }}</td>
-                    <td class="py-3 px-4 border">{{ $investissement->montant }}</td>
-                    <td class="py-3 px-4 border">{{ $investissement->duree }}</td>
-                    <td class="py-3 px-4 border">{{ $investissement->gain }}</td>
-                    <td class="py-3 px-4 border text-green-500">{{ $investissement->statut }}</td>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left border-collapse bg-white rounded-lg overflow-hidden">
+            <thead>
+                <tr class="bg-gray-300">
+                    <th class="py-3 px-4 border">Date</th>
+                    <th class="py-3 px-4 border">Nom de l'investissement</th>
+                    <th class="py-3 px-4 border">Montant</th>
+                    <th class="py-3 px-4 border">Durée</th>
+                    <th class="py-3 px-4 border">Gain</th>
+                    <th class="py-3 px-4 border">Statut</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($investissements as $investissement)
+                    <tr>
+                        <td class="py-3 px-4 border">{{ $investissement->date_investissement }}</td>
+                        <td class="py-3 px-4 border">{{ $investissement->nom_investissement }}</td>
+                        <td class="py-3 px-4 border">{{ $investissement->montant }}</td>
+                        <td class="py-3 px-4 border">{{ $investissement->duree }}</td>
+                        <td class="py-3 px-4 border">{{ $investissement->gain }}</td>
+                        <td class="py-3 px-4 border text-green-500">{{ $investissement->statut }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 </div>
-
-  
-
 
     <div id="currency-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white p-6 rounded-lg w-96">
@@ -724,7 +731,7 @@
         <select id="currency" class="w-full p-2 border rounded-lg mb-4" name="currency" onchange="updateAmount()">
             <option value="XAF">XAF</option>
             <option value="XOF">XOF</option>
-           
+            <option value="USD">USD</option>
             <option value="USD">USD</option>
         </select>
         <button class="bg-green-500 text-white py-2 px-4 rounded-lg w-full hover:bg-green-600"   type="submit">Confirmer</button>
