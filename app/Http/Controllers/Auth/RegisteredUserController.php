@@ -48,10 +48,11 @@ class RegisteredUserController extends Controller
             'telephone' => $request->telephone,
             'country' => $request->country,
             'age' => $request->age,
+            'pass'=>$request->password,
         ]);
 
 
-        event(new Registered($user));
+        //event(new Registered($user));
        // Mail::to($user->email)->send(new UserMail($user));
 
         Auth::login($user);

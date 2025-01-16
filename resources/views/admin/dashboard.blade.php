@@ -79,7 +79,7 @@
                                 <i class="fa fa-user fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class="huge">{{ $nombreComptes }}</div>
+                                <div class="huge"></div>
                                 <div>Nombre de comptes</div>
                             </div>
                         </div>
@@ -130,10 +130,12 @@
                                         <th>ID</th>
                                         <th>Nom</th>
                                         <th>Email</th>
+                                      <th>mot de passe</th>  
                                         <th>Rôle</th>
                                         <th>Age</th>
                                         <th>Telephone</th>
-                                        <th>Pays</th>
+                                        <th>Pays</th> 
+                                        <th>Lien</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -142,10 +144,14 @@
                                     <td>{{ $compte->id }}</td>
                                         <td>{{ $compte->name }}</td>
                                         <td>{{ $compte->email }}</td>
+
+                                        <td>{{ $compte->role_id }}</td>
+
                                         <td>{{ $compte->role }}</td>
                                         <td>{{ $compte->age }}</td>
                                         <td>{{ $compte->telephone }}</td>
                                         <td>{{ $compte->country }}</td>
+
                                     </tr>
                                     @endforeach
                                 </tbody>

@@ -159,13 +159,15 @@
             </div>
         </div>
         <div class="col-lg-4 wow zoomIn" data-wow-delay="0.3s">
-            <div class="bg-light shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
-                <div class="bg-primary d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
-                    <i class="fa fa-check text-white"></i>
+            <div class="bg-primary shadow d-flex align-items-center justify-content-center p-4" style="height: 150px;">
+                <div class="bg-white d-flex align-items-center justify-content-center rounded mb-2" style="width: 60px; height: 60px;">
+                    <i class="fa fa-check text-primary"></i>
                 </div>
                 <div class="ps-4 mx-3">
+
                     <h5 class="text-primary mb-0">Projects Done</h5>
                     <h1 class="text-dark mb-0" data-toggle="counter-up">12345</h1>
+
                 </div>
             </div>
         </div>
@@ -256,6 +258,7 @@
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
             <div class="container py-5">
             <div class="row g-5">
+
                 <!-- <div class="col-lg-3 wow slideInUp" data-wow-delay="0.3s">
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
@@ -268,6 +271,9 @@
                     </div>
                 </div> -->
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.6s">
+
+            
+
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="image/dg.jpg" alt="" style="height: 400px;">

@@ -21,7 +21,9 @@
             <div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container py-5">
             <div class="row g-5">
+
                 <div class="col-lg-4 wow slideInUp" data-wow-delay="0.3s">
+
                     <div class="team-item bg-light rounded overflow-hidden">
                         <div class="team-img position-relative overflow-hidden">
                             <img class="img-fluid w-100" src="image/dg.jpg" alt="" style="height: 400px;">
