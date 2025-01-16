@@ -47,7 +47,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2">Visitez notre bureau</h5>
-                  <h4 class="text-primary mb-0">Mokolo , Beroua, Cameroun</h4>
+                  <h4 class="text-primary mb-0">Mokolo , Bertoua, Cameroun</h4>
                 </div>
               </div>
             </div>
@@ -84,9 +84,10 @@
             </div>
             <div class="col-lg-6 wow slideInUp" data-wow-delay="0.6s">
             <iframe class="position-relative rounded w-100 h-100" 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3979.487527398467!2d11.502089315273093!3d3.8480000972460797!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x10f0e70e2aa2d327%3A0xbdbbab7d334525ff!2sYaound%C3%A9%2C%20Cameroon!5e0!3m2!1sen!2sfr!4v1603794290143!5m2!1sen!2sfr" 
-                frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3954.2012179860983!2d14.51200031533367!3d4.577300696672558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x108cd9e98f4a6d07%3A0x71c0c89e1b52c1cd!2sBertoua%2C%20Cameroon!5e0!3m2!1sen!2sfr!4v1603794290143!5m2!1sen!2sfr" 
+              frameborder="0" style="min-height: 350px; border:0;" allowfullscreen="" aria-hidden="false" tabindex="0">
             </iframe>
+
 
             </div>
           </div>

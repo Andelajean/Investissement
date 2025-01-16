@@ -4,7 +4,7 @@
 @section('content') 
 
    <!-- questions section -->
-<section class="why_section layout_padding">
+<section class="about_section layout_padding">
         <div class="container">
             <div class="heading_container heading_center">
                 <h2 class="pb-5 mb-3">
@@ -67,8 +67,9 @@
 </section>
     <!-- end questions section -->
     
+
     <!-- seconde contain -->
-    <section class="service_section layout_padding">
+    <section class="about_section layout_padding">
       <div class="service_container">
         <div class="container">
           <div class="heading_container heading_center">
