@@ -346,7 +346,7 @@
 
               <!-- Section des investissements inactifs -->
 @if ($nombreInactifs > 0)
-<div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-red-700" style="font-size: 1.5rem; line-height: 1.8;">
+<div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-500 text-red-700">
     <p>
         Vous avez <strong>{{ $nombreInactifs }}</strong> investissement(s) inactif(s). 
         <button 
@@ -555,25 +555,36 @@
 
 
 
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Section Compte -->
+    <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-6 md:p-8 rounded-lg text-center text-white">
+        <a href="/profile" class="flex flex-col items-center gap-2">
+            <!-- Lien vers la page du profil -->
+            <button class="flex flex-col items-center gap-2">
+                <img 
+                    src="{{asset('image/profile.png')}}" 
+                    alt="Recharger mon compte" 
+                    class="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover">
+                <span class="text-sm md:text-base font-medium">Compte</span>
+            </button>
+        </a>
+    </div>
 
-            <div class="bg-gradient-to-r from-blue-400 to-blue-600 p-8 rounded-lg text-center text-white">
-    <a href="/profile" class="flex flex-col items-center gap-2"> <!-- Lien vers la page du profil -->
-        <button>
-        <img src="{{asset('image/profile.png')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
-            Compte
+    <!-- Section Produit -->
+    <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 p-6 md:p-8 rounded-lg text-center text-white">
+        <button 
+            class="flex flex-col items-center gap-2"
+            onclick="opeModal()"
+        >
+            <img 
+                src="{{asset('image/pro.jpeg')}}" 
+                alt="Recharger mon compte" 
+                class="h-12 w-12 md:h-16 md:w-16 rounded-full object-cover">
+            <span class="text-sm md:text-base font-medium">Produit</span>
         </button>
-    </a>
+    </div>
 </div>
 
-<div class="bg-gradient-to-r from-yellow-400 to-yellow-600 p-8 rounded-lg text-center text-white">
-    <button 
-        class="flex flex-col items-center gap-2" 
-        onclick="opeModal()"
-    >
-    <img src="{{asset('image/pro.jpeg')}}" alt="Recharger mon compte" class="h-16 w-16 rounded-full object-cover">
-        Produit
-    </button>
-</div>
 
 <!-- Fenêtre contextuelle -->
 <div id="currencyModal" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex justify-center items-center z-50">
