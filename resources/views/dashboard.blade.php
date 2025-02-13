@@ -375,7 +375,7 @@
                 <p><strong>Devise :</strong>  {{ $investissement->devise }}</p>
                 <p><strong>ID :</strong> {{ $investissement->id }}</p>
                 <a 
-                    href="https://wa.me/+237697091769?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->activation }\nEmail : {$investissement->email }\nDevise : {$investissement->devise }\nID : {$investissement->id}") }}" 
+                    href="https://wa.me/+242061460831?text={{ urlencode("Bonjour Admin, je souhaite activer mon investissement.\nMontant : {$investissement->activation }\nEmail : {$investissement->email }\nDevise : {$investissement->devise }\nID : {$investissement->id}") }}" 
                     target="_blank"
                     class="mt-2 block bg-green-600 text-white text-center py-2 px-4 rounded-lg hover:bg-green-700 transition"
                 >
@@ -907,7 +907,7 @@ function closModal() {
 
     function contactAdmin() {
         // Numéro WhatsApp de l'administrateur
-        const adminNumber = "+237697091769";
+        const adminNumber = "+242061460831";
 
         // Message à envoyer
         const message = `Bonjour, je suis l'utilisateur avec l'email : ${userEmail} et l'ID : ${userId}. Je voudrais investir , quels sont les methodes de paiements??.`;

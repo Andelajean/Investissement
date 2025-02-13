@@ -23,7 +23,7 @@
                 </div>
                 <div class="ps-4 mx-3">
                   <h5 class="mb-2 text-white">Appelez pour toute question</h5>
-                  <h4 class="text-primary mb-0">+237 697 091 769</h4>
+                  <h4 class="text-primary mb-0">+242 06 146 0831</h4>
                   <h4 class="text-primary mb-0">+237 686 370 673</h4>
                 </div>
               </div>

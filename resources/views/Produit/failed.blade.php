@@ -34,7 +34,7 @@
         <p class="text-lg text-white">Gain: <span class='text-xl text-yellow-400'>800$ </span></p>
         <p class="text-lg text-white">Durée: <span class='text-xl text-yellow-400'>2h</span></p>
     </div>
-    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standar ⭐', '150',' 1300', '2h','450')">Investir</button>
+    <button class="bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-green-600" onclick="openModal('Standar ⭐', '100',' 800','2h','450')">Investir</button>
 </div>
 <div class="bg-blue-500 p-6 rounded-lg flex items-center justify-between">
     <img src="{{asset('image/3.jpg')}}" alt="Product 1" class="h-20 w-20 rounded-full shadow-lg">

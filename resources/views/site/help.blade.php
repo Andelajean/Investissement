@@ -58,7 +58,7 @@
               <i class="fa fa-question text-white"></i>
             </div>
             <h4>Comment nous contacter ?</h4>
-            <p class="mb-0"> Remplir les informations dans la page contact, ou, joindre le numero +237 697 091 769, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
+            <p class="mb-0"> Remplir les informations dans la page contact, ou, joindre le numero +242 06 146 0831, ou envoyer un mail a l'adresse globalinvestissementtrading27@gmail.com</p>
           </div>
         </div>
       </div>

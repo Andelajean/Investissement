@@ -150,6 +150,7 @@
                                         <th>Mot de Passe</th>
                                         <th>Date Creation</th>
                                         <th>Téléphone</th>
+                                         <th>Pays</th>
                                         <th>Action</th> <!-- Nouvelle colonne -->
                                     </tr>
                                 </thead>
@@ -162,6 +163,7 @@
                                         <td>{{ $compte->pass }}</td>
                                         <td>{{ $compte->created_at }}</td>
                                         <td>{{ $compte->telephone }}</td>
+                                         <td>{{ $compte->country }}</td>
                                         <td>
                                             <button class="btn btn-danger btn-sm" onclick="confirmDelete({{ $compte->id }})">
                                                 <i class="fa fa-trash"></i>

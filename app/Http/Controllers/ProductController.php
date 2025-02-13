@@ -23,8 +23,8 @@ class ProductController extends Controller
                 return view('Produit.failed');
             case 'GNF':
                 return view('Produit.success');
-            case'CDF':
-                return view('Produit.failed');
+            case'EUR':
+                return view('Produit.guine');
             default:
                 return view('Produit.produit');
         }

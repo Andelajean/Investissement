@@ -84,7 +84,7 @@
                 <a href="">
                   <i class="fa fa-phone" aria-hidden="true"></i>
                   <span>
-                    Appel +237 697 091 769
+                    Appel +242 06 146 0831
                    <p>+237 686 370 673</p> 
                   </span>
                 </a>
